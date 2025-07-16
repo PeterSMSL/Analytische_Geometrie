@@ -12,10 +12,16 @@
             inlineMath: [['\\(', '\\)']],
             displayMath: [['$$', '$$']],
             processEscapes: true,
-            processEnvironments: true
+            processEnvironments: true,
+            packages: {'[+]': ['amsmath', 'amsfonts', 'amssymb']}
         },
         options: {
             skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        chtml: {
+            scale: 1.1,
+            minScale: 0.5,
+            mtextInheritFont: true
         }
     };
     </script>
@@ -136,13 +142,18 @@
         
         .math-formula {
             background: #f1f5f9;
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 10px;
             margin: 1rem 0;
-            font-family: 'Courier New', monospace;
             border-left: 4px solid #059669;
-            font-size: 0.9rem;
+            font-size: 1rem;
             overflow-x: auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .math-formula .MathJax {
+            font-size: 1.1rem !important;
         }
         
         .example-box {
@@ -343,6 +354,225 @@
             transition: width 0.5s ease;
         }
         
+        /* Game Styles */
+        .game-info {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .game-info p {
+            margin-bottom: 0.5rem;
+            color: #0369a1;
+        }
+        
+        .score {
+            font-weight: bold;
+            color: #059669;
+            font-size: 1.1rem;
+        }
+        
+        .game-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            text-align: center;
+            user-select: none;
+        }
+        
+        .card-content {
+            font-size: 0.8rem;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+        
+        .card-content .MathJax {
+            font-size: 0.9rem !important;
+        }
+        
+        .card-content .MathJax_Display {
+            margin: 0.3rem 0 !important;
+        }
+        
+        .question-card {
+            background: #fef3c7;
+            border-color: #f59e0b;
+            color: #d97706;
+        }
+        
+        .question-card:hover {
+            background: #fcd34d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        
+        .question-card.selected {
+            background: #f59e0b;
+            color: white;
+            border-color: #d97706;
+            transform: scale(1.05);
+        }
+        
+        .answer-card {
+            background: #f8fafc;
+            border-color: #64748b;
+            color: #475569;
+        }
+        
+        .answer-card:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
+        }
+        
+        .answer-card.correct {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #166534;
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        .answer-card.wrong {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .card.matched {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        
+        .wrong-answer {
+            background: #f8fafc;
+            border-color: #64748b;
+            color: #475569;
+        }
+        
+        .wrong-answer:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
+        }
+        
+        .disposal-box {
+            background: #fef2f2;
+            border: 2px dashed #dc2626;
+            color: #991b1b;
+            font-weight: 600;
+            min-height: 100px;
+        }
+        
+        .disposal-box:hover {
+            background: #fee2e2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+        
+        .disposal-box small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .game-complete {
+            background: #dcfce7;
+            border: 2px solid #16a34a;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .game-complete h3 {
+            color: #166534;
+            margin-bottom: 1rem;
+        }
+        
+        .reset-button {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-button:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+        }
+        
+        .restart-button {
+            background: #059669;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .restart-button:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes celebrate {
+            0% { 
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: scale(0.8) rotate(360deg) translateY(-100px);
+                opacity: 0;
+            }
+        }
+        
         /* Mobile-spezifische Styles */
         @media (max-width: 768px) {
             body {
@@ -475,20 +705,28 @@
                     <p>Im dreidimensionalen Raum benötigen wir drei Koordinaten, um einen Punkt eindeutig zu beschreiben. Diese werden als x-, y- und z-Koordinaten bezeichnet.</p>
                     
                     <h3>1.1 Kartesische Koordinaten</h3>
-                    <p>Ein Punkt P im Raum wird durch das Tripel (x|y|z) beschrieben:</p>
+                    <p>Ein Punkt P im Raum wird durch ein Koordinatentripel beschrieben:</p>
+                    <div class="math-formula">
+                        $$P(x \mid y \mid z) \text{ oder } P(x_1 \mid x_2 \mid x_3)$$
+                    </div>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="Punkt-im-Koordinatensystem.png" alt="Koordinatensystem" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    </div>
+                    
                     <ul style="margin-left: 2rem; margin-top: 1rem;">
-                        <li><strong>x-Koordinate:</strong> Abstand zur yz-Ebene</li>
-                        <li><strong>y-Koordinate:</strong> Abstand zur xz-Ebene</li>
-                        <li><strong>z-Koordinate:</strong> Abstand zur xy-Ebene</li>
+                        <li><strong>x-Koordinate (x₁):</strong> Abstand zur yz-Ebene</li>
+                        <li><strong>y-Koordinate (x₂):</strong> Abstand zur xz-Ebene</li>
+                        <li><strong>z-Koordinate (x₃):</strong> Abstand zur xy-Ebene</li>
                     </ul>
                     
                     <div class="example-box">
                         <h4>📝 Beispiel 1: Punktkoordinaten</h4>
                         <div class="math-formula">
-                            <strong>Gegeben:</strong><br>
-                            \(P(3|2|4)\) - Punkt mit \(x=3\), \(y=2\), \(z=4\)<br>
-                            \(Q(-1|5|0)\) - Punkt mit \(x=-1\), \(y=5\), \(z=0\)<br>
-                            \(R(0|0|3)\) - Punkt auf der z-Achse<br>
+                            <strong>Beide Notationen sind möglich:</strong><br>
+                            \(P(3|2|4)\) mit \(x=3, y=2, z=4\)<br>
+                            \(Q(-1|5|0)\) mit \(x_1=-1, x_2=5, x_3=0\)<br>
+                            \(R(0|0|3)\) - Punkt auf der z-Achse (x₃-Achse)<br>
                         </div>
                         <p>Diese Punkte liegen im dreidimensionalen Raum und können durch ihre drei Koordinaten eindeutig beschrieben werden.</p>
                     </div>
@@ -496,10 +734,14 @@
                     <h3>1.2 Besondere Punkte und Ebenen</h3>
                     <p>Wichtige Strukturen im dreidimensionalen Raum:</p>
                     <ul style="margin-left: 2rem; margin-top: 1rem;">
-                        <li><strong>Ursprung \(O(0|0|0)\):</strong> Schnittpunkt der drei Achsen</li>
-                        <li><strong>Koordinatenebenen:</strong> xy-Ebene \((z=0)\), xz-Ebene \((y=0)\), yz-Ebene \((x=0)\)</li>
+                        <li><strong>Ursprung O(0|0|0):</strong> Schnittpunkt der drei Achsen</li>
+                        <li><strong>Koordinatenebenen:</strong> xy-Ebene (z=0), xz-Ebene (y=0), yz-Ebene (x=0)</li>
                         <li><strong>Koordinatenachsen:</strong> x-Achse, y-Achse, z-Achse</li>
                     </ul>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="Ebenen_Koordinatensystem.png" alt="Koordinatenebenen" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    </div>
                     
                     <div class="example-box">
                         <h4>📝 Beispiel 2: Spezielle Punkte</h4>
@@ -537,7 +779,7 @@
                     <p>Der Mittelpunkt \(M\) einer Strecke zwischen \(P_1(x_1|y_1|z_1)\) und \(P_2(x_2|y_2|z_2)\) ist:</p>
                     
                     <div class="math-formula">
-                        $$M = \left(\frac{x_1+x_2}{2} \bigg| \frac{y_1+y_2}{2} \bigg| \frac{z_1+z_2}{2}\right)$$
+                        $$M\left(\frac{x_1+x_2}{2} \mid \frac{y_1+y_2}{2} \mid \frac{z_1+z_2}{2}\right)$$
                     </div>
                     
                     <div class="example-box">
@@ -546,7 +788,7 @@
                             <strong>Gegeben:</strong> \(A(2|4|6)\) und \(B(8|2|4)\)
                             
                             <strong>Mittelpunkt:</strong>
-                            $$M = \left(\frac{2+8}{2} \bigg| \frac{4+2}{2} \bigg| \frac{6+4}{2}\right) = (5|3|5)$$
+                            $$M\left(\frac{2+8}{2} \mid \frac{4+2}{2} \mid \frac{6+4}{2}\right) = M(5|3|5)$$
                         </div>
                     </div>
                 </div>
@@ -596,54 +838,111 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution3')">💡 Lösung anzeigen</button>
                     <div id="solution3" class="solution">
                         <strong>Lösung:</strong><br>
-                        $$M = \left(\frac{-2+6}{2} \bigg| \frac{4+2}{2} \bigg| \frac{6+4}{2}\right) = \left(\frac{4}{2} \bigg| \frac{6}{2} \bigg| \frac{10}{2}\right) = (2|3|5)$$
+                        $$M\left(\frac{-2+6}{2} \mid \frac{4+2}{2} \mid \frac{6+4}{2}\right) = M\left(\frac{4}{2} \mid \frac{6}{2} \mid \frac{10}{2}\right) = M(2|3|5)$$
                         <br>
                         <strong>Der Mittelpunkt ist \(M(2|3|5)\).</strong>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 4: Abstandsberechnung</h4>
+                    <p>Berechne den Abstand zwischen den Punkten in Indexnotation:</p>
+                    <div class="math-formula">
+                        \(A(3|1|4)\) und \(B(7|4|0)\)
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('solution4')">💡 Lösung anzeigen</button>
+                    <div id="solution4" class="solution">
+                        <strong>Lösung:</strong><br>
+                        $$d = \sqrt{(x_{1,B}-x_{1,A})^2 + (x_{2,B}-x_{2,A})^2 + (x_{3,B}-x_{3,A})^2}$$
+                        $$d = \sqrt{(7-3)^2 + (4-1)^2 + (0-4)^2}$$
+                        $$d = \sqrt{4^2 + 3^2 + (-4)^2} = \sqrt{16 + 9 + 16} = \sqrt{41} \approx 6{,}4$$
+                        <br>
+                        <strong>Der Abstand beträgt \(\sqrt{41} \approx 6{,}4\) Längeneinheiten.</strong>
                     </div>
                 </div>
             </div>
             
             <!-- Quiz Tab -->
             <div id="quiz" class="tab-content">
-                <h2>🎯 Quiz</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <h2>🎯 Klick-Quiz: Finde die passenden Antworten!</h2>
+                <div class="game-info">
+                    <p>Klicke zuerst auf eine Frage, dann auf die passende(n) Antwort(en). Richtige Paare verschwinden!</p>
+                    <p><strong>Wichtig:</strong> Nur falsche Antworten gehören in den Müll. Am Ende muss alles korrekt entsorgt sein!</p>
+                    <p><strong>⚠️ Achtung:</strong> Es gibt keine Gnade für den kleinsten Fehler! Nur ein Neustart kann dann helfen.</p>
+                    <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                        <button onclick="resetGame()" class="restart-button">🔄 Neustart</button>
+                    </div>
                 </div>
                 
-                <div class="quiz-question">
-                    <h4>Frage 1: Wie viele Koordinaten braucht man, um einen Punkt im Raum zu beschreiben?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q1a" value="incorrect">2</label></li>
-                        <li><label><input type="checkbox" id="q1b" value="correct">3</label></li>
-                        <li><label><input type="checkbox" id="q1c" value="incorrect">4</label></li>
-                        <li><label><input type="checkbox" id="q1d" value="incorrect">1</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q1', ['q1b'])">Antwort prüfen</button>
-                    <div id="q1-feedback" class="quiz-feedback"></div>
+                <div id="game-area" class="game-area">
+                    <!-- Fragen -->
+                    <div class="card question-card" data-question="1">
+                        <div class="card-content">Wie viele Koordinaten braucht man für einen Punkt im Raum?</div>
+                    </div>
+                    
+                    <div class="card question-card" data-question="2">
+                        <div class="card-content">Welche Koordinaten hat ein Punkt auf der z-Achse?</div>
+                    </div>
+                    
+                    <div class="card question-card" data-question="3">
+                        <div class="card-content">Welche Notationen beschreiben einen Punkt im Raum korrekt?</div>
+                    </div>
+                    
+                    <div class="card question-card" data-question="4">
+                        <div class="card-content">Wie lautet die Abstandsformel für zwei Punkte im Raum?</div>
+                    </div>
+                    
+                    <!-- Antworten -->
+                    <div class="card answer-card" data-answer="1">
+                        <div class="card-content">3</div>
+                    </div>
+                    
+                    <div class="card answer-card" data-answer="2">
+                        <div class="card-content">\(x=0, y=0, z\) beliebig</div>
+                    </div>
+                    
+                    <div class="card answer-card" data-answer="3a">
+                        <div class="card-content">P(x|y|z)</div>
+                    </div>
+                    
+                    <div class="card answer-card" data-answer="3b">
+                        <div class="card-content">P(x₁|x₂|x₃)</div>
+                    </div>
+                    
+                    <div class="card answer-card" data-answer="4">
+                        <div class="card-content">\(d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}\)</div>
+                    </div>
+                    
+                    <!-- Falsche Antworten -->
+                    <div class="card answer-card wrong-answer" data-answer="wrong1">
+                        <div class="card-content">2</div>
+                    </div>
+                    
+                    <div class="card answer-card wrong-answer" data-answer="wrong2">
+                        <div class="card-content">\(x \neq 0, y \neq 0, z \neq 0\)</div>
+                    </div>
+                    
+                    <div class="card answer-card wrong-answer" data-answer="wrong3">
+                        <div class="card-content">\(P = [x,y]\)</div>
+                    </div>
+                    
+                    <div class="card answer-card wrong-answer" data-answer="wrong4">
+                        <div class="card-content">\(d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\)</div>
+                    </div>
+                    
+                    <div class="card answer-card wrong-answer" data-answer="wrong5">
+                        <div class="card-content">\(x=0, y\) beliebig, \(z=0\)</div>
+                    </div>
+                    
+                    <!-- Entsorgungsbox -->
+                    <div class="card disposal-box" data-disposal="true">
+                        <div class="card-content">❌ Passt zu keiner Frage<br><small>Hier klicken oder hineinziehen</small></div>
+                    </div>
                 </div>
                 
-                <div class="quiz-question">
-                    <h4>Frage 2: Welche Koordinaten hat ein Punkt auf der z-Achse?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q2a" value="incorrect">x≠0, y≠0, z≠0</label></li>
-                        <li><label><input type="checkbox" id="q2b" value="correct">x=0, y=0, z beliebig</label></li>
-                        <li><label><input type="checkbox" id="q2c" value="incorrect">x beliebig, y=0, z=0</label></li>
-                        <li><label><input type="checkbox" id="q2d" value="incorrect">x=0, y beliebig, z=0</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q2', ['q2b'])">Antwort prüfen</button>
-                    <div id="q2-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 3: Wie lautet die Abstandsformel für zwei Punkte im Raum?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q3a" value="incorrect">d = √[(x₂-x₁)² + (y₂-y₁)²]</label></li>
-                        <li><label><input type="checkbox" id="q3b" value="correct">d = √[(x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²]</label></li>
-                        <li><label><input type="checkbox" id="q3c" value="incorrect">d = |x₂-x₁| + |y₂-y₁| + |z₂-z₁|</label></li>
-                        <li><label><input type="checkbox" id="q3d" value="incorrect">d = (x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q3', ['q3b'])">Antwort prüfen</button>
-                    <div id="q3-feedback" class="quiz-feedback"></div>
+                <div id="game-complete" class="game-complete" style="display: none;">
+                    <h3>🎉 Glückwunsch! Du hast alle Fragen richtig beantwortet!</h3>
+                    <button onclick="resetGame()" class="reset-button">Nochmal spielen</button>
                 </div>
             </div>
         </div>
@@ -652,7 +951,7 @@
     <script>
         let currentTab = 'theory';
         let completedQuestions = 0;
-        const totalQuestions = 3;
+        const totalQuestions = 4;
         
         function showTab(tabName) {
             // Hide all tabs
@@ -691,38 +990,365 @@
             }
         }
         
-        function checkAnswer(questionId, correctAnswers) {
-            const feedback = document.getElementById(questionId + '-feedback');
-            const checkboxes = document.querySelectorAll(`input[id^="${questionId}"]`);
+        // Quiz Game Logic
+        let selectedQuestion = null;
+        let gameState = {
+            score: 0,
+            totalQuestions: 4,
+            matchedPairs: new Set(),
+            hasWrongMoves: false
+        };
+        
+        // Correct answer mappings
+        const correctAnswers = {
+            "1": ["1"],
+            "2": ["2"], 
+            "3": ["3a", "3b"],
+            "4": ["4"]
+        };
+        
+        function initializeGame() {
+            shuffleCards();
+            setupGameListeners();
+        }
+        
+        function shuffleCards() {
+            const gameArea = document.getElementById('game-area');
+            const cards = Array.from(gameArea.children);
             
-            let selectedAnswers = [];
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    selectedAnswers.push(checkbox.id);
-                }
+            // Shuffle array
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            
+            // Append shuffled cards back to game area
+            cards.forEach(card => gameArea.appendChild(card));
+        }
+        
+        function setupGameListeners() {
+            const questionCards = document.querySelectorAll('.question-card');
+            const answerCards = document.querySelectorAll('.answer-card');
+            const disposalBox = document.querySelector('.disposal-box');
+            
+            questionCards.forEach(card => {
+                card.addEventListener('click', () => selectQuestion(card));
             });
             
-            // Check if selected answers match correct answers
-            const isCorrect = selectedAnswers.length === correctAnswers.length && 
-                             selectedAnswers.every(answer => correctAnswers.includes(answer));
+            answerCards.forEach(card => {
+                card.addEventListener('click', () => selectAnswer(card));
+                // Make answer cards draggable
+                card.draggable = true;
+                card.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', card.dataset.answer);
+                });
+            });
             
-            if (isCorrect) {
-                feedback.className = 'quiz-feedback correct show';
-                feedback.innerHTML = '✅ Richtig! Sehr gut gemacht!';
-                if (!feedback.dataset.completed) {
-                    completedQuestions++;
-                    feedback.dataset.completed = 'true';
-                    updateProgress();
-                }
-            } else {
-                feedback.className = 'quiz-feedback incorrect show';
-                feedback.innerHTML = '❌ Nicht ganz richtig. Versuche es noch einmal und überdenke deine Auswahl.';
+            if (disposalBox) {
+                disposalBox.addEventListener('click', () => selectDisposal(disposalBox));
+                
+                // Make disposal box a drop target
+                disposalBox.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    disposalBox.style.background = '#fee2e2';
+                });
+                
+                disposalBox.addEventListener('dragleave', () => {
+                    disposalBox.style.background = '#fef2f2';
+                });
+                
+                disposalBox.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const draggedAnswer = e.dataTransfer.getData('text/plain');
+                    const draggedCard = document.querySelector(`[data-answer="${draggedAnswer}"]`);
+                    
+                    if (draggedCard && !draggedCard.classList.contains('matched')) {
+                        // Check if this is a correct answer being wrongly disposed
+                        const isCorrectAnswer = Object.values(correctAnswers).some(answers => 
+                            answers.includes(draggedAnswer)
+                        );
+                        
+                        if (isCorrectAnswer) {
+                            // Player disposed a correct answer - mark as wrong move
+                            gameState.hasWrongMoves = true;
+                        }
+                        
+                        draggedCard.classList.add('wrong');
+                        setTimeout(() => {
+                            draggedCard.classList.add('matched');
+                            checkGameComplete();
+                        }, 500);
+                    }
+                    
+                    disposalBox.style.background = '#fef2f2';
+                });
             }
         }
         
-        function updateProgress() {
-            const progress = (completedQuestions / totalQuestions) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
+        function selectQuestion(card) {
+            // Clear previous selection
+            document.querySelectorAll('.question-card').forEach(q => {
+                q.classList.remove('selected');
+            });
+            
+            // Select this question
+            selectedQuestion = card.dataset.question;
+            card.classList.add('selected');
+        }
+        
+        function selectAnswer(card) {
+            if (!selectedQuestion) {
+                // Flash message to select question first
+                showMessage("Wähle zuerst eine Frage aus!");
+                return;
+            }
+            
+            const answer = card.dataset.answer;
+            const isCorrect = correctAnswers[selectedQuestion].includes(answer);
+            
+            if (isCorrect) {
+                // Correct answer
+                card.classList.add('correct');
+                setTimeout(() => {
+                    card.classList.add('matched');
+                    checkQuestionComplete();
+                    checkGameComplete();
+                }, 500);
+            } else {
+                // Wrong answer - show feedback and remove after animation
+                card.classList.add('wrong');
+                
+                // Check if this is a correct answer being wrongly disposed
+                const isCorrectAnswer = Object.values(correctAnswers).some(answers => 
+                    answers.includes(answer)
+                );
+                
+                if (isCorrectAnswer) {
+                    // Player disposed a correct answer - mark as wrong move
+                    gameState.hasWrongMoves = true;
+                }
+                
+                setTimeout(() => {
+                    if (card.classList.contains('wrong-answer')) {
+                        // Remove wrong answer cards completely after clicking
+                        card.classList.add('matched');
+                        checkGameComplete();
+                    } else {
+                        card.classList.remove('wrong');
+                    }
+                }, 1000);
+            }
+        }
+        
+        function selectDisposal(disposalBox) {
+            if (!selectedQuestion) {
+                showMessage("Wähle zuerst eine Frage aus!");
+                return;
+            }
+            
+            // Any remaining visible answer cards that are not correct for this question
+            const remainingAnswers = document.querySelectorAll('.answer-card:not(.matched)');
+            const correctAnswersForQuestion = correctAnswers[selectedQuestion];
+            
+            remainingAnswers.forEach(card => {
+                const answer = card.dataset.answer;
+                if (!correctAnswersForQuestion.includes(answer)) {
+                    // Check if this is a correct answer being wrongly disposed
+                    const isCorrectAnswer = Object.values(correctAnswers).some(answers => 
+                        answers.includes(answer)
+                    );
+                    
+                    if (isCorrectAnswer) {
+                        // Player disposed a correct answer - mark as wrong move
+                        gameState.hasWrongMoves = true;
+                    }
+                    
+                    card.classList.add('wrong');
+                    setTimeout(() => {
+                        card.classList.add('matched');
+                        checkGameComplete();
+                    }, 500);
+                }
+            });
+            
+            // Visual feedback for disposal box
+            disposalBox.style.background = '#dcfce7';
+            disposalBox.style.borderColor = '#16a34a';
+            setTimeout(() => {
+                disposalBox.style.background = '#fef2f2';
+                disposalBox.style.borderColor = '#dc2626';
+            }, 1000);
+        }
+        
+        function checkQuestionComplete() {
+            if (!selectedQuestion) return;
+            
+            const requiredAnswers = correctAnswers[selectedQuestion];
+            
+            // Count only the matched answers for this specific question
+            let foundCount = 0;
+            requiredAnswers.forEach(requiredAnswer => {
+                const answerCard = document.querySelector(`[data-answer="${requiredAnswer}"]`);
+                if (answerCard && answerCard.classList.contains('matched')) {
+                    foundCount++;
+                }
+            });
+            
+            if (foundCount === requiredAnswers.length) {
+                // Question completed
+                const questionCard = document.querySelector(`[data-question="${selectedQuestion}"]`);
+                setTimeout(() => {
+                    questionCard.classList.add('matched');
+                    gameState.matchedPairs.add(selectedQuestion);
+                    checkGameComplete();
+                }, 200);
+                
+                selectedQuestion = null;
+                document.querySelectorAll('.question-card').forEach(q => {
+                    q.classList.remove('selected');
+                });
+            }
+        }
+        
+        
+        function checkGameComplete() {
+            // Check if all question cards are matched
+            const allQuestionCards = document.querySelectorAll('.question-card');
+            const matchedQuestionCards = document.querySelectorAll('.question-card.matched');
+            
+            // Check if all answer cards (both correct and wrong) are matched
+            const allAnswerCards = document.querySelectorAll('.answer-card');
+            const matchedAnswerCards = document.querySelectorAll('.answer-card.matched');
+            
+            // Check for incomplete state: questions left but no answers
+            const remainingQuestions = allQuestionCards.length - matchedQuestionCards.length;
+            const remainingAnswers = allAnswerCards.length - matchedAnswerCards.length;
+            
+            // If questions remain but no answers, force end with failure
+            if (remainingQuestions > 0 && remainingAnswers === 0) {
+                gameState.hasWrongMoves = true;
+                
+                // Force all remaining questions to disappear
+                const remainingQuestionCards = document.querySelectorAll('.question-card:not(.matched)');
+                remainingQuestionCards.forEach(card => {
+                    card.classList.add('matched');
+                });
+            }
+            
+            if (matchedQuestionCards.length === allQuestionCards.length && 
+                matchedAnswerCards.length === allAnswerCards.length) {
+                
+                // All cards are gone, show completion
+                setTimeout(() => {
+                    // Hide disposal box
+                    const disposalBox = document.querySelector('.disposal-box');
+                    if (disposalBox) {
+                        disposalBox.classList.add('matched');
+                    }
+                    
+                    // Only show celebration if no wrong moves were made
+                    if (!gameState.hasWrongMoves) {
+                        createCelebrationEffect();
+                    }
+                    
+                    // Show completion message
+                    setTimeout(() => {
+                        const completeDiv = document.getElementById('game-complete');
+                        const messageElement = completeDiv.querySelector('h3');
+                        
+                        if (gameState.hasWrongMoves) {
+                            messageElement.textContent = '🤪';
+                            messageElement.style.color = '#dc2626';
+                            messageElement.style.fontSize = '4rem';
+                        } else {
+                            messageElement.textContent = '🎉 Glückwunsch! Du hast alle Fragen richtig beantwortet!';
+                            messageElement.style.color = '#166534';
+                            messageElement.style.fontSize = '1.5rem';
+                        }
+                        
+                        completeDiv.style.display = 'block';
+                    }, 1000);
+                }, 500);
+            }
+        }
+        
+        function createCelebrationEffect() {
+            // Create multiple celebration emojis
+            const emojis = ['🎉', '🎊', '✨', '🌟', '🎈', '🥳'];
+            const gameArea = document.getElementById('game-area');
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.cssText = `
+                        position: absolute;
+                        font-size: 2rem;
+                        z-index: 1000;
+                        pointer-events: none;
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        animation: celebrate 2s ease-out forwards;
+                    `;
+                    
+                    gameArea.appendChild(emoji);
+                    
+                    setTimeout(() => {
+                        if (emoji.parentNode) {
+                            emoji.parentNode.removeChild(emoji);
+                        }
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+        
+        function showMessage(message) {
+            // Simple message display
+            const existingMessage = document.getElementById('temp-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'temp-message';
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fee2e2;
+                color: #991b1b;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                border: 2px solid #dc2626;
+                z-index: 1000;
+                font-weight: 600;
+            `;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 2000);
+        }
+        
+        function resetGame() {
+            // Reset game state
+            gameState.score = 0;
+            gameState.matchedPairs.clear();
+            gameState.hasWrongMoves = false;
+            selectedQuestion = null;
+            
+            // Reset all cards
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('matched', 'selected', 'correct', 'wrong');
+            });
+            
+            // Hide completion message
+            document.getElementById('game-complete').style.display = 'none';
+            
+            // Reinitialize
+            initializeGame();
         }
         
         // Event listeners für Tab-Navigation
@@ -758,6 +1384,9 @@
                     this.style.transform = 'scale(1)';
                 });
             });
+            
+            // Initialize game when page loads
+            initializeGame();
         });
         
         // Globale Funktion: Teste PDF mit iframe, dann öffne oder zeige Coming Soon

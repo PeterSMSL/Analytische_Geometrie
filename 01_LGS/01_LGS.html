@@ -482,6 +482,399 @@
             margin-top: 1rem;
             text-align: center;
         }
+        
+        /* RPG Styles */
+        .rpg-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .rpg-header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .rpg-header h2 {
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .rpg-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        
+        .stat-box {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            flex: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-label {
+            display: block;
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1e1b4b;
+        }
+        
+        .rpg-inventory {
+            background: #f1f5f9;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rpg-inventory h3 {
+            margin-bottom: 1rem;
+            color: #1e1b4b;
+        }
+        
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .inventory-slot {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .inventory-slot.locked {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            opacity: 0.6;
+        }
+        
+        .inventory-slot.unlocked {
+            background: #dcfce7;
+            border-color: #16a34a;
+            box-shadow: 0 4px 8px rgba(22, 163, 74, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .item-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            color: #1e1b4b;
+            font-size: 0.9rem;
+        }
+        
+        .rpg-story {
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-text h3 {
+            color: #92400e;
+            margin-bottom: 1rem;
+        }
+        
+        .story-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .enemy-display {
+            margin-top: 1.5rem;
+        }
+        
+        .enemy-card {
+            background: #fef2f2;
+            border: 2px solid #dc2626;
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .enemy-avatar {
+            font-size: 3rem;
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .enemy-info {
+            flex: 1;
+        }
+        
+        .enemy-info h4 {
+            margin-bottom: 0.5rem;
+            color: #991b1b;
+        }
+        
+        .enemy-hp {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .hp-bar {
+            flex: 1;
+            height: 20px;
+            background: #fee2e2;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #dc2626;
+        }
+        
+        .hp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            transition: width 0.5s ease;
+        }
+        
+        .rpg-quest {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quest-box h4 {
+            color: #0369a1;
+            margin-bottom: 1rem;
+        }
+        
+        .quest-question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quest-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .quest-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .quest-option:hover {
+            background: #f8fafc;
+            border-color: #0ea5e9;
+        }
+        
+        .quest-option input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        
+        .checkmark {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .quest-option input[type="checkbox"]:checked + .checkmark {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+        }
+        
+        .quest-option input[type="checkbox"]:checked + .checkmark::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+        
+        .quest-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .rpg-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .rpg-button.attack {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .rpg-button.attack:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+        
+        .rpg-button.help {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .rpg-button.help:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+        
+        .rpg-button.theory {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .rpg-button.theory:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+        
+        .rpg-button.continue {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .rpg-button.continue:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+        }
+        
+        .rpg-feedback {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .feedback-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .feedback-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .feedback-content.success {
+            color: #16a34a;
+        }
+        
+        .feedback-content.error {
+            color: #dc2626;
+        }
+        
+        .xp-gain {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-weight: bold;
+            color: #92400e;
+        }
+        
+        .level-up {
+            background: #dcfce7;
+            border: 2px solid #16a34a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-weight: bold;
+            color: #166534;
+        }
+        
+        @media (max-width: 768px) {
+            .rpg-stats {
+                flex-direction: column;
+            }
+            
+            .stat-box {
+                margin-bottom: 0.5rem;
+            }
+            
+            .quest-actions {
+                flex-direction: column;
+            }
+            
+            .rpg-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .enemy-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .enemy-avatar {
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 
     <!-- MathJax Konfiguration -->
@@ -526,7 +919,7 @@
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="theory">Theorie</button>
             <button class="nav-tab" data-tab="exercises">Übungen</button>
-            <button class="nav-tab" data-tab="quiz">Quiz</button>
+            <button class="nav-tab" data-tab="rpg">Gleichungs-Quest</button>
         </div>
         
         <div class="content">
@@ -738,59 +1131,116 @@
                 </div>
             </div>
             
-            <!-- Quiz Tab -->
-            <div id="quiz" class="tab-content">
-                <h2>🎯 Quiz</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 1: Welche Verfahren eignen sich für 2x2 Gleichungssysteme?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q1a" value="correct">Additionsverfahren</label></li>
-                        <li><label><input type="checkbox" id="q1b" value="correct">Einsetzungsverfahren</label></li>
-                        <li><label><input type="checkbox" id="q1c" value="correct">Gleichsetzungsverfahren</label></li>
-                        <li><label><input type="checkbox" id="q1d" value="incorrect">Nur das Gauß-Verfahren</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q1', ['q1a', 'q1b', 'q1c'])">Antwort prüfen</button>
-                    <div id="q1-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 2: Wer entwickelte das Gauß-Verfahren?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q2a" value="incorrect">Isaac Newton</label></li>
-                        <li><label><input type="checkbox" id="q2b" value="correct">Carl Friedrich Gauß</label></li>
-                        <li><label><input type="checkbox" id="q2c" value="incorrect">Leonhard Euler</label></li>
-                        <li><label><input type="checkbox" id="q2d" value="incorrect">Gottfried Leibniz</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q2', ['q2b'])">Antwort prüfen</button>
-                    <div id="q2-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 3: Welche Lösungstypen kann ein LGS haben?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q3a" value="correct">Eindeutige Lösung</label></li>
-                        <li><label><input type="checkbox" id="q3b" value="correct">Unendlich viele Lösungen</label></li>
-                        <li><label><input type="checkbox" id="q3c" value="correct">Keine Lösung</label></li>
-                        <li><label><input type="checkbox" id="q3d" value="incorrect">Genau zwei Lösungen</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q3', ['q3a', 'q3b', 'q3c'])">Antwort prüfen</button>
-                    <div id="q3-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 4: Was bedeutet eine Widerspruchszeile im Gauß-Verfahren?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q4a" value="incorrect">Das System hat unendlich viele Lösungen</label></li>
-                        <li><label><input type="checkbox" id="q4b" value="correct">Das System hat keine Lösung</label></li>
-                        <li><label><input type="checkbox" id="q4c" value="incorrect">Das System hat genau eine Lösung</label></li>
-                        <li><label><input type="checkbox" id="q4d" value="incorrect">Es wurde ein Rechenfehler gemacht</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q4', ['q4b'])">Antwort prüfen</button>
-                    <div id="q4-feedback" class="quiz-feedback"></div>
+            <!-- RPG Tab -->
+            <div id="rpg" class="tab-content">
+                <div class="rpg-container">
+                    <div class="rpg-header">
+                        <h2>⚔️ Gleichungs-Quest: Die Reise der Mathematik-Ritter:in</h2>
+                        <p>Begib dich auf eine epische Reise durch das Reich der Linearen Gleichungssysteme!</p>
+                    </div>
+                    
+                    <div class="rpg-stats">
+                        <div class="stat-box">
+                            <span class="stat-label">Level:</span>
+                            <span class="stat-value" id="playerLevel">1</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">XP:</span>
+                            <span class="stat-value" id="playerXP">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Titel:</span>
+                            <span class="stat-value" id="playerTitle">Novize</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rpg-inventory">
+                        <h3>📦 Methoden-Rucksack</h3>
+                        <div class="inventory-grid" id="inventory">
+                            <div class="inventory-slot locked">
+                                <div class="item-icon">➕</div>
+                                <div class="item-name">Additionsverfahren</div>
+                            </div>
+                            <div class="inventory-slot locked">
+                                <div class="item-icon">🔄</div>
+                                <div class="item-name">Einsetzungsverfahren</div>
+                            </div>
+                            <div class="inventory-slot locked">
+                                <div class="item-icon">⚖️</div>
+                                <div class="item-name">Gleichsetzungsverfahren</div>
+                            </div>
+                            <div class="inventory-slot locked">
+                                <div class="item-icon">🔱</div>
+                                <div class="item-name">Gauß-Verfahren</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rpg-story" id="storyContainer">
+                        <div class="story-text">
+                            <h3>🏰 Willkommen im Reich der Gleichungen!</h3>
+                            <p>Du stehst vor den Toren der Akademie der Mathematik. Als angehende:r Gleichungs-Ritter:in musst du verschiedene Prüfungen bestehen, um deine Kräfte zu entwickeln.</p>
+                            <p>Vor dir erscheint der erste Gegner: Ein <strong>Chaos-Monster</strong>, das nur durch die richtige Lösung eines einfachen Gleichungssystems besiegt werden kann!</p>
+                        </div>
+                        
+                        <div class="enemy-display">
+                            <div class="enemy-card">
+                                <div class="enemy-avatar">👾</div>
+                                <div class="enemy-info">
+                                    <h4 id="enemyName">Chaos-Monster Level 1</h4>
+                                    <div class="enemy-hp">
+                                        <div class="hp-bar">
+                                            <div class="hp-fill" id="enemyHP" style="width: 100%"></div>
+                                        </div>
+                                        <span id="enemyHPText">100/100 HP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rpg-quest" id="questContainer">
+                        <div class="quest-box">
+                            <h4 id="questTitle">⚔️ Erste Prüfung: Grundlagen</h4>
+                            <div class="quest-question" id="questQuestion">
+                                <p>Welche Verfahren eignen sich für 2x2 Gleichungssysteme? (Mehrfachauswahl möglich)</p>
+                                <div class="quest-options">
+                                    <label class="quest-option">
+                                        <input type="checkbox" value="correct" data-answer="addition">
+                                        <span class="checkmark"></span>
+                                        Additionsverfahren
+                                    </label>
+                                    <label class="quest-option">
+                                        <input type="checkbox" value="correct" data-answer="substitution">
+                                        <span class="checkmark"></span>
+                                        Einsetzungsverfahren
+                                    </label>
+                                    <label class="quest-option">
+                                        <input type="checkbox" value="correct" data-answer="equation">
+                                        <span class="checkmark"></span>
+                                        Gleichsetzungsverfahren
+                                    </label>
+                                    <label class="quest-option">
+                                        <input type="checkbox" value="incorrect" data-answer="wrong">
+                                        <span class="checkmark"></span>
+                                        Nur das Gauß-Verfahren
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="quest-actions">
+                                <button class="rpg-button attack" onclick="attackEnemy()">⚔️ Angreifen!</button>
+                                <button class="rpg-button help" onclick="getHelp()">🆘 Hilfe</button>
+                                <button class="rpg-button theory" onclick="goToTheory()">📚 Theorie</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rpg-feedback" id="feedbackContainer" style="display: none;">
+                        <div class="feedback-box">
+                            <div class="feedback-content" id="feedbackContent"></div>
+                            <button class="rpg-button continue" onclick="continueQuest()" id="continueButton">Weiter</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -800,6 +1250,108 @@
         let currentTab = 'theory';
         let completedQuestions = 0;
         const totalQuestions = 4;
+        
+        // RPG Game State
+        let rpgState = {
+            level: 1,
+            xp: 0,
+            title: 'Noviz:in',
+            currentQuest: 0,
+            unlockedMethods: [],
+            enemyHP: 100,
+            maxEnemyHP: 100
+        };
+        
+        const quests = [
+            {
+                title: "⚔️ Erste Prüfung: Grundlagen",
+                story: "🏰 Willkommen im Reich der Gleichungen!",
+                storyText: "Du stehst vor den Toren der Akademie der Mathematik. Als angehende:r Gleichungs-Ritter:in musst du verschiedene Prüfungen bestehen, um deine Kräfte zu entwickeln. Vor dir erscheint der erste Gegner:
+                enemy: "👾 Chaos-Bestie Level 1",
+                question: "Welche Verfahren eignen sich für 2x2 Gleichungssysteme? (Mehrfachauswahl möglich)",
+                options: [
+                    { text: "Additionsverfahren", correct: true, method: "addition" },
+                    { text: "Einsetzungsverfahren", correct: true, method: "substitution" },
+                    { text: "Gleichsetzungsverfahren", correct: true, method: "equation" },
+                    { text: "Nur das Gauß-Verfahren", correct: false, method: "wrong" }
+                ],
+                xpReward: 50,
+                unlockedMethod: "addition"
+            },
+            {
+                title: "⚔️ Zweite Prüfung: Gauß-Meisterschaft",
+                story: "🌟 Der Weg zum Gauß-Tempel",
+                storyText: "Großartig! Du hast die erste Chaos-Bestie besiegt. Dein Ruf als Mathematik-Ritter:in wächst! Vor dir öffnet sich der Weg zum legendären Gauß-Tempel. Dort wartet ein mächtiger <strong>Algebra-Dämon</strong>, der nur durch Wissen über den berühmten Mathematiker besiegt werden kann.",
+                enemy: "🔥 Algebra-Dämon Level 2",
+                question: "Wer entwickelte das Gauß-Verfahren?",
+                options: [
+                    { text: "Isaac Newton", correct: false, method: "wrong" },
+                    { text: "Carl Friedrich Gauß", correct: true, method: "gauss" },
+                    { text: "Leonhard Euler", correct: false, method: "wrong" },
+                    { text: "Gottfried Leibniz", correct: false, method: "wrong" }
+                ],
+                xpReward: 75,
+                unlockedMethod: "gauss"
+            },
+            {
+                title: "⚔️ Dritte Prüfung: Konkrete Analyse",
+                story: "🏔️ Die Bergfestung der Lösungen",
+                storyText: "Du hast den Algebra-Dämon besiegt! Die Kräfte des Gauß-Verfahrens fließen nun durch dich. Doch deine Reise ist noch nicht zu Ende. Hoch oben in den Bergen thront die Festung der Lösungen, bewacht von einer <strong>System-Wächterin</strong>, die dein Verständnis für konkrete Lösungsanalyse prüfen wird.",
+                enemy: "🛡️ System-Wächterin Level 3",
+                question: "Analysiere das folgende LGS und bestimme den Lösungstyp:\\n\\n(I)  2x + 3y = 7\\n(II) 4x + 6y = 10",
+                options: [
+                    { text: "Eindeutige Lösung", correct: false, method: "wrong" },
+                    { text: "Unendlich viele Lösungen", correct: false, method: "wrong" },
+                    { text: "Keine Lösung (Widerspruch)", correct: true, method: "contradiction" },
+                    { text: "Kann nicht bestimmt werden", correct: false, method: "wrong" }
+                ],
+                xpReward: 100,
+                unlockedMethod: "substitution",
+                tip: "💡 Tipp: Bringe das System in Stufenform:\\n(I)  2x + 3y = 7\\n(II) 4x + 6y = 10\\n\\nMultipliziere (I) mit 2:\\n(I')  4x + 6y = 14\\n(II)  4x + 6y = 10\\n\\nSubtraktion (II) - (I'): 0 = -4 → Widerspruch!"
+            },
+            {
+                title: "⚔️ Vierte Prüfung: Parameterlösung",
+                story: "🌌 Das Tal der unendlichen Lösungen",
+                storyText: "Beeindruckend! Du hast die System-Wächterin besiegt. Nun führt dich der Weg durch das mystische Tal der unendlichen Lösungen. Hier herrscht ein <strong>Parameter-Magier</strong>, der deine Fähigkeit testet, Systeme mit unendlich vielen Lösungen zu erkennen.",
+                enemy: "🎭 Parameter-Magier Level 4",
+                question: "Bestimme den Lösungstyp für dieses LGS:\\n\\n(I)  x - 2y + z = 3\\n(II) 2x - 4y + 2z = 6\\n(III) 3x - 6y + 3z = 9",
+                options: [
+                    { text: "Eindeutige Lösung", correct: false, method: "wrong" },
+                    { text: "Unendlich viele Lösungen", correct: true, method: "infinite" },
+                    { text: "Keine Lösung", correct: false, method: "wrong" },
+                    { text: "Genau drei Lösungen", correct: false, method: "wrong" }
+                ],
+                xpReward: 125,
+                unlockedMethod: "equation",
+                tip: "💡 Tipp: Stufenform:\\n(I)  x - 2y + z = 3\\n(II) 2x - 4y + 2z = 6  |  -2·(I)\\n(III) 3x - 6y + 3z = 9  |  -3·(I)\\n\\nErgebnis:\\n(I)  x - 2y + z = 3\\n(II) 0 = 0\\n(III) 0 = 0\\n\\nZwei freie Parameter!"
+            },
+            {
+                title: "⚔️ Finale Prüfung: Die Gleichungs-Königin",
+                story: "👑 Der Thron der Mathematik",
+                storyText: "Fantastisch! Du bist nun fast am Ziel deiner Reise. Der Thron der Mathematik liegt vor dir, doch er wird von der mächtigsten Gegnerin bewacht: Der <strong>Gleichungs-Königin</strong>! Nur wer das Geheimnis der eindeutigen Lösungen versteht, kann diesen finalen Kampf gewinnen und zum/zur wahren Gleichungs-Ritter:in werden.",
+                enemy: "👑 Gleichungs-Königin Level 5",
+                question: "Analysiere das finale LGS und bestimme den Lösungstyp:\\n\\n(I)  2x + y - z = 4\\n(II) x - y + 2z = 1\\n(III) 3x + 2y - 3z = 5",
+                options: [
+                    { text: "Eindeutige Lösung", correct: true, method: "unique" },
+                    { text: "Unendlich viele Lösungen", correct: false, method: "wrong" },
+                    { text: "Keine Lösung", correct: false, method: "wrong" },
+                    { text: "Unlösbar ohne Rechnung", correct: false, method: "wrong" }
+                ],
+                xpReward: 200,
+                unlockedMethod: "master",
+                tip: "💡 Tipp: Stufenform durch Gauß-Elimination:\\n(I)  2x + y - z = 4\\n(II) x - y + 2z = 1\\n(III) 3x + 2y - 3z = 5\\n\\nNach Elimination:\\n(I)  2x + y - z = 4\\n(II) 0 - 3y + 5z = -2\\n(III) 0 + 0 - 3z = -3\\n\\nDreieckssystem → eindeutige Lösung!"
+            }
+        ];
+        
+        const titles = [
+            { level: 1, title: "Noviz:in" },
+            { level: 2, title: "Lehrling" },
+            { level: 3, title: "Adept:in" },
+            { level: 4, title: "Kenner:in" },
+            { level: 5, title: "Expert:in" },
+            { level: 6, title: "Meister:in" },
+            { level: 7, title: "Gleichungs-Ritter:in" }
+        ];
         
 		function showTab(tabName) {
 			// Hide all tabs
@@ -872,6 +1424,297 @@
             document.getElementById('progressFill').style.width = progress + '%';
         }
         
+        // RPG Functions
+        function attackEnemy() {
+            const currentQuest = quests[rpgState.currentQuest];
+            const checkedOptions = document.querySelectorAll('#rpg input[type="checkbox"]:checked');
+            
+            if (checkedOptions.length === 0) {
+                showFeedback("⚠️ Du musst mindestens eine Antwort auswählen, um anzugreifen!", "error");
+                return;
+            }
+            
+            const selectedAnswers = Array.from(checkedOptions).map(checkbox => checkbox.getAttribute('data-answer'));
+            const correctAnswers = currentQuest.options.filter(option => option.correct).map(option => option.method);
+            
+            const isCorrect = selectedAnswers.length === correctAnswers.length && 
+                             selectedAnswers.every(answer => correctAnswers.includes(answer));
+            
+            if (isCorrect) {
+                // Successful attack
+                rpgState.enemyHP = 0;
+                updateEnemyHP();
+                
+                // Gain XP
+                rpgState.xp += currentQuest.xpReward;
+                
+                // Check for level up
+                const oldLevel = rpgState.level;
+                checkLevelUp();
+                
+                // Unlock method
+                unlockMethod(currentQuest.unlockedMethod);
+                
+                let feedbackHTML = `
+                    <div class="feedback-content success">
+                        <h3>🎉 Sieg!</h3>
+                        <p>Du hast den ${currentQuest.enemy} besiegt!</p>
+                        <div class="xp-gain">+${currentQuest.xpReward} XP erhalten!</div>
+                `;
+                
+                if (rpgState.level > oldLevel) {
+                    feedbackHTML += `<div class="level-up">🌟 Level Up! Du bist jetzt Level ${rpgState.level}!</div>`;
+                }
+                
+                feedbackHTML += `
+                        <p>Du hast eine neue Methode freigeschaltet: <strong>${getMethodName(currentQuest.unlockedMethod)}</strong></p>
+                    </div>
+                `;
+                
+                showFeedback(feedbackHTML, "success");
+                
+                // Update UI
+                updatePlayerStats();
+                updateInventory();
+                
+            } else {
+                // Failed attack
+                rpgState.enemyHP = Math.max(0, rpgState.enemyHP - 25);
+                updateEnemyHP();
+                
+                showFeedback(`
+                    <div class="feedback-content error">
+                        <h3>💥 Verfehlt!</h3>
+                        <p>Dein Angriff war nicht stark genug. Der ${currentQuest.enemy} ist noch nicht besiegt!</p>
+                        <p>💡 Tipp: Überprüfe deine Antworten oder nutze die Hilfe-Funktion.</p>
+                    </div>
+                `, "error");
+            }
+        }
+        
+        function showFeedback(content, type) {
+            const feedbackContainer = document.getElementById('feedbackContainer');
+            const feedbackContent = document.getElementById('feedbackContent');
+            
+            feedbackContent.innerHTML = content;
+            feedbackContent.className = `feedback-content ${type}`;
+            feedbackContainer.style.display = 'flex';
+            
+            // Update continue button
+            const continueBtn = document.getElementById('continueButton');
+            if (type === 'success' && rpgState.enemyHP === 0) {
+                continueBtn.textContent = rpgState.currentQuest < quests.length - 1 ? 'Nächste Quest' : 'Quest beenden';
+            } else {
+                continueBtn.textContent = 'Weiter versuchen';
+            }
+        }
+        
+        function continueQuest() {
+            const feedbackContainer = document.getElementById('feedbackContainer');
+            feedbackContainer.style.display = 'none';
+            
+            if (rpgState.enemyHP === 0) {
+                // Enemy defeated, go to next quest
+                if (rpgState.currentQuest < quests.length - 1) {
+                    rpgState.currentQuest++;
+                    loadQuest();
+                } else {
+                    // Game completed
+                    showGameComplete();
+                }
+            } else {
+                // Reset checkboxes for retry
+                const checkboxes = document.querySelectorAll('#rpg input[type="checkbox"]');
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+            }
+        }
+        
+        function loadQuest() {
+            const quest = quests[rpgState.currentQuest];
+            
+            // Update story
+            document.querySelector('.story-text h3').textContent = quest.story;
+            document.querySelector('.story-text p').innerHTML = quest.storyText;
+            
+            // Update enemy
+            document.getElementById('enemyName').textContent = quest.enemy;
+            rpgState.enemyHP = 100;
+            rpgState.maxEnemyHP = 100;
+            updateEnemyHP();
+            
+            // Update quest
+            document.getElementById('questTitle').textContent = quest.title;
+            document.getElementById('questQuestion').innerHTML = `
+                <p style="white-space: pre-line; font-family: ${quest.question.includes('\\n') ? 'monospace' : 'inherit'};">${quest.question}</p>
+                <div class="quest-options">
+                    ${quest.options.map(option => `
+                        <label class="quest-option">
+                            <input type="checkbox" value="${option.correct ? 'correct' : 'incorrect'}" data-answer="${option.method}">
+                            <span class="checkmark"></span>
+                            ${option.text}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        function updateEnemyHP() {
+            const hpFill = document.getElementById('enemyHP');
+            const hpText = document.getElementById('enemyHPText');
+            
+            const hpPercentage = (rpgState.enemyHP / rpgState.maxEnemyHP) * 100;
+            hpFill.style.width = hpPercentage + '%';
+            hpText.textContent = `${rpgState.enemyHP}/${rpgState.maxEnemyHP} HP`;
+        }
+        
+        function updatePlayerStats() {
+            document.getElementById('playerLevel').textContent = rpgState.level;
+            document.getElementById('playerXP').textContent = rpgState.xp;
+            document.getElementById('playerTitle').textContent = rpgState.title;
+        }
+        
+        function checkLevelUp() {
+            const xpThresholds = [0, 50, 125, 225, 350, 550, 750];
+            
+            for (let i = 0; i < xpThresholds.length; i++) {
+                if (rpgState.xp >= xpThresholds[i] && i + 1 > rpgState.level) {
+                    rpgState.level = i + 1;
+                    rpgState.title = titles[i].title;
+                }
+            }
+        }
+        
+        function unlockMethod(methodName) {
+            if (!rpgState.unlockedMethods.includes(methodName)) {
+                rpgState.unlockedMethods.push(methodName);
+            }
+        }
+        
+        function updateInventory() {
+            const inventorySlots = document.querySelectorAll('.inventory-slot');
+            const methods = ['addition', 'gauss', 'substitution', 'equation'];
+            
+            inventorySlots.forEach((slot, index) => {
+                const methodName = methods[index];
+                if (rpgState.unlockedMethods.includes(methodName) || rpgState.unlockedMethods.includes('master')) {
+                    slot.classList.remove('locked');
+                    slot.classList.add('unlocked');
+                }
+            });
+        }
+        
+        function getMethodName(method) {
+            const methodNames = {
+                addition: 'Additionsverfahren',
+                substitution: 'Einsetzungsverfahren',
+                equation: 'Gleichsetzungsverfahren',
+                gauss: 'Gauß-Verfahren',
+                master: 'Meister-Rang'
+            };
+            return methodNames[method] || method;
+        }
+        
+        function getHelp() {
+            const currentQuest = quests[rpgState.currentQuest];
+            
+            if (currentQuest.tip) {
+                // Zeige spezifischen Tipp für konkrete Aufgaben
+                showFeedback(`
+                    <div class="feedback-content">
+                        <h3>🆘 Hilfe</h3>
+                        <p style="white-space: pre-line; font-family: monospace; background: #f1f5f9; padding: 1rem; border-radius: 8px; text-align: left;">${currentQuest.tip}</p>
+                    </div>
+                `, "help");
+            } else {
+                // Allgemeine Tipps für Grundlagenfragen
+                const helpTexts = [
+                    "💡 Tipp: Für 2x2 Gleichungssysteme gibt es drei klassische Verfahren. Überlege, welche du aus der Mittelstufe kennst!",
+                    "💡 Tipp: Denke an den berühmten deutschen Mathematiker, nach dem das Verfahren benannt ist. Er lebte von 1777-1855."
+                ];
+                
+                showFeedback(`
+                    <div class="feedback-content">
+                        <h3>🆘 Hilfe</h3>
+                        <p>${helpTexts[rpgState.currentQuest] || "💡 Überlege dir die Antwort genau und verwende dein Wissen aus der Theorie!"}</p>
+                    </div>
+                `, "help");
+            }
+        }
+        
+        function goToTheory() {
+            showTab('theory');
+        }
+        
+        function showGameComplete() {
+            showFeedback(`
+                <div class="feedback-content success">
+                    <h3>🎊 Gratulation!</h3>
+                    <p>Du hast alle Prüfungen bestanden und bist nun ein:e wahrer:e <strong>Gleichungs-Ritter:in</strong>!</p>
+                    <p>Du hast alle Methoden gemeistert und das Reich der Linearen Gleichungssysteme von den Chaos-Bestien befreit!</p>
+                    <div class="level-up">🏆 Quest abgeschlossen! Du bist nun Level ${rpgState.level} ${rpgState.title}!</div>
+                    <p style="margin-top: 1rem; color: #059669;">Dein Fortschritt wurde gespeichert. Du kannst jederzeit zurückkehren!</p>
+                </div>
+            `, "success");
+            
+            // Zwei Buttons: Beenden und Neu starten
+            const continueBtn = document.getElementById('continueButton');
+            continueBtn.textContent = 'Quest beenden';
+            continueBtn.onclick = function() {
+                document.getElementById('feedbackContainer').style.display = 'none';
+            };
+            
+            // Zusätzlichen Neustart-Button hinzufügen
+            const feedbackBox = document.querySelector('.feedback-box');
+            if (!document.getElementById('restartButton')) {
+                const restartBtn = document.createElement('button');
+                restartBtn.id = 'restartButton';
+                restartBtn.className = 'rpg-button theory';
+                restartBtn.textContent = 'Neu starten';
+                restartBtn.style.marginLeft = '1rem';
+                restartBtn.onclick = function() {
+                    resetGame();
+                };
+                feedbackBox.appendChild(restartBtn);
+            }
+        }
+        
+        function resetGame() {
+            rpgState = {
+                level: 1,
+                xp: 0,
+                title: 'Noviz:in',
+                currentQuest: 0,
+                unlockedMethods: [],
+                enemyHP: 100,
+                maxEnemyHP: 100
+            };
+            
+            // Entferne Neustart-Button falls vorhanden
+            const restartBtn = document.getElementById('restartButton');
+            if (restartBtn) {
+                restartBtn.remove();
+            }
+            
+            loadQuest();
+            updatePlayerStats();
+            updateInventory();
+            
+            document.getElementById('feedbackContainer').style.display = 'none';
+            document.getElementById('continueButton').onclick = continueQuest;
+        }
+        
+        function initializeRPG() {
+            // Only initialize once
+            if (window.rpgInitialized) return;
+            window.rpgInitialized = true;
+            
+            // Load first quest
+            loadQuest();
+            updatePlayerStats();
+            updateInventory();
+            updateEnemyHP();
+        }
+        
         // Event listeners für Tab-Navigation
 		document.addEventListener('DOMContentLoaded', function() {
 			// Tab navigation - robuste Event-Behandlung
@@ -883,6 +1726,11 @@
 					e.preventDefault();
 					const tabName = this.getAttribute('data-tab');
 					showTab(tabName);
+					
+					// Initialize RPG when tab is opened
+					if (tabName === 'rpg') {
+						initializeRPG();
+					}
 				});
 				
 				// Touch event für mobile Geräte
@@ -891,6 +1739,11 @@
 					e.stopPropagation();
 					const tabName = this.getAttribute('data-tab');
 					showTab(tabName);
+					
+					// Initialize RPG when tab is opened
+					if (tabName === 'rpg') {
+						initializeRPG();
+					}
 				});
 			});
             

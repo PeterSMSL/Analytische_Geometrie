@@ -114,6 +114,38 @@
             --accent-color: #6b7280;
         }
         
+        .chapter-button.orange {
+            --accent-color: #f59e0b;
+        }
+        
+        .chapter-button.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #f8fafc;
+            color: #9ca3af;
+            border-color: #e5e7eb;
+        }
+        
+        .chapter-button.locked:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: #e5e7eb;
+        }
+        
+        .chapter-button.locked::before {
+            background: #9ca3af;
+            width: 4px;
+        }
+        
+        .chapter-button.locked::after {
+            content: '🔒';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 2rem;
@@ -242,6 +274,7 @@
             <a href="05_Vektorprodukt/05_Vektorprodukt.html" class="chapter-button pink">
                 Vektorprodukt
             </a>
+            
         </div>
         
         <div class="footer">
@@ -255,5 +288,48 @@
         </div>
     </div>
     
+    <script>
+        // Kapitel-Freischaltung Flags
+        const chapterFlags = {
+            overview: true,        // Übersicht immer verfügbar
+            lgs: true,             // LGS verfügbar
+            punkte: true,         // Punkte im Raum gesperrt
+            vektoren: false,       // Vektoren gesperrt
+            skalarprodukt: false,  // Skalarprodukt gesperrt
+            vektorprodukt: false   // Vektorprodukt gesperrt
+        };
+        
+        // Kapitel-Konfiguration
+        const chapters = [
+            { id: 'overview', href: '00_Uebersicht/00_Uebersicht.html', flag: 'overview' },
+            { id: 'lgs', href: '01_LGS/01_LGS.html', flag: 'lgs' },
+            { id: 'punkte', href: '02_Punkte-im-Raum/02_Punkte-im-Raum.html', flag: 'punkte' },
+            { id: 'vektoren', href: '03_Vektoren/03_Vektoren.html', flag: 'vektoren' },
+            { id: 'skalarprodukt', href: '04_Skalarprodukt/04_Skalarprodukt.html', flag: 'skalarprodukt' },
+            { id: 'vektorprodukt', href: '05_Vektorprodukt/05_Vektorprodukt.html', flag: 'vektorprodukt' }
+        ];
+        
+        function initializeChapters() {
+            const buttons = document.querySelectorAll('.chapter-button');
+            
+            buttons.forEach((button, index) => {
+                const chapter = chapters[index];
+                if (chapter && !chapterFlags[chapter.flag]) {
+                    // Kapitel ist gesperrt
+                    button.classList.add('locked');
+                    button.removeAttribute('href');
+                    
+                    // Click-Handler für gesperrte Kapitel
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        window.location.href = 'interstellar_time.html';
+                    });
+                }
+            });
+        }
+        
+        // Initialisierung beim Laden der Seite
+        document.addEventListener('DOMContentLoaded', initializeChapters);
+    </script>
 </body>
 </html>

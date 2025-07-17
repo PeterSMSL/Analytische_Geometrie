@@ -88,6 +88,20 @@
                 align-items: center;
                 padding-top: 0;
             }
+            
+            /* Ensure better touch interaction in landscape */
+            .mobile-controls {
+                display: flex !important;
+                bottom: 5px;
+                right: 5px;
+                gap: 4px;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
         }
         
         .ui-overlay {
@@ -761,10 +775,10 @@
             
             const statement = mathStatements[Math.floor(Math.random() * mathStatements.length)];
             
-            // Spawn from top of screen, on the road
+            // Spawn from top of screen, on the road (wider spawn area)
             const roadWidth = 300;
-            const roadLeft = (canvas.width - roadWidth) / 2 + 30;
-            const roadRight = roadLeft + roadWidth - 60;
+            const roadLeft = (canvas.width - roadWidth) / 2 + 10; // Reduced margin
+            const roadRight = roadLeft + roadWidth - 20; // Reduced margin
             
             // Random position on road
             let x = roadLeft + Math.random() * (roadRight - roadLeft);
@@ -825,9 +839,10 @@
                     return false;
                 }
                 
-                // Check collision with car (increased hit area)
+                // Check collision with car (much larger hit area for mobile)
                 const distance = Math.sqrt(Math.pow(car.x - statement.x, 2) + Math.pow(car.y - statement.y, 2));
-                if (distance < 65) { // Larger collision area for better hits
+                const hitRadius = window.innerWidth < 768 ? 85 : 65; // Larger on mobile
+                if (distance < hitRadius) { // Dynamic collision area
                     handleStatementCollision(statement);
                     if (statementEl) {
                         statementEl.remove();
@@ -1029,10 +1044,10 @@
             // Update road scrolling effect (slower)
             car.roadOffset += car.speed * 1.2;
             
-            // Keep car on road horizontally
+            // Keep car on road horizontally (wider movement area)
             const roadWidth = 300;
-            const roadLeft = (canvas.width - roadWidth) / 2 + 15;
-            const roadRight = roadLeft + roadWidth - 30;
+            const roadLeft = (canvas.width - roadWidth) / 2 + 5; // Reduced margin
+            const roadRight = roadLeft + roadWidth - 10; // Reduced margin
             car.x = Math.max(roadLeft, Math.min(roadRight, car.x));
             
             // Keep car in vertical bounds (shouldn't move much)

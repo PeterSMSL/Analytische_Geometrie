@@ -51,6 +51,26 @@
             }
         }
         
+        @media (max-width: 768px) {
+            .game-container {
+                width: 100vw;
+                height: 66.67vw; /* Maintain 900:600 aspect ratio */
+                max-height: 90vh;
+            }
+            
+            body {
+                padding: 0;
+            }
+        }
+        
+        @media (max-width: 768px) and (orientation: landscape) {
+            .game-container {
+                width: 100vw;
+                height: 56.25vw; /* Maintain 16:9 aspect ratio in landscape */
+                max-height: 100vh;
+            }
+        }
+        
         .ui-overlay {
             position: absolute;
             top: 20px;
@@ -236,6 +256,19 @@
             background: rgba(220, 220, 220, 0.9);
         }
         
+        .shield-btn {
+            background: rgba(255, 215, 0, 0.9) !important;
+            border-color: #b8860b !important;
+        }
+        
+        .shield-btn:active {
+            background: rgba(255, 193, 7, 0.9) !important;
+        }
+        
+        .shield-btn:hover {
+            background: rgba(255, 223, 0, 0.9) !important;
+        }
+        
         
         /* Mobile controls are always visible for testing */
         .mobile-controls {
@@ -299,6 +332,9 @@
                 <div class="control-btn" id="downBtn">↓</div>
                 <div class="control-btn" id="rightBtn">→</div>
             </div>
+            <div class="control-row">
+                <div class="control-btn shield-btn" id="shieldBtn">🛡️</div>
+            </div>
         </div>
     </div>
 
@@ -306,6 +342,10 @@
         // Canvas Setup
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        
+        // Gauss Shield Image
+        const gaussImg = new Image();
+        gaussImg.src = 'Gauss_zeichnung.jpg';
         
         // Game State
         let gameRunning = true;
@@ -325,7 +365,9 @@
             friction: 0.88,
             turnSpeed: 0.06,
             width: 35,
-            height: 20
+            height: 20,
+            shieldActive: false,
+            shieldTimeLeft: 0
         };
         
         // Input State
@@ -333,7 +375,8 @@
             up: false,
             down: false,
             left: false,
-            right: false
+            right: false,
+            shield: false
         };
         
         // Math Statements Pool - More correct answers, column vector notation
@@ -585,6 +628,50 @@
             ctx.arc(0, -6, 2, 0, 2 * Math.PI);
             ctx.fill();
             
+            // Draw Gauss shield if active
+            if (car.shieldActive && gaussImg.complete) {
+                ctx.save();
+                
+                // Shield size and position
+                const shieldSize = 80;
+                const shieldX = -shieldSize / 2;
+                const shieldY = -shieldSize / 2;
+                
+                // Shield glow effect
+                ctx.shadowColor = '#FFD700';
+                ctx.shadowBlur = 15;
+                
+                // Draw circular shield background
+                ctx.beginPath();
+                ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
+                ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+                ctx.fill();
+                
+                // Draw Gauss portrait in circle
+                ctx.beginPath();
+                ctx.arc(0, 0, shieldSize / 2 - 5, 0, 2 * Math.PI);
+                ctx.clip();
+                
+                ctx.drawImage(gaussImg, shieldX, shieldY, shieldSize, shieldSize);
+                
+                ctx.restore();
+                
+                // Shield border
+                ctx.beginPath();
+                ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#FFD700';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Shield timer indicator
+                const timeRatio = car.shieldTimeLeft / 2000;
+                ctx.beginPath();
+                ctx.arc(0, 0, shieldSize / 2 + 8, -Math.PI / 2, -Math.PI / 2 + (timeRatio * 2 * Math.PI));
+                ctx.strokeStyle = '#FF6B6B';
+                ctx.lineWidth = 6;
+                ctx.stroke();
+            }
+            
             ctx.restore();
         }
         
@@ -688,14 +775,33 @@
         }
         
         function handleStatementCollision(statement) {
-            if (statement.correct) {
-                timeLeft += 6; // Reduced from 10 to 6 seconds
+            // Gauß-Schild wirkt wie NOT-Operator in boolescher Algebra
+            const effectiveResult = car.shieldActive ? !statement.correct : statement.correct;
+            
+            if (effectiveResult) {
+                // Effektiv richtige Antwort
+                timeLeft += 6;
                 score += 100;
-                createParticle(statement.x, statement.y, '+6s', '#4CAF50');
+                if (car.shieldActive) {
+                    createParticle(statement.x, statement.y, '🛡️ NOT-Operator', '#FFD700');
+                } else {
+                    createParticle(statement.x, statement.y, '+6s', '#4CAF50');
+                }
             } else {
+                // Effektiv falsche Antwort
                 timeLeft -= 5;
                 score = Math.max(0, score - 50);
-                createParticle(statement.x, statement.y, '-5s', '#f44336');
+                if (car.shieldActive) {
+                    createParticle(statement.x, statement.y, '🛡️ Fehler!', '#FF6B6B');
+                } else {
+                    createParticle(statement.x, statement.y, '-5s', '#f44336');
+                }
+            }
+            
+            // Schild deaktiviert sich nach jeder Nutzung
+            if (car.shieldActive) {
+                car.shieldActive = false;
+                car.shieldTimeLeft = 0;
             }
         }
         
@@ -712,7 +818,7 @@
             setTimeout(() => particle.remove(), 1000);
         }
         
-        // Input Handling - Only WASD
+        // Input Handling - WASD + Space for shield
         document.addEventListener('keydown', (e) => {
             switch(e.code) {
                 case 'KeyW':
@@ -726,6 +832,9 @@
                     break;
                 case 'KeyD':
                     keys.right = true;
+                    break;
+                case 'Space':
+                    keys.shield = true;
                     break;
             }
             e.preventDefault();
@@ -745,6 +854,9 @@
                 case 'KeyD':
                     keys.right = false;
                     break;
+                case 'Space':
+                    keys.shield = false;
+                    break;
             }
             e.preventDefault();
         });
@@ -755,6 +867,7 @@
             const downBtn = document.getElementById('downBtn');
             const leftBtn = document.getElementById('leftBtn');
             const rightBtn = document.getElementById('rightBtn');
+            const shieldBtn = document.getElementById('shieldBtn');
             
             // Prevent scrolling on touch devices
             document.body.addEventListener('touchmove', (e) => {
@@ -806,6 +919,7 @@
             handleButtonPress(downBtn, 'down');
             handleButtonPress(leftBtn, 'left');
             handleButtonPress(rightBtn, 'right');
+            handleButtonPress(shieldBtn, 'shield');
         }
         
         setupTouchControls();
@@ -813,6 +927,21 @@
         // Car Physics
         function updateCar() {
             if (!gameRunning) return;
+            
+            // Shield activation
+            if (keys.shield && !car.shieldActive) {
+                car.shieldActive = true;
+                car.shieldTimeLeft = 2000; // 2 seconds
+            }
+            
+            // Shield timer
+            if (car.shieldActive) {
+                car.shieldTimeLeft -= 1000/60; // 60 FPS
+                if (car.shieldTimeLeft <= 0) {
+                    car.shieldActive = false;
+                    car.shieldTimeLeft = 0;
+                }
+            }
             
             // Automatic forward movement with optional speed boost
             if (keys.up) {
@@ -884,6 +1013,8 @@
             car.y = 450; // Start on the track bottom
             car.angle = -Math.PI/2; // Start pointing up
             car.speed = car.baseSpeed; // Start with base speed for mobile
+            car.shieldActive = false;
+            car.shieldTimeLeft = 0;
             activeStatements = [];
             lastSpawnTime = 0;
             

@@ -30,6 +30,7 @@
             max-width: 100%;
             width: 900px;
             height: 600px;
+            margin: 0 auto;
         }
         
         #gameCanvas {
@@ -55,11 +56,23 @@
             .game-container {
                 width: 100vw;
                 height: 66.67vw; /* Maintain 900:600 aspect ratio */
-                max-height: 90vh;
+                max-height: 85vh;
+                border-radius: 0;
+                margin: 0;
+            }
+            
+            #gameCanvas {
+                border-radius: 0;
             }
             
             body {
                 padding: 0;
+                margin: 0;
+                overflow: hidden;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
         
@@ -67,7 +80,7 @@
             .game-container {
                 width: 100vw;
                 height: 56.25vw; /* Maintain 16:9 aspect ratio in landscape */
-                max-height: 100vh;
+                max-height: 95vh;
             }
         }
         
@@ -220,6 +233,11 @@
             flex-direction: column;
             gap: 10px;
             z-index: 30;
+            pointer-events: none;
+        }
+        
+        .control-btn {
+            pointer-events: auto;
         }
         
         .control-row {
@@ -278,21 +296,30 @@
         @media (max-width: 768px) {
             .mobile-controls {
                 display: flex !important;
-                bottom: 10px;
-                right: 10px;
+                bottom: 15px;
+                right: 15px;
+                gap: 8px;
             }
             
             .control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 18px;
+                border-width: 2px;
+            }
+            
+            .shield-btn {
+                width: 65px !important;
+                height: 65px !important;
+                font-size: 22px !important;
+                box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
             }
             
             .ui-overlay {
                 top: 10px;
                 left: 10px;
                 right: 10px;
-                font-size: 16px;
+                font-size: 14px;
             }
         }
         
@@ -325,15 +352,13 @@
         
         <div class="mobile-controls">
             <div class="control-row">
+                <div class="control-btn shield-btn" id="shieldBtn">🛡️</div>
                 <div class="control-btn" id="upBtn">↑</div>
             </div>
             <div class="control-row">
                 <div class="control-btn" id="leftBtn">←</div>
                 <div class="control-btn" id="downBtn">↓</div>
                 <div class="control-btn" id="rightBtn">→</div>
-            </div>
-            <div class="control-row">
-                <div class="control-btn shield-btn" id="shieldBtn">🛡️</div>
             </div>
         </div>
     </div>
@@ -345,7 +370,17 @@
         
         // Gauss Shield Image
         const gaussImg = new Image();
+        gaussImg.crossOrigin = 'anonymous';
         gaussImg.src = 'Gauss_zeichnung.jpg';
+        
+        // Preload image
+        gaussImg.onload = function() {
+            console.log('Gauss image loaded successfully');
+        };
+        
+        gaussImg.onerror = function() {
+            console.log('Gauss image failed to load');
+        };
         
         // Game State
         let gameRunning = true;
@@ -629,17 +664,15 @@
             ctx.fill();
             
             // Draw Gauss shield if active
-            if (car.shieldActive && gaussImg.complete) {
-                ctx.save();
-                
-                // Shield size and position
-                const shieldSize = 80;
+            if (car.shieldActive) {
+                // Shield size and position - smaller on mobile
+                const shieldSize = window.innerWidth < 768 ? 60 : 80;
                 const shieldX = -shieldSize / 2;
                 const shieldY = -shieldSize / 2;
                 
-                // Shield glow effect
-                ctx.shadowColor = '#FFD700';
-                ctx.shadowBlur = 15;
+                // Reset shadow settings
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
                 
                 // Draw circular shield background
                 ctx.beginPath();
@@ -647,14 +680,22 @@
                 ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
                 ctx.fill();
                 
-                // Draw Gauss portrait in circle
-                ctx.beginPath();
-                ctx.arc(0, 0, shieldSize / 2 - 5, 0, 2 * Math.PI);
-                ctx.clip();
-                
-                ctx.drawImage(gaussImg, shieldX, shieldY, shieldSize, shieldSize);
-                
-                ctx.restore();
+                // Draw Gauss portrait if loaded, otherwise show symbol
+                if (gaussImg.complete && gaussImg.naturalWidth > 0) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(0, 0, shieldSize / 2 - 5, 0, 2 * Math.PI);
+                    ctx.clip();
+                    ctx.drawImage(gaussImg, shieldX, shieldY, shieldSize, shieldSize);
+                    ctx.restore();
+                } else {
+                    // Fallback: Show mathematical symbols
+                    ctx.fillStyle = '#333';
+                    ctx.font = `${shieldSize / 3}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('¬', 0, 0);
+                }
                 
                 // Shield border
                 ctx.beginPath();

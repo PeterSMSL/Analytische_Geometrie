@@ -377,8 +377,8 @@
         
         .game-area {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 0.8rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
             margin-bottom: 1.5rem;
             min-height: 400px;
             position: relative;
@@ -388,26 +388,27 @@
             background: white;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            padding: 1rem;
+            padding: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 80px;
+            min-height: 120px;
             text-align: center;
             user-select: none;
         }
         
         .card-content {
-            font-size: 0.8rem;
-            line-height: 1.3;
+            font-size: 0.9rem;
+            line-height: 1.4;
             font-weight: 500;
+            width: 100%;
         }
         
         .card-content .MathJax {
-            font-size: 0.9rem !important;
+            font-size: 1rem !important;
         }
         
         .card-content .MathJax_Display {
@@ -483,7 +484,7 @@
             border: 2px dashed #dc2626;
             color: #991b1b;
             font-weight: 600;
-            min-height: 100px;
+            min-height: 120px;
         }
         
         .disposal-box:hover {
@@ -643,6 +644,25 @@
                 padding: 1rem;
                 font-size: 1rem;
             }
+            
+            /* Game Area Mobile Anpassungen */
+            .game-area {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .card {
+                min-height: 100px;
+                padding: 0.8rem;
+            }
+            
+            .card-content {
+                font-size: 0.8rem;
+            }
+            
+            .card-content .MathJax {
+                font-size: 0.9rem !important;
+            }
         }
         
         /* Kleinere Bildschirme */
@@ -666,6 +686,25 @@
             
             .theory-section h3 {
                 font-size: 1.1rem;
+            }
+            
+            /* Game Area kleine Bildschirme */
+            .game-area {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+            
+            .card {
+                min-height: 80px;
+                padding: 0.6rem;
+            }
+            
+            .card-content {
+                font-size: 0.75rem;
+            }
+            
+            .card-content .MathJax {
+                font-size: 0.85rem !important;
             }
         }
     </style>
@@ -869,6 +908,7 @@
                     <p>Klicke zuerst auf eine Frage, dann auf die passende(n) Antwort(en). Richtige Paare verschwinden!</p>
                     <p><strong>Wichtig:</strong> Nur falsche Antworten gehören in den Müll. Am Ende muss alles korrekt entsorgt sein!</p>
                     <p><strong>⚠️ Achtung:</strong> Es gibt keine Gnade für den kleinsten Fehler! Nur ein Neustart kann dann helfen.</p>
+                    <p><strong>📱 Für iPad/Android:</strong> Klicke auf den Mülleimer und wähle dann die falschen Antworten aus!</p>
                     <div style="display: flex; justify-content: center; margin-top: 1rem;">
                         <button onclick="resetGame()" class="restart-button">🔄 Neustart</button>
                     </div>
@@ -1033,10 +1073,22 @@
             
             questionCards.forEach(card => {
                 card.addEventListener('click', () => selectQuestion(card));
+                // Touch support für mobile Geräte
+                card.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    selectQuestion(card);
+                });
             });
             
             answerCards.forEach(card => {
                 card.addEventListener('click', () => selectAnswer(card));
+                // Touch support für mobile Geräte
+                card.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    selectAnswer(card);
+                });
                 // Make answer cards draggable
                 card.draggable = true;
                 card.addEventListener('dragstart', (e) => {
@@ -1046,6 +1098,12 @@
             
             if (disposalBox) {
                 disposalBox.addEventListener('click', () => selectDisposal(disposalBox));
+                // Touch support für mobile Geräte
+                disposalBox.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    selectDisposal(disposalBox);
+                });
                 
                 // Make disposal box a drop target
                 disposalBox.addEventListener('dragover', (e) => {
@@ -1141,43 +1199,154 @@
         }
         
         function selectDisposal(disposalBox) {
+            // Erweiterte Funktionalität: Entweder alle falschen Antworten oder einzelne Antworten entsorgen
             if (!selectedQuestion) {
                 showMessage("Wähle zuerst eine Frage aus!");
                 return;
             }
             
-            // Any remaining visible answer cards that are not correct for this question
+            // Neue Funktionalität: Zeige alle verbleibenden Antworten an und erlaube Auswahl
             const remainingAnswers = document.querySelectorAll('.answer-card:not(.matched)');
             const correctAnswersForQuestion = correctAnswers[selectedQuestion];
             
+            if (remainingAnswers.length === 0) {
+                showMessage("Keine Antworten mehr verfügbar!");
+                return;
+            }
+            
+            // Zeige Auswahlfenster für iPad/Android
+            showAnswerSelectionModal(remainingAnswers, correctAnswersForQuestion);
+        }
+        
+        function showAnswerSelectionModal(remainingAnswers, correctAnswersForQuestion) {
+            // Erstelle Modal für Antwortauswahl
+            const modal = document.createElement('div');
+            modal.id = 'answer-selection-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                max-width: 80%;
+                max-height: 80%;
+                overflow-y: auto;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            `;
+            
+            modalContent.innerHTML = `
+                <h3 style="margin-bottom: 1rem; color: #dc2626;">Wähle die falschen Antworten aus:</h3>
+                <div id="answer-options" style="display: grid; gap: 0.5rem; margin-bottom: 1rem;"></div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                    <button id="cancel-selection" style="background: #6b7280; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">Abbrechen</button>
+                    <button id="confirm-selection" style="background: #dc2626; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">Entsorgen</button>
+                </div>
+            `;
+            
+            const answerOptions = modalContent.querySelector('#answer-options');
+            const selectedAnswersToDispose = new Set();
+            
             remainingAnswers.forEach(card => {
                 const answer = card.dataset.answer;
-                if (!correctAnswersForQuestion.includes(answer)) {
-                    // Check if this is a correct answer being wrongly disposed
-                    const isCorrectAnswer = Object.values(correctAnswers).some(answers => 
-                        answers.includes(answer)
-                    );
-                    
-                    if (isCorrectAnswer) {
-                        // Player disposed a correct answer - mark as wrong move
-                        gameState.hasWrongMoves = true;
+                const answerDiv = document.createElement('div');
+                answerDiv.style.cssText = `
+                    padding: 0.8rem;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                `;
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `dispose-${answer}`;
+                checkbox.style.cssText = 'transform: scale(1.2);';
+                
+                const label = document.createElement('label');
+                label.htmlFor = `dispose-${answer}`;
+                label.style.cssText = 'cursor: pointer; flex: 1;';
+                label.innerHTML = card.querySelector('.card-content').innerHTML;
+                
+                answerDiv.appendChild(checkbox);
+                answerDiv.appendChild(label);
+                
+                answerDiv.addEventListener('click', () => {
+                    checkbox.checked = !checkbox.checked;
+                    if (checkbox.checked) {
+                        selectedAnswersToDispose.add(answer);
+                        answerDiv.style.background = '#fee2e2';
+                        answerDiv.style.borderColor = '#dc2626';
+                    } else {
+                        selectedAnswersToDispose.delete(answer);
+                        answerDiv.style.background = 'white';
+                        answerDiv.style.borderColor = '#e5e7eb';
                     }
-                    
-                    card.classList.add('wrong');
-                    setTimeout(() => {
-                        card.classList.add('matched');
-                        checkGameComplete();
-                    }, 500);
-                }
+                });
+                
+                answerOptions.appendChild(answerDiv);
             });
             
-            // Visual feedback for disposal box
-            disposalBox.style.background = '#dcfce7';
-            disposalBox.style.borderColor = '#16a34a';
-            setTimeout(() => {
-                disposalBox.style.background = '#fef2f2';
-                disposalBox.style.borderColor = '#dc2626';
-            }, 1000);
+            modalContent.querySelector('#cancel-selection').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            modalContent.querySelector('#confirm-selection').addEventListener('click', () => {
+                if (selectedAnswersToDispose.size === 0) {
+                    showMessage("Wähle mindestens eine Antwort aus!");
+                    return;
+                }
+                
+                // Entsorge ausgewählte Antworten
+                selectedAnswersToDispose.forEach(answer => {
+                    const card = document.querySelector(`[data-answer="${answer}"]`);
+                    if (card && !card.classList.contains('matched')) {
+                        // Check if this is a correct answer being wrongly disposed
+                        const isCorrectAnswer = Object.values(correctAnswers).some(answers => 
+                            answers.includes(answer)
+                        );
+                        
+                        if (isCorrectAnswer) {
+                            // Player disposed a correct answer - mark as wrong move
+                            gameState.hasWrongMoves = true;
+                        }
+                        
+                        card.classList.add('wrong');
+                        setTimeout(() => {
+                            card.classList.add('matched');
+                            checkGameComplete();
+                        }, 500);
+                    }
+                });
+                
+                document.body.removeChild(modal);
+                
+                // Visual feedback for disposal box
+                const disposalBox = document.querySelector('.disposal-box');
+                disposalBox.style.background = '#dcfce7';
+                disposalBox.style.borderColor = '#16a34a';
+                setTimeout(() => {
+                    disposalBox.style.background = '#fef2f2';
+                    disposalBox.style.borderColor = '#dc2626';
+                }, 1000);
+            });
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
         }
         
         function checkQuestionComplete() {

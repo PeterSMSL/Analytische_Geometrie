@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Vektor-Radfahrer - Mathematisches Rennspiel</title>
+    <title>Vektor-Radfahrer v2 - Top-Down Rennspiel</title>
     <style>
         * {
             margin: 0;
@@ -415,21 +415,22 @@
         let score = 0;
         let gameStartTime = Date.now();
         
-        // Car Object
+        // Car Object - Top-Down View
         const car = {
-            x: 450,
-            y: 450, // Start on the track bottom
-            angle: -Math.PI/2, // Start pointing up
-            speed: 2, // Start with base speed for mobile
-            maxSpeed: 5, // Reduced from 8 to 5
-            baseSpeed: 2, // Minimum speed for mobile
-            acceleration: 0.25, // Reduced from 0.4 to 0.25
-            friction: 0.88,
-            turnSpeed: 0.06,
-            width: 35,
-            height: 20,
+            x: 450, // Center horizontally
+            y: 500, // Fixed Y position (bottom third)
+            angle: -Math.PI/2, // Always pointing up
+            speed: 1.5, // Reduced speed for better control
+            maxSpeed: 2.5, // Reduced max speed
+            baseSpeed: 1, // Reduced base speed
+            acceleration: 0.2, // Reduced acceleration
+            friction: 0.9,
+            turnSpeed: 0.08,
+            width: 30,
+            height: 40, // Taller for top-down view
             shieldActive: false,
-            shieldTimeLeft: 0
+            shieldTimeLeft: 0,
+            roadOffset: 0 // For scrolling road effect
         };
         
         // Input State
@@ -575,120 +576,108 @@
         const statementLifetime = 5500; // 5.5 seconds (balanced lifetime)
         const minDistanceBetweenStatements = 120; // Reduced distance for more statements
         
-        // Track Generation
+        // Track Generation - Top-Down Road
         function drawTrack() {
-            ctx.fillStyle = '#2d5016';
+            // Background grass
+            ctx.fillStyle = '#228B22';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Outer track boundary (oval) - adjusted for smaller canvas
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 8;
-            ctx.beginPath();
-            ctx.ellipse(450, 300, 400, 250, 0, 0, 2 * Math.PI);
-            ctx.stroke();
+            // Road surface
+            const roadWidth = 300;
+            const roadLeft = (canvas.width - roadWidth) / 2;
+            const roadRight = roadLeft + roadWidth;
             
-            // Inner track boundary (oval)
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 8;
-            ctx.beginPath();
-            ctx.ellipse(450, 300, 220, 130, 0, 0, 2 * Math.PI);
-            ctx.stroke();
-            
-            // Track surface
             ctx.fillStyle = '#4a4a4a';
-            ctx.beginPath();
-            ctx.ellipse(450, 300, 392, 242, 0, 0, 2 * Math.PI);
-            ctx.fill();
+            ctx.fillRect(roadLeft, 0, roadWidth, canvas.height);
             
-            ctx.fillStyle = '#2d5016';
-            ctx.beginPath();
-            ctx.ellipse(450, 300, 228, 138, 0, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Track lines
+            // Road stripes (moving)
             ctx.strokeStyle = '#ffff00';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([20, 20]);
-            ctx.beginPath();
-            ctx.ellipse(450, 300, 310, 190, 0, 0, 2 * Math.PI);
-            ctx.stroke();
+            ctx.lineWidth = 4;
+            ctx.setLineDash([30, 30]);
+            
+            for (let i = 0; i < 20; i++) {
+                const y = (i * 60 + car.roadOffset) % (canvas.height + 60);
+                ctx.beginPath();
+                ctx.moveTo(canvas.width / 2, y);
+                ctx.lineTo(canvas.width / 2, y + 30);
+                ctx.stroke();
+            }
             ctx.setLineDash([]);
+            
+            // Road borders
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(roadLeft, 0);
+            ctx.lineTo(roadLeft, canvas.height);
+            ctx.moveTo(roadRight, 0);
+            ctx.lineTo(roadRight, canvas.height);
+            ctx.stroke();
+            
+            // Trees on left side
+            for (let i = 0; i < 15; i++) {
+                const treeY = (i * 80 + car.roadOffset * 0.5) % (canvas.height + 80);
+                const treeX = Math.random() * (roadLeft - 40) + 20;
+                drawTree(treeX, treeY);
+            }
+            
+            // Trees on right side
+            for (let i = 0; i < 15; i++) {
+                const treeY = (i * 80 + car.roadOffset * 0.5) % (canvas.height + 80);
+                const treeX = roadRight + 20 + Math.random() * (canvas.width - roadRight - 60);
+                drawTree(treeX, treeY);
+            }
         }
         
-        // Bicycle Drawing
+        function drawTree(x, y) {
+            // Tree trunk
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(x - 4, y - 10, 8, 20);
+            
+            // Tree crown
+            ctx.fillStyle = '#228B22';
+            ctx.beginPath();
+            ctx.arc(x, y - 15, 15, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        // Bicycle Drawing - Top-Down View
         function drawCar() {
             ctx.save();
             ctx.translate(car.x, car.y);
-            ctx.rotate(car.angle);
             
             // Bicycle shadow
             ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillRect(-car.width/2 + 2, -car.height/2 + 2, car.width, car.height);
+            
+            // Bicycle body (simplified top-down)
+            ctx.fillStyle = '#0066cc';
+            ctx.fillRect(-car.width/2, -car.height/2, car.width, car.height);
+            
+            // Bicycle wheels (top-down circles)
+            ctx.fillStyle = '#333333';
             ctx.beginPath();
-            ctx.arc(-8 + 2, 0 + 2, 8, 0, 2 * Math.PI);
-            ctx.arc(8 + 2, 0 + 2, 8, 0, 2 * Math.PI);
+            ctx.arc(0, -car.height/2 + 5, 8, 0, 2 * Math.PI); // Front wheel
+            ctx.arc(0, car.height/2 - 5, 8, 0, 2 * Math.PI);  // Back wheel
             ctx.fill();
             
-            // Bicycle wheels
-            ctx.strokeStyle = '#333333';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(-8, 0, 8, 0, 2 * Math.PI);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(8, 0, 8, 0, 2 * Math.PI);
-            ctx.stroke();
-            
-            // Wheel spokes
+            // Wheel details
             ctx.strokeStyle = '#666666';
             ctx.lineWidth = 1;
-            for (let i = 0; i < 4; i++) {
-                const angle = (i * Math.PI) / 2;
-                // Front wheel spokes
-                ctx.beginPath();
-                ctx.moveTo(-8 + Math.cos(angle) * 3, Math.sin(angle) * 3);
-                ctx.lineTo(-8 + Math.cos(angle) * 8, Math.sin(angle) * 8);
-                ctx.stroke();
-                // Back wheel spokes
-                ctx.beginPath();
-                ctx.moveTo(8 + Math.cos(angle) * 3, Math.sin(angle) * 3);
-                ctx.lineTo(8 + Math.cos(angle) * 8, Math.sin(angle) * 8);
-                ctx.stroke();
-            }
-            
-            // Bicycle frame
-            ctx.strokeStyle = '#0066cc';
-            ctx.lineWidth = 3;
             ctx.beginPath();
-            // Top tube
-            ctx.moveTo(-8, 0);
-            ctx.lineTo(0, -8);
-            ctx.lineTo(8, 0);
-            // Down tube
-            ctx.moveTo(-8, 0);
-            ctx.lineTo(0, 6);
-            ctx.lineTo(8, 0);
-            // Seat post
-            ctx.moveTo(0, -8);
-            ctx.lineTo(0, -12);
+            ctx.arc(0, -car.height/2 + 5, 8, 0, 2 * Math.PI); // Front wheel
+            ctx.arc(0, car.height/2 - 5, 8, 0, 2 * Math.PI);  // Back wheel
             ctx.stroke();
             
-            // Seat
-            ctx.fillStyle = '#8B4513';
-            ctx.fillRect(-3, -12, 6, 2);
-            
-            // Handlebars
-            ctx.strokeStyle = '#333333';
-            ctx.lineWidth = 2;
+            // Rider (simple representation)
+            ctx.fillStyle = '#FF6B6B';
             ctx.beginPath();
-            ctx.moveTo(-2, -6);
-            ctx.lineTo(2, -6);
-            ctx.stroke();
-            
-            // Direction indicator (bell)
-            ctx.fillStyle = '#ffff00';
-            ctx.beginPath();
-            ctx.arc(0, -6, 2, 0, 2 * Math.PI);
+            ctx.arc(0, 0, 6, 0, 2 * Math.PI);
             ctx.fill();
+            
+            // Direction indicator
+            ctx.fillStyle = '#ffff00';
+            ctx.fillRect(-2, -car.height/2 - 2, 4, 4);
             
             // Draw Gauss shield if active
             if (car.shieldActive) {
@@ -757,62 +746,49 @@
             ctx.restore();
         }
         
-        // Collision Detection with Track
-        function isOnTrack(x, y) {
-            const centerX = 450;
-            const centerY = 300;
-            const outerA = 400;
-            const outerB = 250;
-            const innerA = 220;
-            const innerB = 130;
+        // Collision Detection with Road (Top-Down)
+        function isOnRoad(x, y) {
+            const roadWidth = 300;
+            const roadLeft = (canvas.width - roadWidth) / 2;
+            const roadRight = roadLeft + roadWidth;
             
-            // Check if inside outer ellipse
-            const outerEllipse = Math.pow((x - centerX), 2) / Math.pow(outerA, 2) + Math.pow((y - centerY), 2) / Math.pow(outerB, 2);
-            
-            // Check if outside inner ellipse
-            const innerEllipse = Math.pow((x - centerX), 2) / Math.pow(innerA, 2) + Math.pow((y - centerY), 2) / Math.pow(innerB, 2);
-            
-            return outerEllipse <= 1 && innerEllipse >= 1;
+            return x >= roadLeft && x <= roadRight;
         }
         
-        // Math Statement Management
+        // Math Statement Management - Top-Down Version
         function spawnMathStatement() {
             if (Date.now() - lastSpawnTime < spawnInterval) return;
             
             const statement = mathStatements[Math.floor(Math.random() * mathStatements.length)];
             
-            // Random position on track with distance checking
-            let x, y;
-            let attempts = 0;
-            do {
-                const angle = Math.random() * 2 * Math.PI;
-                const radius = 250 + Math.random() * 120; // Between inner and outer track
-                x = 450 + Math.cos(angle) * radius;
-                y = 300 + Math.sin(angle) * radius * 0.62; // Adjust for oval shape
-                attempts++;
-                
-                // Check distance from existing statements
-                let tooClose = false;
-                for (let existing of activeStatements) {
-                    const distance = Math.sqrt(Math.pow(x - existing.x, 2) + Math.pow(y - existing.y, 2));
-                    if (distance < minDistanceBetweenStatements) {
-                        tooClose = true;
-                        break;
-                    }
-                }
-                
-                if (!tooClose && isOnTrack(x, y)) break;
-                
-            } while (attempts < 20); // Max 20 attempts to find good position
+            // Spawn from top of screen, on the road
+            const roadWidth = 300;
+            const roadLeft = (canvas.width - roadWidth) / 2 + 30;
+            const roadRight = roadLeft + roadWidth - 60;
             
-            if (attempts >= 20) return; // Skip spawning if no good position found
+            // Random position on road
+            let x = roadLeft + Math.random() * (roadRight - roadLeft);
+            let y = -50; // Start above screen
+            
+            // Check distance from existing statements
+            let tooClose = false;
+            for (let existing of activeStatements) {
+                const distance = Math.sqrt(Math.pow(x - existing.x, 2) + Math.pow(y - existing.y, 2));
+                if (distance < minDistanceBetweenStatements) {
+                    tooClose = true;
+                    break;
+                }
+            }
+            
+            if (tooClose) return; // Skip spawning if too close
             
             const newStatement = {
                 ...statement,
                 x: x,
                 y: y,
                 spawnTime: Date.now(),
-                id: Date.now() + Math.random()
+                id: Date.now() + Math.random(),
+                moveSpeed: 1 + Math.random() * 1.5 // Slower individual movement speed
             };
             
             activeStatements.push(newStatement);
@@ -821,7 +797,7 @@
             // Create DOM element for statement
             const statementEl = document.createElement('div');
             statementEl.className = 'math-statement';
-            statementEl.textContent = newStatement.text; // Use textContent for plain text
+            statementEl.textContent = newStatement.text;
             statementEl.id = 'statement-' + newStatement.id;
             statementEl.style.left = (newStatement.x - 125) + 'px';
             statementEl.style.top = (newStatement.y - 30) + 'px';
@@ -831,20 +807,27 @@
         
         function updateMathStatements() {
             activeStatements = activeStatements.filter(statement => {
-                const age = Date.now() - statement.spawnTime;
                 const statementEl = document.getElementById('statement-' + statement.id);
                 
-                if (age > statementLifetime) {
+                // Move statement down the screen (slower)
+                statement.y += (statement.moveSpeed + car.speed) * 0.6;
+                
+                // Update DOM position
+                if (statementEl) {
+                    statementEl.style.top = (statement.y - 30) + 'px';
+                }
+                
+                // Remove if off screen
+                if (statement.y > canvas.height + 50) {
                     if (statementEl) {
-                        statementEl.classList.add('fade-out');
-                        setTimeout(() => statementEl.remove(), 500);
+                        statementEl.remove();
                     }
                     return false;
                 }
                 
-                // Check collision with car - increased collision radius
+                // Check collision with car (increased hit area)
                 const distance = Math.sqrt(Math.pow(car.x - statement.x, 2) + Math.pow(car.y - statement.y, 2));
-                if (distance < 60) { // Increased from 40 to 60 for easier collision
+                if (distance < 65) { // Larger collision area for better hits
                     handleStatementCollision(statement);
                     if (statementEl) {
                         statementEl.remove();
@@ -1006,7 +989,7 @@
         
         setupTouchControls();
         
-        // Car Physics
+        // Car Physics - Top-Down Version
         function updateCar() {
             if (!gameRunning) return;
             
@@ -1025,39 +1008,35 @@
                 }
             }
             
-            // Automatic forward movement with optional speed boost
+            // Speed control
             if (keys.up) {
                 car.speed = Math.min(car.speed + car.acceleration, car.maxSpeed);
             } else if (keys.down) {
                 car.speed = Math.max(car.speed - car.acceleration, car.baseSpeed * 0.5);
             } else {
-                // Maintain base speed for mobile-friendly gameplay
+                // Maintain base speed for constant forward movement
                 car.speed = Math.max(car.speed * car.friction, car.baseSpeed);
             }
             
-            // Turning - Always possible for mobile
+            // Horizontal movement only
             if (keys.left) {
-                car.angle -= car.turnSpeed;
+                car.x -= 4;
             }
             if (keys.right) {
-                car.angle += car.turnSpeed;
+                car.x += 4;
             }
             
-            // Movement - Apply speed to position
-            car.x += Math.cos(car.angle) * car.speed;
-            car.y += Math.sin(car.angle) * car.speed;
+            // Update road scrolling effect (slower)
+            car.roadOffset += car.speed * 1.2;
             
-            // Check track boundaries and bounce back
-            if (!isOnTrack(car.x, car.y)) {
-                // Bounce back
-                car.x -= Math.cos(car.angle) * car.speed * 2;
-                car.y -= Math.sin(car.angle) * car.speed * 2;
-                car.speed = Math.max(car.speed * -0.3, car.baseSpeed);
-            }
+            // Keep car on road horizontally
+            const roadWidth = 300;
+            const roadLeft = (canvas.width - roadWidth) / 2 + 15;
+            const roadRight = roadLeft + roadWidth - 30;
+            car.x = Math.max(roadLeft, Math.min(roadRight, car.x));
             
-            // Keep car in canvas bounds
-            car.x = Math.max(30, Math.min(canvas.width - 30, car.x));
-            car.y = Math.max(30, Math.min(canvas.height - 30, car.y));
+            // Keep car in vertical bounds (shouldn't move much)
+            car.y = Math.max(car.height, Math.min(canvas.height - car.height, car.y));
         }
         
         // UI Updates

@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Vektor-Radfahrer - Mathematisches Rennspiel</title>
     <style>
         * {
@@ -236,6 +236,34 @@
             background: rgba(220, 220, 220, 0.9);
         }
         
+        .game-instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+            z-index: 20;
+        }
+        
+        .instruction-desktop,
+        .instruction-mobile {
+            margin-bottom: 8px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        .instruction-game {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
         @media (max-width: 768px) {
             .mobile-controls {
                 display: flex;
@@ -255,10 +283,34 @@
                 right: 10px;
                 font-size: 16px;
             }
+            
+            .game-instructions {
+                bottom: 10px;
+                left: 10px;
+                max-width: 280px;
+                font-size: 12px;
+                padding: 10px;
+            }
+            
+            .instruction-desktop {
+                display: none;
+            }
+            
+            .instruction-mobile {
+                display: block;
+            }
         }
         
         @media (min-width: 769px) {
             .mobile-controls {
+                display: none;
+            }
+            
+            .instruction-desktop {
+                display: block;
+            }
+            
+            .instruction-mobile {
                 display: none;
             }
         }
@@ -274,6 +326,19 @@
             <div class="speed">🚴 <span id="speed">0</span> km/h</div>
         </div>
         
+        <div class="game-instructions">
+            <div class="instruction-desktop">
+                🖥️ <strong>Desktop:</strong> WASD-Tasten zum Steuern
+            </div>
+            <div class="instruction-mobile">
+                📱 <strong>Mobile:</strong> Nutze die Pfeiltasten unten rechts
+            </div>
+            <div class="instruction-game">
+                ✅ Fahre über <strong>WAHRE</strong> Aussagen = +6s Zeit &amp; +100 Punkte<br>
+                ❌ Fahre über <strong>FALSCHE</strong> Aussagen = -5s Zeit &amp; -50 Punkte<br>
+                ⭐ <strong>Sterne:</strong> 500+ Punkte = 1⭐, 750+ = 2⭐, 1212+ = 3⭐
+            </div>
+        </div>
         
         <div class="game-over" id="gameOver">
             <h2 id="gameResult">Spiel beendet!</h2>
@@ -749,57 +814,56 @@
             const leftBtn = document.getElementById('leftBtn');
             const rightBtn = document.getElementById('rightBtn');
             
-            // Touch start events
-            upBtn.addEventListener('touchstart', (e) => {
+            // Prevent scrolling on touch devices
+            document.body.addEventListener('touchmove', (e) => {
                 e.preventDefault();
-                keys.up = true;
-            });
+            }, { passive: false });
             
-            downBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keys.down = true;
-            });
+            // Helper function to handle button press
+            function handleButtonPress(button, key) {
+                // Touch events
+                button.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    keys[key] = true;
+                    button.style.background = 'rgba(200, 200, 200, 0.9)';
+                }, { passive: false });
+                
+                button.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    keys[key] = false;
+                    button.style.background = 'rgba(255, 255, 255, 0.9)';
+                }, { passive: false });
+                
+                button.addEventListener('touchcancel', (e) => {
+                    e.preventDefault();
+                    keys[key] = false;
+                    button.style.background = 'rgba(255, 255, 255, 0.9)';
+                }, { passive: false });
+                
+                // Mouse events for desktop testing
+                button.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    keys[key] = true;
+                    button.style.background = 'rgba(200, 200, 200, 0.9)';
+                });
+                
+                button.addEventListener('mouseup', (e) => {
+                    e.preventDefault();
+                    keys[key] = false;
+                    button.style.background = 'rgba(255, 255, 255, 0.9)';
+                });
+                
+                button.addEventListener('mouseleave', (e) => {
+                    keys[key] = false;
+                    button.style.background = 'rgba(255, 255, 255, 0.9)';
+                });
+            }
             
-            leftBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keys.left = true;
-            });
-            
-            rightBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keys.right = true;
-            });
-            
-            // Touch end events
-            upBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keys.up = false;
-            });
-            
-            downBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keys.down = false;
-            });
-            
-            leftBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keys.left = false;
-            });
-            
-            rightBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keys.right = false;
-            });
-            
-            // Mouse events for desktop testing
-            upBtn.addEventListener('mousedown', () => keys.up = true);
-            upBtn.addEventListener('mouseup', () => keys.up = false);
-            downBtn.addEventListener('mousedown', () => keys.down = true);
-            downBtn.addEventListener('mouseup', () => keys.down = false);
-            leftBtn.addEventListener('mousedown', () => keys.left = true);
-            leftBtn.addEventListener('mouseup', () => keys.left = false);
-            rightBtn.addEventListener('mousedown', () => keys.right = true);
-            rightBtn.addEventListener('mouseup', () => keys.right = false);
+            // Set up all buttons
+            handleButtonPress(upBtn, 'up');
+            handleButtonPress(downBtn, 'down');
+            handleButtonPress(leftBtn, 'left');
+            handleButtonPress(rightBtn, 'right');
         }
         
         setupTouchControls();

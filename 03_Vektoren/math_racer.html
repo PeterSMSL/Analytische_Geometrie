@@ -370,16 +370,17 @@
         
         // Gauss Shield Image
         const gaussImg = new Image();
-        gaussImg.crossOrigin = 'anonymous';
         gaussImg.src = 'Gauss_zeichnung.jpg';
         
         // Preload image
         gaussImg.onload = function() {
-            console.log('Gauss image loaded successfully');
+            console.log('Gauss image loaded successfully', gaussImg.naturalWidth, 'x', gaussImg.naturalHeight);
         };
         
         gaussImg.onerror = function() {
-            console.log('Gauss image failed to load');
+            console.log('Gauss image failed to load - trying different path');
+            // Try alternative filename
+            gaussImg.src = './Gauss_zeichnung.jpg';
         };
         
         // Game State
@@ -670,18 +671,18 @@
                 const shieldX = -shieldSize / 2;
                 const shieldY = -shieldSize / 2;
                 
-                // Reset shadow settings
-                ctx.shadowColor = 'transparent';
-                ctx.shadowBlur = 0;
-                
-                // Draw circular shield background
+                // Draw circular shield background with glow
+                ctx.save();
+                ctx.shadowColor = '#FFD700';
+                ctx.shadowBlur = 10;
                 ctx.beginPath();
                 ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
                 ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
                 ctx.fill();
+                ctx.restore();
                 
                 // Draw Gauss portrait if loaded, otherwise show symbol
-                if (gaussImg.complete && gaussImg.naturalWidth > 0) {
+                if (gaussImg.complete && gaussImg.naturalWidth > 0 && gaussImg.naturalHeight > 0) {
                     ctx.save();
                     ctx.beginPath();
                     ctx.arc(0, 0, shieldSize / 2 - 5, 0, 2 * Math.PI);
@@ -689,28 +690,42 @@
                     ctx.drawImage(gaussImg, shieldX, shieldY, shieldSize, shieldSize);
                     ctx.restore();
                 } else {
+                    // Debug: Show what's happening
+                    console.log('Gauss image status:', {
+                        complete: gaussImg.complete,
+                        naturalWidth: gaussImg.naturalWidth,
+                        naturalHeight: gaussImg.naturalHeight,
+                        src: gaussImg.src
+                    });
+                    
                     // Fallback: Show mathematical symbols
+                    ctx.save();
                     ctx.fillStyle = '#333';
                     ctx.font = `${shieldSize / 3}px Arial`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText('¬', 0, 0);
+                    ctx.restore();
                 }
                 
                 // Shield border
+                ctx.save();
                 ctx.beginPath();
                 ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
                 ctx.strokeStyle = '#FFD700';
                 ctx.lineWidth = 4;
                 ctx.stroke();
+                ctx.restore();
                 
                 // Shield timer indicator
+                ctx.save();
                 const timeRatio = car.shieldTimeLeft / 2000;
                 ctx.beginPath();
                 ctx.arc(0, 0, shieldSize / 2 + 8, -Math.PI / 2, -Math.PI / 2 + (timeRatio * 2 * Math.PI));
                 ctx.strokeStyle = '#FF6B6B';
                 ctx.lineWidth = 6;
                 ctx.stroke();
+                ctx.restore();
             }
             
             ctx.restore();

@@ -428,6 +428,51 @@
             }
         }
         
+        /* Responsive iframe container */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+        
+        .iframe-container iframe {
+            width: 100%;
+            height: 620px;
+        }
+        
+        @media (max-width: 920px) {
+            .iframe-container {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+            
+            .iframe-container iframe {
+                height: calc(100vw * 0.67); /* Maintain aspect ratio */
+                max-height: 80vh;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .iframe-container {
+                padding: 0;
+            }
+            
+            .iframe-container iframe {
+                height: calc(100vw * 0.67);
+                max-height: 85vh;
+                border-radius: 0;
+                border-width: 1px;
+            }
+        }
+        
+        @media (max-width: 768px) and (orientation: landscape) {
+            .iframe-container iframe {
+                height: 85vh;
+                max-height: 85vh;
+            }
+        }
+        
         /* Kleinere Bildschirme */
         @media (max-width: 480px) {
             .header h1 {
@@ -765,12 +810,12 @@
                 </p>
                 
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <iframe src="math_racer.html" 
-                            width="920" 
-                            height="620" 
-                            style="border: 3px solid #7c3aed; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"
-                            allowfullscreen>
-                    </iframe>
+                    <div class="iframe-container">
+                        <iframe src="math_racer.html" 
+                                style="border: 3px solid #7c3aed; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
                 
                 <div style="background: #f0f9ff; border: 2px solid #0ea5e9; border-radius: 10px; padding: 1.5rem; margin: 2rem 0;">

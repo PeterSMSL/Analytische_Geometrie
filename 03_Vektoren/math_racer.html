@@ -236,37 +236,15 @@
             background: rgba(220, 220, 220, 0.9);
         }
         
-        .game-instructions {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            max-width: 400px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            line-height: 1.4;
-            z-index: 20;
-        }
         
-        .instruction-desktop,
-        .instruction-mobile {
-            margin-bottom: 8px;
-            padding: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-        }
-        
-        .instruction-game {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        /* Mobile controls are always visible for testing */
+        .mobile-controls {
+            display: flex;
         }
         
         @media (max-width: 768px) {
             .mobile-controls {
-                display: flex;
+                display: flex !important;
                 bottom: 10px;
                 right: 10px;
             }
@@ -283,35 +261,12 @@
                 right: 10px;
                 font-size: 16px;
             }
-            
-            .game-instructions {
-                bottom: 10px;
-                left: 10px;
-                max-width: 280px;
-                font-size: 12px;
-                padding: 10px;
-            }
-            
-            .instruction-desktop {
-                display: none;
-            }
-            
-            .instruction-mobile {
-                display: block;
-            }
         }
         
         @media (min-width: 769px) {
             .mobile-controls {
-                display: none;
-            }
-            
-            .instruction-desktop {
-                display: block;
-            }
-            
-            .instruction-mobile {
-                display: none;
+                display: flex !important;
+                opacity: 0.7;
             }
         }
     </style>
@@ -326,19 +281,6 @@
             <div class="speed">🚴 <span id="speed">0</span> km/h</div>
         </div>
         
-        <div class="game-instructions">
-            <div class="instruction-desktop">
-                🖥️ <strong>Desktop:</strong> WASD-Tasten zum Steuern
-            </div>
-            <div class="instruction-mobile">
-                📱 <strong>Mobile:</strong> Nutze die Pfeiltasten unten rechts
-            </div>
-            <div class="instruction-game">
-                ✅ Fahre über <strong>WAHRE</strong> Aussagen = +6s Zeit &amp; +100 Punkte<br>
-                ❌ Fahre über <strong>FALSCHE</strong> Aussagen = -5s Zeit &amp; -50 Punkte<br>
-                ⭐ <strong>Sterne:</strong> 500+ Punkte = 1⭐, 750+ = 2⭐, 1212+ = 3⭐
-            </div>
-        </div>
         
         <div class="game-over" id="gameOver">
             <h2 id="gameResult">Spiel beendet!</h2>

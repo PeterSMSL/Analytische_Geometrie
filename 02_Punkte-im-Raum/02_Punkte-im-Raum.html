@@ -908,7 +908,7 @@
                     <p>Klicke zuerst auf eine Frage, dann auf die passende(n) Antwort(en). Richtige Paare verschwinden!</p>
                     <p><strong>Wichtig:</strong> Nur falsche Antworten gehören in den Müll. Am Ende muss alles korrekt entsorgt sein!</p>
                     <p><strong>⚠️ Achtung:</strong> Es gibt keine Gnade für den kleinsten Fehler! Nur ein Neustart kann dann helfen.</p>
-                    <p><strong>📱 Für iPad/Android:</strong> Klicke auf den Mülleimer und wähle dann die falschen Antworten aus!</p>
+                    <p><strong>📱 Mobile Nutzung:</strong> Klicke auf den Mülleimer und wähle dann die falschen Antworten aus!</p>
                     <div style="display: flex; justify-content: center; margin-top: 1rem;">
                         <button onclick="resetGame()" class="restart-button">🔄 Neustart</button>
                     </div>
@@ -1036,7 +1036,8 @@
             score: 0,
             totalQuestions: 4,
             matchedPairs: new Set(),
-            hasWrongMoves: false
+            hasWrongMoves: false,
+            gameOver: false
         };
         
         // Correct answer mappings
@@ -1144,6 +1145,9 @@
         }
         
         function selectQuestion(card) {
+            // Verhindere Interaktion wenn Spiel vorbei ist
+            if (gameState.gameOver) return;
+            
             // Clear previous selection
             document.querySelectorAll('.question-card').forEach(q => {
                 q.classList.remove('selected');
@@ -1155,6 +1159,9 @@
         }
         
         function selectAnswer(card) {
+            // Verhindere Interaktion wenn Spiel vorbei ist
+            if (gameState.gameOver) return;
+            
             if (!selectedQuestion) {
                 // Flash message to select question first
                 showMessage("Wähle zuerst eine Frage aus!");
@@ -1393,15 +1400,29 @@
             const remainingQuestions = allQuestionCards.length - matchedQuestionCards.length;
             const remainingAnswers = allAnswerCards.length - matchedAnswerCards.length;
             
-            // If questions remain but no answers, force end with failure
+            // EXTREMFALL: Wenn Fragen übrig sind aber alle Antworten weg - SOFORTIGER VERLUST!
             if (remainingQuestions > 0 && remainingAnswers === 0) {
                 gameState.hasWrongMoves = true;
+                gameState.gameOver = true;
                 
-                // Force all remaining questions to disappear
+                // Alle verbleibenden Fragen rot markieren (Fehler-Animation)
                 const remainingQuestionCards = document.querySelectorAll('.question-card:not(.matched)');
                 remainingQuestionCards.forEach(card => {
-                    card.classList.add('matched');
+                    card.classList.add('wrong');
+                    card.style.animation = 'shake 0.5s ease-in-out';
                 });
+                
+                // Sofortiges Game Over ohne weitere Verzögerung
+                setTimeout(() => {
+                    // Force all remaining questions to disappear
+                    remainingQuestionCards.forEach(card => {
+                        card.classList.add('matched');
+                    });
+                    
+                    // Sofortiges Ende anzeigen
+                    showGameOver('impossible');
+                }, 1000);
+                return;
             }
             
             if (matchedQuestionCards.length === allQuestionCards.length && 
@@ -1418,25 +1439,10 @@
                     // Only show celebration if no wrong moves were made
                     if (!gameState.hasWrongMoves) {
                         createCelebrationEffect();
+                        showGameOver('success');
+                    } else {
+                        showGameOver('failure');
                     }
-                    
-                    // Show completion message
-                    setTimeout(() => {
-                        const completeDiv = document.getElementById('game-complete');
-                        const messageElement = completeDiv.querySelector('h3');
-                        
-                        if (gameState.hasWrongMoves) {
-                            messageElement.textContent = '🤪';
-                            messageElement.style.color = '#dc2626';
-                            messageElement.style.fontSize = '4rem';
-                        } else {
-                            messageElement.textContent = '🎉 Glückwunsch! Du hast alle Fragen richtig beantwortet!';
-                            messageElement.style.color = '#166534';
-                            messageElement.style.fontSize = '1.5rem';
-                        }
-                        
-                        completeDiv.style.display = 'block';
-                    }, 1000);
                 }, 500);
             }
         }
@@ -1501,20 +1507,59 @@
             }, 2000);
         }
         
+        function showGameOver(type) {
+            const completeDiv = document.getElementById('game-complete');
+            const messageElement = completeDiv.querySelector('h3');
+            
+            switch(type) {
+                case 'success':
+                    messageElement.textContent = '🎉 Glückwunsch! Du hast alle Fragen richtig beantwortet!';
+                    messageElement.style.color = '#166534';
+                    messageElement.style.fontSize = '1.5rem';
+                    completeDiv.style.background = '#dcfce7';
+                    completeDiv.style.borderColor = '#16a34a';
+                    break;
+                case 'failure':
+                    messageElement.textContent = '🤪 Nicht ganz perfekt! Versuche es nochmal.';
+                    messageElement.style.color = '#dc2626';
+                    messageElement.style.fontSize = '1.5rem';
+                    completeDiv.style.background = '#fee2e2';
+                    completeDiv.style.borderColor = '#dc2626';
+                    break;
+                case 'impossible':
+                    messageElement.textContent = '💀 VERLOREN! Es sind noch Fragen übrig, aber alle Antworten sind weg!';
+                    messageElement.style.color = '#dc2626';
+                    messageElement.style.fontSize = '1.3rem';
+                    messageElement.style.fontWeight = 'bold';
+                    completeDiv.style.background = '#fee2e2';
+                    completeDiv.style.borderColor = '#dc2626';
+                    completeDiv.style.animation = 'shake 0.5s ease-in-out';
+                    break;
+            }
+            
+            completeDiv.style.display = 'block';
+        }
+        
         function resetGame() {
             // Reset game state
             gameState.score = 0;
             gameState.matchedPairs.clear();
             gameState.hasWrongMoves = false;
+            gameState.gameOver = false;
             selectedQuestion = null;
             
             // Reset all cards
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.remove('matched', 'selected', 'correct', 'wrong');
+                card.style.animation = '';
             });
             
-            // Hide completion message
-            document.getElementById('game-complete').style.display = 'none';
+            // Hide completion message and reset styles
+            const completeDiv = document.getElementById('game-complete');
+            completeDiv.style.display = 'none';
+            completeDiv.style.background = '#dcfce7';
+            completeDiv.style.borderColor = '#16a34a';
+            completeDiv.style.animation = '';
             
             // Reinitialize
             initializeGame();

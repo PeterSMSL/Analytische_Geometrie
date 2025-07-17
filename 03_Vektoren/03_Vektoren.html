@@ -480,6 +480,43 @@
             }
         }
         
+        /* Game Version Buttons */
+        .game-version-btn {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-align: center;
+            min-width: 180px;
+        }
+        
+        .game-version-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+        
+        .game-version-btn.active {
+            background: #7c3aed;
+            color: white;
+            border-color: #7c3aed;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+        
+        .game-version-btn.active:hover {
+            background: #6d28d9;
+        }
+        
+        @media (max-width: 480px) {
+            .game-version-btn {
+                min-width: 140px;
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
         /* Kleinere Bildschirme */
         @media (max-width: 480px) {
             .header h1 {
@@ -816,12 +853,28 @@
                     indem du über <strong>wahre</strong> mathematische Aussagen fährst. Falsche Aussagen kosten Zeit!
                 </p>
                 
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <div class="iframe-container">
-                        <iframe src="math_racer.html" 
-                                style="border: 3px solid #7c3aed; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"
-                                allowfullscreen>
-                        </iframe>
+                <div style="margin-bottom: 2rem;">
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <h3 style="color: #7c3aed; margin-bottom: 1rem;">🎮 Spielversion wählen</h3>
+                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            <button class="game-version-btn active" data-version="1" onclick="switchGameVersion(1)">
+                                <span style="font-size: 1.2rem;">🖥️ Version 1</span><br>
+                                <small>Super für PC und Tablet</small>
+                            </button>
+                            <button class="game-version-btn" data-version="2" onclick="switchGameVersion(2)">
+                                <span style="font-size: 1.2rem;">📱 Version 2</span><br>
+                                <small>Vor allem auf dem Handy</small>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div class="iframe-container">
+                            <iframe id="game-iframe" src="math_racer.html" 
+                                    style="border: 3px solid #7c3aed; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
                 
@@ -854,8 +907,7 @@
                     <h3 style="color: #a16207; margin-bottom: 1rem;">💡 Lern-Tipp</h3>
                     <p style="color: #a16207; margin: 0;">
                         Das Spiel testet dein Wissen über Vektorrechnung! Wiederhole die Theorie und Übungen, 
-                        um bessere Ergebnisse zu erzielen. Achte besonders auf die Unterschiede zwischen 
-                        Vektor- und Punkt-Notation!
+                        um bessere Ergebnisse zu erzielen.
                     </p>
                 </div>
             </div>
@@ -931,6 +983,27 @@
                 feedback.className = 'quiz-feedback incorrect show';
                 feedback.innerHTML = '❌ Nicht ganz richtig. Versuche es noch einmal und überdenke deine Auswahl.';
             }
+        }
+        
+        // Game Version Switcher
+        function switchGameVersion(version) {
+            const iframe = document.getElementById('game-iframe');
+            const buttons = document.querySelectorAll('.game-version-btn');
+            
+            // Update iframe source
+            if (version === 1) {
+                iframe.src = 'math_racer.html';
+            } else if (version === 2) {
+                iframe.src = 'math_racer2.html';
+            }
+            
+            // Update button states
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.version == version) {
+                    btn.classList.add('active');
+                }
+            });
         }
         
         function updateProgress() {

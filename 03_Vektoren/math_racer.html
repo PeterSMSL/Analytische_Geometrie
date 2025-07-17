@@ -55,8 +55,8 @@
         @media (max-width: 768px) {
             .game-container {
                 width: 100vw;
-                height: 66.67vw; /* Maintain 900:600 aspect ratio */
-                max-height: 85vh;
+                height: 60vh; /* Fixed height for better control visibility */
+                max-height: 60vh;
                 border-radius: 0;
                 margin: 0;
             }
@@ -71,16 +71,22 @@
                 overflow: hidden;
                 min-height: 100vh;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: center;
+                padding-top: 10px;
             }
         }
         
         @media (max-width: 768px) and (orientation: landscape) {
             .game-container {
                 width: 100vw;
-                height: 56.25vw; /* Maintain 16:9 aspect ratio in landscape */
-                max-height: 95vh;
+                height: 85vh; /* More height in landscape */
+                max-height: 85vh;
+            }
+            
+            body {
+                align-items: center;
+                padding-top: 0;
             }
         }
         
@@ -296,30 +302,50 @@
         @media (max-width: 768px) {
             .mobile-controls {
                 display: flex !important;
-                bottom: 15px;
-                right: 15px;
-                gap: 8px;
+                bottom: 5px;
+                right: 5px;
+                gap: 6px;
             }
             
             .control-btn {
-                width: 55px;
-                height: 55px;
-                font-size: 18px;
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
                 border-width: 2px;
             }
             
             .shield-btn {
-                width: 65px !important;
-                height: 65px !important;
-                font-size: 22px !important;
+                width: 55px !important;
+                height: 55px !important;
+                font-size: 20px !important;
                 box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
             }
             
             .ui-overlay {
-                top: 10px;
-                left: 10px;
-                right: 10px;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mobile-controls {
+                bottom: 2px;
+                right: 2px;
+                gap: 4px;
+            }
+            
+            .control-btn {
+                width: 45px;
+                height: 45px;
                 font-size: 14px;
+            }
+            
+            .shield-btn {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 18px !important;
             }
         }
         

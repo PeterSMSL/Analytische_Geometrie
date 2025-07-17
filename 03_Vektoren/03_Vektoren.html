@@ -459,10 +459,17 @@
             }
             
             .iframe-container iframe {
-                height: calc(100vw * 0.67);
-                max-height: 85vh;
+                height: 60vh;
+                max-height: 60vh;
                 border-radius: 0;
                 border-width: 1px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .iframe-container iframe {
+                height: 55vh;
+                max-height: 55vh;
             }
         }
         

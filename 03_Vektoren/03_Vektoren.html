@@ -218,6 +218,19 @@
             to { opacity: 1; max-height: 500px; }
         }
         
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-10px) scale(1.05); }
+            50% { transform: translateY(-5px) scale(1.02); }
+            75% { transform: translateY(-8px) scale(1.03); }
+        }
+        
         .quiz-question {
             background: #f0f9ff;
             border: 2px solid #0ea5e9;
@@ -455,7 +468,7 @@
                 <a href="03_Vektoren_und_Rechenregeln.pdf" target="_blank" class="pdf-link" onclick="openPdfOrFallback(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
                     Arbeitsblatt
                 </a>
-                <a href="03_Vektoren_und_Rechenregeln_Loesung.pdf" target="_blank" class="pdf-link" onclick="openPdfOrFallback(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="03_Vektoren_und_Rechenregeln_Loesung.pdf" target="_blank" class="pdf-link" onclick="openPdfWithPassword(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
                     Lösung
                 </a>
             </div>
@@ -464,7 +477,7 @@
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="theory">Theorie</button>
             <button class="nav-tab" data-tab="exercises">Übungen</button>
-            <button class="nav-tab" data-tab="quiz">Quiz</button>
+            <button class="nav-tab" data-tab="quiz">Vektor Racer</button>
         </div>
         
         <div class="content">
@@ -477,19 +490,17 @@
                     <h3>1.1 Darstellung von Vektoren</h3>
                     <p>Vektoren können auf verschiedene Arten dargestellt werden:</p>
                     <ul style="margin-left: 2rem; margin-top: 1rem;">
-                        <li><strong>Spaltenvektor:</strong> Als dreispaltige Matrix</li>
-                        <li><strong>Koordinatenform:</strong> Mit Komponenten (x|y|z)</li>
+                        <li><strong>Spaltenvektor:</strong> \(\begin{pmatrix} x \\ y \\ z \end{pmatrix}\) - vertikale Darstellung</li>
                         <li><strong>Geometrisch:</strong> Als Pfeil im Koordinatensystem</li>
                     </ul>
                     
                     <div class="example-box">
                         <h4>📝 Beispiel 1: Vektordarstellung</h4>
                         <div class="math-formula">
-                            <strong>Vektor \(\vec{a}\):</strong>
+                            <strong>Vektor \(\vec{a}\) als Spaltenvektor:</strong>
                             $$\vec{a} = \begin{pmatrix} 3 \\ 2 \\ 4 \end{pmatrix}$$
-                            <strong>oder als Koordinaten: \(\vec{a}(3|2|4)\)</strong>
                         </div>
-                        <p>Dieser Vektor zeigt 3 Einheiten in x-Richtung, 2 Einheiten in y-Richtung und 4 Einheiten in z-Richtung.</p>
+                        <p>Dieser Vektor hat die Komponenten 3 in x-Richtung, 2 in y-Richtung und 4 in z-Richtung. Die Notation (3|2|4) ist für Punkte reserviert!</p>
                     </div>
                     
                     <h3>1.2 Besondere Vektoren</h3>
@@ -579,6 +590,8 @@
                     <div id="solution1" class="solution">
                         <strong>Lösung:</strong><br>
                         $$\vec{a} + \vec{b} = \begin{pmatrix} 2 \\ 3 \\ 1 \end{pmatrix} + \begin{pmatrix} 4 \\ 1 \\ 5 \end{pmatrix} = \begin{pmatrix} 6 \\ 4 \\ 6 \end{pmatrix}$$
+                        <br>
+                        <strong>Begründung:</strong> Vektoren werden komponentenweise addiert. Die erste Komponente wird zur ersten, die zweite zur zweiten und die dritte zur dritten addiert.
                     </div>
                 </div>
                 
@@ -592,6 +605,8 @@
                     <div id="solution2" class="solution">
                         <strong>Lösung:</strong><br>
                         $$3 \cdot \vec{c} = 3 \cdot \begin{pmatrix} 2 \\ 4 \\ 1 \end{pmatrix} = \begin{pmatrix} 6 \\ 12 \\ 3 \end{pmatrix}$$
+                        <br>
+                        <strong>Begründung:</strong> Bei der Skalarmultiplikation wird jede Komponente des Vektors mit dem Skalar multipliziert. Der resultierende Vektor zeigt in die gleiche Richtung, ist aber um den Faktor 3 länger.
                     </div>
                 </div>
                 
@@ -606,52 +621,188 @@
                         <strong>Lösung:</strong><br>
                         $$|\vec{d}| = \sqrt{6^2 + 8^2 + 0^2} = \sqrt{36 + 64 + 0} = \sqrt{100} = 10$$
                         <br>
-                        <strong>Der Betrag ist 10.</strong>
+                        <strong>Begründung:</strong> Der Betrag eines Vektors entspricht seiner Länge im Raum. Diese wird durch die Wurzel aus der Summe der Quadrate aller Komponenten berechnet, analog zum Satz des Pythagoras. Da die z-Komponente 0 ist, liegt dieser Vektor in der xy-Ebene.
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 4: Vektorsubtraktion</h4>
+                    <p>Berechne die Differenz der Vektoren:</p>
+                    <div class="math-formula">
+                        $$\vec{e} = \begin{pmatrix} 7 \\ 2 \\ 4 \end{pmatrix} \text{ und } \vec{f} = \begin{pmatrix} 3 \\ 5 \\ 1 \end{pmatrix}$$
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('solution4')">💡 Lösung anzeigen</button>
+                    <div id="solution4" class="solution">
+                        <strong>Lösung:</strong><br>
+                        $$\vec{e} - \vec{f} = \begin{pmatrix} 7 \\ 2 \\ 4 \end{pmatrix} - \begin{pmatrix} 3 \\ 5 \\ 1 \end{pmatrix} = \begin{pmatrix} 4 \\ -3 \\ 3 \end{pmatrix}$$
+                        <br>
+                        <strong>Begründung:</strong> Bei der Vektorsubtraktion wird jede Komponente einzeln subtrahiert. Geometrisch stellt \(\vec{e} - \vec{f}\) den Vektor dar, der vom Endpunkt von \(\vec{f}\) zum Endpunkt von \(\vec{e}\) zeigt.
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 5: Einheitsvektor</h4>
+                    <p>Bestimme den Einheitsvektor zu:</p>
+                    <div class="math-formula">
+                        $$\vec{g} = \begin{pmatrix} 3 \\ 4 \\ 0 \end{pmatrix}$$
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('solution5')">💡 Lösung anzeigen</button>
+                    <div id="solution5" class="solution">
+                        <strong>Lösung:</strong><br>
+                        Zunächst berechnen wir den Betrag: $$|\vec{g}| = \sqrt{3^2 + 4^2 + 0^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$
+                        <br>
+                        Der Einheitsvektor ist: $$\vec{g}_0 = \frac{\vec{g}}{|\vec{g}|} = \frac{1}{5} \begin{pmatrix} 3 \\ 4 \\ 0 \end{pmatrix} = \begin{pmatrix} 0{,}6 \\ 0{,}8 \\ 0 \end{pmatrix}$$
+                        <br>
+                        <strong>Begründung:</strong> Ein Einheitsvektor hat den Betrag 1 und zeigt in die gleiche Richtung wie der ursprüngliche Vektor. Er wird berechnet, indem man den Vektor durch seinen Betrag teilt.
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 6: Linearkombination</h4>
+                    <p>Berechne die Linearkombination:</p>
+                    <div class="math-formula">
+                        $$2\vec{h} - 3\vec{i} \text{ für } \vec{h} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \text{ und } \vec{i} = \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix}$$
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('solution6')">💡 Lösung anzeigen</button>
+                    <div id="solution6" class="solution">
+                        <strong>Lösung:</strong><br>
+                        $$2\vec{h} = 2 \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix}$$
+                        $$3\vec{i} = 3 \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 6 \\ 3 \\ 3 \end{pmatrix}$$
+                        $$2\vec{h} - 3\vec{i} = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix} - \begin{pmatrix} 6 \\ 3 \\ 3 \end{pmatrix} = \begin{pmatrix} -4 \\ 1 \\ 3 \end{pmatrix}$$
+                        <br>
+                        <strong>Begründung:</strong> Eine Linearkombination ist eine Summe von Vektoren, die jeweils mit einem Skalar multipliziert werden. Hier wird zunächst die Skalarmultiplikation durchgeführt, dann die Subtraktion.
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 7: Lineare Unabhängigkeit (drei Vektoren)</h4>
+                    <p>Prüfe, ob die folgenden drei Vektoren linear unabhängig sind:</p>
+                    <div class="math-formula">
+                        $$\vec{u} = \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}, \quad \vec{v} = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}, \quad \vec{w} = \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix}$$
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('solution7')">💡 Lösung anzeigen</button>
+                    <div id="solution7" class="solution">
+                        <strong>Lösung:</strong><br>
+                        Wir prüfen, ob die Gleichung \(r\vec{u} + s\vec{v} + t\vec{w} = \vec{0}\) nur die triviale Lösung \(r = s = t = 0\) hat.
+                        $$r \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix} + s \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} + t \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$$
+                        
+                        Dies führt zum Gleichungssystem:
+                        $$\begin{align}
+                        r + 3t &= 0 \\
+                        2r + s + t &= 0 \\
+                        2s - 2t &= 0
+                        \end{align}$$
+                        
+                        Aus der dritten Gleichung: \(s = t\)<br>
+                        Aus der ersten Gleichung: \(r = -3t\)<br>
+                        Einsetzen in die zweite: \(2(-3t) + t + t = -6t + 2t = -4t = 0\), also \(t = 0\)
+                        
+                        Damit ist auch \(r = 0\) und \(s = 0\).
+                        <br>
+                        <strong>Begründung:</strong> Da nur die triviale Lösung existiert, sind die drei Vektoren linear unabhängig.
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 8: Lineare Unabhängigkeit (zwei Vektoren - Spezialfall)</h4>
+                    <p>Prüfe, ob die folgenden zwei Vektoren linear unabhängig sind:</p>
+                    <div class="math-formula">
+                        $$\vec{p} = \begin{pmatrix} 2 \\ 4 \\ -2 \end{pmatrix}, \quad \vec{q} = \begin{pmatrix} -1 \\ -2 \\ 1 \end{pmatrix}$$
+                    </div>
+                    <button class="solution-toggle" onclick="toggleSolution('solution8')">💡 Lösung anzeigen</button>
+                    <div id="solution8" class="solution">
+                        <strong>Lösung:</strong><br>
+                        Zwei Vektoren sind linear abhängig, wenn einer ein Vielfaches des anderen ist.
+                        <br>
+                        Wir prüfen, ob \(\vec{q} = k \cdot \vec{p}\) für einen Skalar \(k\):
+                        $$\begin{pmatrix} -1 \\ -2 \\ 1 \end{pmatrix} = k \begin{pmatrix} 2 \\ 4 \\ -2 \end{pmatrix}$$
+                        
+                        Aus der ersten Komponente: \(-1 = 2k \Rightarrow k = -\frac{1}{2}\)<br>
+                        Prüfung der anderen Komponenten:<br>
+                        Zweite Komponente: \(-2 = 4 \cdot (-\frac{1}{2}) = -2\) ✓<br>
+                        Dritte Komponente: \(1 = -2 \cdot (-\frac{1}{2}) = 1\) ✓
+                        
+                        <br>
+                        <strong>Begründung:</strong> Da \(\vec{q} = -\frac{1}{2} \vec{p}\), sind die Vektoren linear abhängig (kollinear).
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 9: Containerbahnhof</h4>
+                    <p>In einem Containerbahnhof werden Container mithilfe eines Containerkrans auf Eisenbahnwaggons verladen. Bei geeigneter Wahl eines räumlichen Koordinatensystems (Einheiten in m) denken wir uns die Ecke A eines Containers im Punkt A(-10|21|0). Der Container soll auf einen Eisenbahnwaggon verladen werden, der parallel zum Container steht. Dabei wird der Container so verschoben, dass sein Eckpunkt A auf den Punkt A'(-5|28|1,5) des Waggons fällt.</p>
+                    <p><strong>a)</strong> Zur Steuerung des Krans muss angegeben werden, um wie viele Einheiten dieser den Container jeweils in Richtung der x₁-Achse, in Richtung der x₂-Achse und in Richtung der x₃-Achse bewegen muss. Welche Werte erhält man?</p>
+                    <p><strong>b)</strong> Der Eckpunkt G des Containers liegt vor der Verschiebung im Punkt G(-17|23,5|0,5). Gebe die Koordinaten seines Bildpunktes G' nach der Verschiebung an.</p>
+                    <p><strong>c)</strong> Bestimme die Länge des Verschiebungsvektors von A nach A'.</p>
+                    <button class="solution-toggle" onclick="toggleSolution('solution9')">💡 Lösung anzeigen</button>
+                    <div id="solution9" class="solution">
+                        <strong>Lösung:</strong><br>
+                        
+                        <strong>a) Verschiebungsvektor bestimmen:</strong><br>
+                        Der Verschiebungsvektor \(\vec{v}\) ist der Vektor von A nach A':
+                        $$\vec{v} = \vec{AA'} = A' - A = \begin{pmatrix} -5 \\ 28 \\ 1{,}5 \end{pmatrix} - \begin{pmatrix} -10 \\ 21 \\ 0 \end{pmatrix} = \begin{pmatrix} 5 \\ 7 \\ 1{,}5 \end{pmatrix}$$
+                        
+                        Der Kran muss den Container um 5 m in x₁-Richtung, 7 m in x₂-Richtung und 1,5 m in x₃-Richtung bewegen.
+                        <br><br>
+                        <strong>b) Bildpunkt G' bestimmen:</strong><br>
+                        G' erhält man durch Addition des Verschiebungsvektors zu G:
+                        $$G' = G + \vec{v} = \begin{pmatrix} -17 \\ 23{,}5 \\ 0{,}5 \end{pmatrix} + \begin{pmatrix} 5 \\ 7 \\ 1{,}5 \end{pmatrix} = \begin{pmatrix} -12 \\ 30{,}5 \\ 2 \end{pmatrix}$$
+                        <br>
+                        <strong>c) Länge des Verschiebungsvektors:</strong><br>
+                        $$|\vec{v}| = \sqrt{5^2 + 7^2 + 1{,}5^2} = \sqrt{25 + 49 + 2{,}25} = \sqrt{76{,}25} \approx 8{,}73 \text{ m}$$
+                        
+                        <br>
+                        <strong>Begründung:</strong> Bei einer Verschiebung (Translation) wird jeder Punkt um denselben Vektor verschoben. Der Verschiebungsvektor gibt die Richtung und Strecke der Bewegung an. Seine Länge entspricht der zurückgelegten Distanz.
                     </div>
                 </div>
             </div>
             
-            <!-- Quiz Tab -->
+            <!-- Vektor Racer Tab -->
             <div id="quiz" class="tab-content">
-                <h2>🎯 Quiz</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <h2>🏎️ Vektor-Racer</h2>
+                <p style="margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">
+                    Spiele das interaktive Vektor-Rennspiel! Steuere dein Auto über die Rennstrecke und sammle Punkte, 
+                    indem du über <strong>wahre</strong> mathematische Aussagen fährst. Falsche Aussagen kosten Zeit!
+                </p>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <iframe src="math_racer.html" 
+                            width="920" 
+                            height="620" 
+                            style="border: 3px solid #7c3aed; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"
+                            allowfullscreen>
+                    </iframe>
                 </div>
                 
-                <div class="quiz-question">
-                    <h4>Frage 1: Wie werden Vektoren addiert?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q1a" value="correct">Komponentenweise</label></li>
-                        <li><label><input type="checkbox" id="q1b" value="incorrect">Beträge werden addiert</label></li>
-                        <li><label><input type="checkbox" id="q1c" value="incorrect">Nur die erste Komponente</label></li>
-                        <li><label><input type="checkbox" id="q1d" value="incorrect">Multiplikation der Komponenten</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q1', ['q1a'])">Antwort prüfen</button>
-                    <div id="q1-feedback" class="quiz-feedback"></div>
+                <div style="background: #f0f9ff; border: 2px solid #0ea5e9; border-radius: 10px; padding: 1.5rem; margin: 2rem 0;">
+                    <h3 style="color: #0369a1; margin-bottom: 1rem;">🎮 Spielanleitung</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <h4 style="color: #0369a1;">Steuerung:</h4>
+                            <ul style="margin-left: 1.5rem;">
+                                <li><strong>W:</strong> Gas geben</li>
+                                <li><strong>S:</strong> Bremsen/Rückwärts</li>
+                                <li><strong>A:</strong> Links lenken</li>
+                                <li><strong>D:</strong> Rechts lenken</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: #0369a1;">Punktesystem:</h4>
+                            <ul style="margin-left: 1.5rem;">
+                                <li><strong>✅ Wahre Aussage:</strong> +6 Sekunden, +100 Punkte</li>
+                                <li><strong>❌ Falsche Aussage:</strong> -5 Sekunden, -50 Punkte</li>
+                                <li><strong>🏆 Sterne:</strong> 3⭐ bei >25s, 2⭐ bei >10s, 1⭐ bei >0s</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="quiz-question">
-                    <h4>Frage 2: Was ist der Nullvektor?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q2a" value="correct">Der Vektor (0|0|0)</label></li>
-                        <li><label><input type="checkbox" id="q2b" value="incorrect">Ein Vektor mit Betrag 1</label></li>
-                        <li><label><input type="checkbox" id="q2c" value="incorrect">Ein Vektor ohne Richtung</label></li>
-                        <li><label><input type="checkbox" id="q2d" value="correct">Ein Vektor ohne Betrag</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q2', ['q2a', 'q2d'])">Antwort prüfen</button>
-                    <div id="q2-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 3: Wie berechnet man den Betrag eines Vektors?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q3a" value="incorrect">Summe der Komponenten</label></li>
-                        <li><label><input type="checkbox" id="q3b" value="correct">Wurzel aus der Summe der Quadrate</label></li>
-                        <li><label><input type="checkbox" id="q3c" value="incorrect">Produkt der Komponenten</label></li>
-                        <li><label><input type="checkbox" id="q3d" value="incorrect">Größte Komponente</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q3', ['q3b'])">Antwort prüfen</button>
-                    <div id="q3-feedback" class="quiz-feedback"></div>
+                <div style="background: #fefce8; border: 2px solid #eab308; border-radius: 10px; padding: 1.5rem;">
+                    <h3 style="color: #a16207; margin-bottom: 1rem;">💡 Lern-Tipp</h3>
+                    <p style="color: #a16207; margin: 0;">
+                        Das Spiel testet dein Wissen über Vektorrechnung! Wiederhole die Theorie und Übungen, 
+                        um bessere Ergebnisse zu erzielen. Achte besonders auf die Unterschiede zwischen 
+                        Vektor- und Punkt-Notation!
+                    </p>
                 </div>
             </div>
         </div>
@@ -800,6 +951,203 @@
             }, 3000);
             
             document.body.appendChild(testFrame);
+        }
+        
+        // Neue Funktion: PDF mit Passwort-Schutz öffnen
+        function openPdfWithPassword(link, event) {
+            event.preventDefault();
+            
+            // Passwort-Dialog anzeigen
+            showPasswordDialog(() => {
+                // Bei korrektem Passwort: PDF öffnen
+                openPdfOrFallback(link, event);
+            });
+        }
+        
+        // Passwort-Dialog-Funktion
+        function showPasswordDialog(onSuccess) {
+            // Erstelle Modal für Passwort-Eingabe
+            const modal = document.createElement('div');
+            modal.id = 'password-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                text-align: center;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div id="yeti-container" style="position: relative; display: inline-block;">
+                        <div id="yeti-body" style="
+                            font-family: 'Courier New', monospace;
+                            font-size: 1.3rem;
+                            line-height: 1.1;
+                            color: #f0f9ff;
+                            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+                            white-space: pre;
+                            transition: all 0.3s ease;
+                        ">    ∩─────∩
+   (  ░░░░░  )
+  /  ●     ●  \\
+ |      ^      |
+ |   \\─────/   |
+  \\___________/
+   \\\\\     ///
+    \\\\\   ///
+     🦶 🦶</div>
+                        <div id="yeti-eyes-normal" style="
+                            position: absolute;
+                            top: 2.2rem;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            font-size: 1.1rem;
+                            transition: all 0.3s ease;
+                            font-family: 'Courier New', monospace;
+                            color: #1e40af;
+                        ">●     ●</div>
+                        <div id="yeti-hands-covering" style="
+                            position: absolute;
+                            top: 1.8rem;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            font-size: 1.3rem;
+                            opacity: 0;
+                            transition: all 0.3s ease;
+                            font-family: 'Courier New', monospace;
+                        ">🙈 🙈</div>
+                    </div>
+                </div>
+                <h3 style="margin-bottom: 1rem; color: #059669;">🔐 Passwort erforderlich</h3>
+                <p style="margin-bottom: 1.5rem; color: #64748b;">Der Yeti bewacht die Lösung! Gib das Passwort ein:</p>
+                <input type="password" id="password-input" placeholder="Passwort eingeben" 
+                       style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem;">
+                <div id="password-error" style="color: #dc2626; margin-bottom: 1rem; display: none;">❌ Falsches Passwort! Der Yeti ist nicht überzeugt!</div>
+                <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                    <button id="cancel-password" style="background: #6b7280; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem;">Abbrechen</button>
+                    <button id="submit-password" style="background: #059669; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem;">OK</button>
+                </div>
+            `;
+            
+            const passwordInput = modalContent.querySelector('#password-input');
+            const errorDiv = modalContent.querySelector('#password-error');
+            const cancelBtn = modalContent.querySelector('#cancel-password');
+            const submitBtn = modalContent.querySelector('#submit-password');
+            const yetiEyesNormal = modalContent.querySelector('#yeti-eyes-normal');
+            const yetiHandsCovering = modalContent.querySelector('#yeti-hands-covering');
+            
+            // Yeti-Animationen
+            function showYetiCoveringEyes() {
+                yetiEyesNormal.style.opacity = '0';
+                yetiHandsCovering.style.opacity = '1';
+            }
+            
+            function showYetiNormalEyes() {
+                yetiEyesNormal.style.opacity = '1';
+                yetiHandsCovering.style.opacity = '0';
+            }
+            
+            function yetiShakeHead() {
+                const yetiContainer = modalContent.querySelector('#yeti-container');
+                yetiContainer.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    yetiContainer.style.animation = '';
+                }, 500);
+            }
+            
+            function yetiHappyDance() {
+                const yetiContainer = modalContent.querySelector('#yeti-container');
+                yetiContainer.style.animation = 'bounce 0.6s ease-in-out';
+                setTimeout(() => {
+                    yetiContainer.style.animation = '';
+                }, 600);
+            }
+            
+            // Passwort prüfen
+            function checkPassword() {
+                const enteredPassword = passwordInput.value.trim();
+                const correctPassword = 'test'; // Globales Passwort
+                
+                if (enteredPassword === correctPassword) {
+                    yetiHappyDance();
+                    setTimeout(() => {
+                        document.body.removeChild(modal);
+                        onSuccess();
+                    }, 300);
+                } else {
+                    yetiShakeHead();
+                    errorDiv.style.display = 'block';
+                    passwordInput.style.borderColor = '#dc2626';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }
+            
+            // Event Listeners
+            cancelBtn.addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            submitBtn.addEventListener('click', checkPassword);
+            
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
+            // Yeti-Animationen bei Passwort-Eingabe
+            passwordInput.addEventListener('input', (e) => {
+                if (e.target.value.length > 0) {
+                    showYetiCoveringEyes();
+                } else {
+                    showYetiNormalEyes();
+                }
+            });
+            
+            passwordInput.addEventListener('focus', () => {
+                if (passwordInput.value.length > 0) {
+                    showYetiCoveringEyes();
+                }
+            });
+            
+            passwordInput.addEventListener('blur', () => {
+                if (passwordInput.value.length === 0) {
+                    showYetiNormalEyes();
+                }
+            });
+            
+            // Modal schließen bei Klick außerhalb
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Fokus auf Eingabefeld
+            setTimeout(() => {
+                passwordInput.focus();
+            }, 100);
         }
     </script>
     

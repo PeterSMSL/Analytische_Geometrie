@@ -204,6 +204,19 @@
             line-height: 1.3;
         }
         
+        /* Mobile optimizations for better visibility and hit detection */
+        @media (max-width: 768px) {
+            .math-statement {
+                font-size: 16px;
+                padding: 14px 20px;
+                border-width: 4px;
+                min-width: 270px;
+                max-width: 280px;
+                line-height: 1.4;
+                box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            }
+        }
+        
         .math-statement.correct {
             border-color: #4CAF50;
             background: rgba(76,175,80,0.95);
@@ -596,8 +609,8 @@
             ctx.fillStyle = '#228B22';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Road surface
-            const roadWidth = 300;
+            // Road surface - wider road for mobile
+            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Wider road
             const roadLeft = (canvas.width - roadWidth) / 2;
             const roadRight = roadLeft + roadWidth;
             
@@ -628,18 +641,19 @@
             ctx.lineTo(roadRight, canvas.height);
             ctx.stroke();
             
-            // Trees on left side
-            for (let i = 0; i < 15; i++) {
+            // Trees on left side - narrower forest area
+            const forestWidth = window.innerWidth < 768 ? 15 : 25; // Narrower forest on mobile
+            for (let i = 0; i < 10; i++) { // Fewer trees
                 const treeY = (i * 80 + car.roadOffset * 0.5) % (canvas.height + 80);
-                const treeX = Math.random() * (roadLeft - 40) + 20;
-                drawTree(treeX, treeY);
+                const treeX = Math.random() * (roadLeft - forestWidth) + 5;
+                if (treeX > 0) drawTree(treeX, treeY);
             }
             
-            // Trees on right side
-            for (let i = 0; i < 15; i++) {
+            // Trees on right side - narrower forest area
+            for (let i = 0; i < 10; i++) { // Fewer trees
                 const treeY = (i * 80 + car.roadOffset * 0.5) % (canvas.height + 80);
-                const treeX = roadRight + 20 + Math.random() * (canvas.width - roadRight - 60);
-                drawTree(treeX, treeY);
+                const treeX = roadRight + 5 + Math.random() * (canvas.width - roadRight - forestWidth - 10);
+                if (treeX < canvas.width - 5) drawTree(treeX, treeY);
             }
         }
         
@@ -762,7 +776,7 @@
         
         // Collision Detection with Road (Top-Down)
         function isOnRoad(x, y) {
-            const roadWidth = 300;
+            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Match drawTrack road width
             const roadLeft = (canvas.width - roadWidth) / 2;
             const roadRight = roadLeft + roadWidth;
             
@@ -776,9 +790,9 @@
             const statement = mathStatements[Math.floor(Math.random() * mathStatements.length)];
             
             // Spawn from top of screen, on the road (wider spawn area)
-            const roadWidth = 300;
-            const roadLeft = (canvas.width - roadWidth) / 2 + 10; // Reduced margin
-            const roadRight = roadLeft + roadWidth - 20; // Reduced margin
+            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Match road width
+            const roadLeft = (canvas.width - roadWidth) / 2 + 5; // Minimal margin
+            const roadRight = roadLeft + roadWidth - 10; // Minimal margin
             
             // Random position on road
             let x = roadLeft + Math.random() * (roadRight - roadLeft);
@@ -813,8 +827,13 @@
             statementEl.className = 'math-statement';
             statementEl.textContent = newStatement.text;
             statementEl.id = 'statement-' + newStatement.id;
-            statementEl.style.left = (newStatement.x - 125) + 'px';
+            
+            // Better positioning for mobile - wider statements
+            const isMobile = window.innerWidth < 768;
+            const boxWidth = isMobile ? 280 : 250;
+            statementEl.style.left = (newStatement.x - boxWidth / 2) + 'px';
             statementEl.style.top = (newStatement.y - 30) + 'px';
+            statementEl.style.width = boxWidth + 'px';
             
             document.querySelector('.game-container').appendChild(statementEl);
         }
@@ -829,6 +848,11 @@
                 // Update DOM position
                 if (statementEl) {
                     statementEl.style.top = (statement.y - 30) + 'px';
+                    // Update width for responsive design
+                    const isMobile = window.innerWidth < 768;
+                    const boxWidth = isMobile ? 280 : 250;
+                    statementEl.style.left = (statement.x - boxWidth / 2) + 'px';
+                    statementEl.style.width = boxWidth + 'px';
                 }
                 
                 // Remove if off screen
@@ -839,10 +863,27 @@
                     return false;
                 }
                 
-                // Check collision with car (much larger hit area for mobile)
-                const distance = Math.sqrt(Math.pow(car.x - statement.x, 2) + Math.pow(car.y - statement.y, 2));
-                const hitRadius = window.innerWidth < 768 ? 85 : 65; // Larger on mobile
-                if (distance < hitRadius) { // Dynamic collision area
+                // Check collision with car - rectangular collision for full box width
+                const isMobile = window.innerWidth < 768;
+                
+                // Rectangular collision detection - much easier to hit on mobile
+                const boxWidth = isMobile ? 280 : 250; // Full statement width
+                const boxHeight = isMobile ? 80 : 60; // Statement height
+                
+                const carLeft = car.x - 15;
+                const carRight = car.x + 15;
+                const carTop = car.y - 20;
+                const carBottom = car.y + 20;
+                
+                const boxLeft = statement.x - boxWidth / 2;
+                const boxRight = statement.x + boxWidth / 2;
+                const boxTop = statement.y - boxHeight / 2;
+                const boxBottom = statement.y + boxHeight / 2;
+                
+                // Check if car overlaps with statement box
+                const isColliding = carLeft < boxRight && carRight > boxLeft && carTop < boxBottom && carBottom > boxTop;
+                
+                if (isColliding) { // Rectangular collision - much easier to hit
                     handleStatementCollision(statement);
                     if (statementEl) {
                         statementEl.remove();
@@ -1045,9 +1086,9 @@
             car.roadOffset += car.speed * 1.2;
             
             // Keep car on road horizontally (wider movement area)
-            const roadWidth = 300;
-            const roadLeft = (canvas.width - roadWidth) / 2 + 5; // Reduced margin
-            const roadRight = roadLeft + roadWidth - 10; // Reduced margin
+            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Match road width
+            const roadLeft = (canvas.width - roadWidth) / 2 + 5; // Minimal margin
+            const roadRight = roadLeft + roadWidth - 10; // Minimal margin
             car.x = Math.max(roadLeft, Math.min(roadRight, car.x));
             
             // Keep car in vertical bounds (shouldn't move much)

@@ -859,9 +859,22 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution1')">💡 Lösung anzeigen</button>
                     <div id="solution1" class="solution">
                         <strong>Lösung:</strong><br>
-                        a) \(A(7|0|0)\) - auf der x-Achse sind \(y=0\) und \(z=0\)<br>
-                        b) \(B(0|3|5)\) - in der yz-Ebene ist \(x=0\)<br>
-                        c) \(C(-2|4|0)\) - in der xy-Ebene ist \(z=0\)<br>
+                        
+                        <strong>Konzept:</strong> Im 3D-Raum brauchen wir drei Koordinaten (x|y|z) zur eindeutigen Beschreibung einer Position.<br><br>
+                        
+                        <strong>a) Punkt auf der x-Achse:</strong> \(A(7|0|0)\)<br>
+                        <em>Warum y=0 und z=0?</em> Die x-Achse ist definiert als die Linie, wo y und z beide null sind.<br>
+                        <em>Visualisierung:</em> Stell dir vor, du gehst 7 Schritte entlang der x-Achse vom Ursprung weg.<br><br>
+                        
+                        <strong>b) Punkt in der yz-Ebene:</strong> \(B(0|3|5)\)<br>
+                        <em>Warum x=0?</em> Die yz-Ebene ist die "Rückwand" des Koordinatensystems - kein Schritt nach vorne/hinten.<br>
+                        <em>Visualisierung:</em> 3 Schritte nach rechts (y-Richtung), 5 Schritte nach oben (z-Richtung).<br><br>
+                        
+                        <strong>c) Punkt in der xy-Ebene:</strong> \(C(-2|4|0)\)<br>
+                        <em>Warum z=0?</em> Die xy-Ebene ist der "Boden" des Koordinatensystems - keine Höhe.<br>
+                        <em>Visualisierung:</em> 2 Schritte nach links, 4 Schritte nach rechts, auf Bodenebene.<br>
+                        
+                        <strong>Wichtiger Hinweis:</strong> Die Reihenfolge (x|y|z) ist immer fest - wie eine Adresse im 3D-Raum!
                     </div>
                 </div>
                 
@@ -874,9 +887,22 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution2')">💡 Lösung anzeigen</button>
                     <div id="solution2" class="solution">
                         <strong>Lösung:</strong><br>
+                        
+                        <strong>Konzept:</strong> Der Abstand zwischen zwei Punkten ist die Länge der direkten Verbindungslinie - eine 3D-Erweiterung des Satzes von Pythagoras.<br><br>
+                        
+                        <strong>Formel:</strong> \(d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}\)<br><br>
+                        
+                        <strong>Berechnung:</strong><br>
                         $$d = \sqrt{(4-1)^2 + (2-2)^2 + (7-3)^2}$$
                         $$d = \sqrt{3^2 + 0^2 + 4^2} = \sqrt{9 + 0 + 16} = \sqrt{25} = 5$$
-                        <br>
+                        
+                        <strong>Geometrische Interpretation:</strong><br>
+                        - x-Richtung: 3 Einheiten Unterschied<br>
+                        - y-Richtung: 0 Einheiten (gleiche Höhe)<br>
+                        - z-Richtung: 4 Einheiten Unterschied<br>
+                        Das ergibt ein 3D-rechtwinkliges Dreieck mit Katheten 3, 0, 4 und Hypotenuse 5.<br><br>
+                        
+                        <strong>Anwendung:</strong> GPS-Entfernungen, Flugstrecken, Abstände in der Architektur.<br>
                         <strong>Der Abstand beträgt 5 Längeneinheiten.</strong>
                     </div>
                 </div>
@@ -890,8 +916,21 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution3')">💡 Lösung anzeigen</button>
                     <div id="solution3" class="solution">
                         <strong>Lösung:</strong><br>
+                        
+                        <strong>Konzept:</strong> Der Mittelpunkt einer Strecke liegt genau in der Mitte zwischen den beiden Endpunkten - in jeder Koordinate der Durchschnitt.<br><br>
+                        
+                        <strong>Formel:</strong> \(M\left(\frac{x_1+x_2}{2} \mid \frac{y_1+y_2}{2} \mid \frac{z_1+z_2}{2}\right)\)<br><br>
+                        
+                        <strong>Berechnung:</strong><br>
                         $$M\left(\frac{-2+6}{2} \mid \frac{4+2}{2} \mid \frac{6+4}{2}\right) = M\left(\frac{4}{2} \mid \frac{6}{2} \mid \frac{10}{2}\right) = M(2|3|5)$$
-                        <br>
+                        
+                        <strong>Anschauliche Erklärung:</strong><br>
+                        - x-Koordinate: Von -2 bis 6 ist der Mittelwert 2 (genau in der Mitte)<br>
+                        - y-Koordinate: Von 4 bis 2 ist der Mittelwert 3<br>
+                        - z-Koordinate: Von 6 bis 4 ist der Mittelwert 5<br><br>
+                        
+                        <strong>Probe:</strong> Abstand von A zu M = Abstand von M zu B (sollte gleich sein)<br>
+                        <strong>Anwendung:</strong> Schwerpunkt, Navigationsziele, symmetrische Konstruktionen.<br>
                         <strong>Der Mittelpunkt ist \(M(2|3|5)\).</strong>
                     </div>
                 </div>

@@ -1,0 +1,233 @@
+                         ANALYTISCHE GEOMETRIE – LINEARE GLEICHUNGSSYSTEME
+
+
+1. Lineare Gleichungssysteme (LGS)
+Wir können eine Gleichung mit einer Variablen (Unbekannten) lösen. Das Ganze kennen wir auch
+schon für mehrere Gleichungen und mehrere Variablen. Aus der Mittelstufe kennen wir vor Allem die
+Gleichungssysteme mit zwei Gleichungen und zwei Variablen. Aus der jüngeren Vergangenheit
+(Rekonstruktion von Funktionen) kennen wir auch größere LGS. Zum Einstieg in die Analytische
+Geometrie / Lineare Algebra bietet sich eine kurze Wiederholung der Lösungsmethoden für LGS an.
+
+1.1. Lineare Gleichungssysteme mit zwei Gleichungen und zwei Variablen
+Hier sind das Grundverständnis der Lösungsansätze Gleichsetzungs-, Einsetzungs-, Additions- und
+Subtraktionsverfahren vorausgesetzt. Wir betrachten ein Beispiel zum Wiedereinstieg und dabei zwei
+Lösungswege:
+
+Beispiel 1 Löse das gegebenen LGS.
+
+           (I) 𝑥 + 𝑦 = 2
+           (II) 𝑥 − 𝑦 = −8
+
+    a) Lösung mit Additionsverfahren
+
+           I. x + y =    2
+           II. x − y =   −8            |I + II
+               2x =      −6              |: 2
+                             6
+              x=         −
+                           2
+              𝐱=         −𝟑 in I einsetzen
+
+           −3 + y =      2       |+3
+            𝐲=𝟓
+
+       Die Lösungsmenge des LGS beträgt somit 𝑳 = {(−𝟑|𝟓)}.
+    b) Lösung mit Gleichsetzungsverfahren
+        I. x + y = 2 | − y          I. x = 2 − y
+                              ⇒                           Durch Gleichsetzen von I und II folgt
+       II. x − y = −8 | + y          II. x = −8 + y
+
+            2 − y = −8 + y ⇒ 𝐲 = 𝟓 in I. einsetzen liefert: 𝐱 = −𝟑 und somit ebenfalls als
+           Lösungsmenge des LGS 𝑳 = {(−𝟑|𝟓)}.
+
+Beispiel 2: Löse das gegebene LGS.
+
+           (I)   𝑥 + 𝑦 = 9
+           (II) 4𝑥 + 2𝑦 = 24
+
+Lösung:
+
+(I)   𝑥 + 𝑦 = 9                   | ∙ (−2)                Nebenrechnung: −2𝑥 − 2𝑦 = −18
+(II) 4𝑥 + 2𝑦 = 24
+(III) 2𝑥           =6
+Aus Gleichung (III) erhalten wir: 𝒙 = 𝟑. Durch Einsetzen von 𝑥 = 3 in (I) erhalten wir:
+
+(I)    3 + 𝑦 = 9             und somit 𝒚 = 𝟔 ergibt. Die Lösungsmenge des LGS beträgt somit 𝐿 =
+{(3|6)}.
+
+Hinweis: Es gibt unterschiedliche Notationen. Soweit der Weg nachvollziehbar ist, ist vieles erlaubt.
+Meist handelt es sich bei LGS um Nebenrechnungen für ein größeres Ziel.
+
+
+                                                      1
+                     ANALYTISCHE GEOMETRIE – LINEARE GLEICHUNGSSYSTEME
+
+
+1.2 LGS mit drei Variablen – Dreieckssysteme
+Bei LGS mit mehr als zwei Gleichung und Unbekannten werden die obigen Verfahren sehr schnell
+unübersichtlich und fehlerbehaftet. Deswegen geht man in diesen Fällen zu einem allgemeingültigen,
+immer anwendbaren Verfahren über, dem sogenannten Gauß-Algorithmus.
+
+Der deutsche Mathematiker Carl Friedrich Gauß (1777 – 1855) hat zu Linearen Gleichungssystemen
+(LGS) einen Algorithmus entwickelt, der das LGS in ein Dreieckssystem überführt, mit welchem man
+dann schnell die gesuchte Lösung für 𝑥, 𝑦 und 𝑧 findet.
+
+Beispiel 3:
+(I) 3𝑥 −2𝑦       +4𝑧 = 11
+(II)        4𝑦   +2𝑧 = 14
+(III)             5𝑧 = 15
+
+Aus Gleichung (III) ergibt sich: 𝒛 = 𝟑.
+Dieses Ergebnis setzen wir in (II) ein und lösen nach 𝑦 auf:
+4𝑦 + 2 ∙ 3 = 14
+         𝒚=𝟐
+Nun setzen wir 𝑧 = 3 und 𝑦 = 2 in (I) ein und lösen nach 𝑥 auf:
+3𝑥 − 2 ∙ 2 + 4 ∙ 3 = 11
+                 𝒙=𝟏
+Resultat: Das gegebene Dreieckssystem ist eindeutig lösbar und besitzt die Lösungsmenge
+𝑳 = {(𝟏|𝟐|𝟑)}.
+
+Übung 1 Löse das Dreieckssystem und gib die Lösungsmenge an.
+a)                                     b)
+(I) 2𝑥 + 4𝑦 − 𝑧 = −13                  (I) 2𝑥 + 4𝑦 − 3𝑧 = 3
+(II)     2𝑦 − 2𝑧 = −12                 (II)   − 6𝑦 + 5𝑧 = 7
+(III)         3𝑧 =   9                 (III)         2𝑧 = 4
+
+
+1.3 LGS mit drei Variablen – Das Gauß-Verfahren
+
+Ist ein LGS mit drei Variablen noch nicht in Dreiecksform, sondern zum Beispiel „voll besetzt“, dann
+wenden wir das sogenannte Gauß-Verfahren an.
+
+Dazu gehen wir wie folgt vor:
+
+    o Elimination von 𝑥 in Gleichung (𝐼𝐼) und (𝐼𝐼𝐼)
+    o Elimination von 𝑦 in Gleichung (𝐼𝐼𝐼)
+    o Lösung des entstandenen Dreiecksystems (wie in 1.2)
+
+
+
+
+                                                  2
+                    ANALYTISCHE GEOMETRIE – LINEARE GLEICHUNGSSYSTEME
+
+
+
+ Beispiel 4:                        1. Elimination von 𝑥        Tabellarische Schreibweise:
+ (I) 3𝑥        +3𝑦 +2𝑧 = 5
+ (II) 2𝑥       +4𝑦 +3𝑧 = 4            → 2 ∙ (𝐼) − 3 ∙ (𝐼𝐼)
+ (III)−5𝑥      +2𝑦 +4𝑧 = −9           → 3 ∙ (𝐼𝐼𝐼) + 5 ∙ (𝐼)
+
+                                  2. Elimination von 𝑦
+ (I)     3𝑥   +3𝑦   + 2𝑧 = 5
+ (II)         −6𝑦   − 5𝑧 = −2
+ (III)        21𝑦   +22𝑧 = −2         → 2 ∙ (𝐼𝐼𝐼) + 7 ∙ (𝐼𝐼)
+
+
+ (I) 3𝑥       +3𝑦   + 2𝑧 = 5
+ (II)         −6𝑦   − 5𝑧 = − 2        Dreieckssystem
+ (III)                9𝑧 = −18
+
+
+
+
+Aus Gleichung (𝐼𝐼𝐼) ergibt sich: 𝒛 = −𝟐.
+Dieses Ergebnis setzen wir in (𝐼𝐼) ein und lösen nach 𝑦 auf:
+−6𝑦 − 5 ∙ (−2) = −2
+               𝒚=𝟐
+Nun setzen wir 𝑧 = 3 und 𝑦 = 2 in (𝐼) ein und lösen nach 𝑥 auf:
+3𝑥 + 3 ∙ 2 + 2 ∙ (−2) = 5
+                     𝒙=𝟏
+Resultat: Das gegebene Dreieckssystem ist eindeutig lösbar und besitzt die Lösungsmenge
+𝑳 = {(𝟏|𝟐| − 𝟐)}.
+Alternativ kann die Lösungsmenge auch mit (𝒙; 𝒚; 𝒛) = (𝟏; 𝟐; −𝟐) notiert werden.
+
+
+
+
+                                                3
+                     ANALYTISCHE GEOMETRIE – LINEARE GLEICHUNGSSYSTEME
+
+
+1.4. Lösbarkeit von LGS
+Für ein LGS muss es nicht immer eine eindeutige Lösung geben.
+
+Beispiel 5: Untersuche das LGS mithilfe des Gauß’schen Algorithmus auf Lösbarkeit.
+
+
+
+
+ Gleichung (𝐼𝐼𝐼) des Dreieckssystems wird als         Gleichung (𝐼𝐼𝐼) des Gleichungssystems wird als
+ Widerspruchszeile bezeichnet. Sie ist unlösbar       Nullzeile bezeichnet. Sie ist für jedes Tripel
+ (0𝑥 + 0𝑦 + 0𝑧 = −1 ist für kein Tripel               𝑥, 𝑦, 𝑧 erfüllt, stellt keine Einschränkung dar und
+ 𝑥, 𝑦, 𝑧 erfüllt).                                    könnte daher auch weggelassen werden.
+
+ Damit ist das Dreieckssystem als Ganzes              Es verbleiben 2 Gleichungen mit 3 Variablen,
+ unlösbar.                                            von denen daher eine Variable frei wählbar ist.
+ Es folgt: Das ursprüngliche LGS ist ebenfalls        Wir setzen für diese „überzählige“ Variable
+ unlösbar, die Lösungsmenge ist daher leer:           einen Parameter ein.
+                      𝐿 = {}
+                                                      Wählen wir        𝑧=𝑐              mit 𝑐 ∈ ℝ,
+ Die Unlösbarkeit eines LGS wird nach                 so folgt aus (𝐼𝐼) 𝑦 = 2𝑐 − 1
+ Anwendung des Gaußschen Algorithmus stets            und dann aus (𝐼) 𝑥 = 𝑐 + 1
+ auf diese Weise offenbar:
+                                                      Wir erhalten für jeden Wert des freien
+ Wenigstens in einer Gleichung des                    Parameters 𝑐 genau ein Lösungstripel 𝑥, 𝑦, 𝑧.
+ resultierenden Dreieckssystems tritt ein             Das Gleichungssystem hat eine einparametrige
+ offensichtlicher Widerspruch auf.                    unendliche Lösungsmenge:
+                                                              𝐿 = {(𝑐 + 1; 2𝑐 − 1; 𝑐); 𝑐 ∈ ℝ}
+Übung 2
+Untersuche das LGS auf Lösbarkeit. Gib die Lösungsmenge an.
+
+
+
+
+                                                  4
+                     ANALYTISCHE GEOMETRIE – LINEARE GLEICHUNGSSYSTEME
+
+
+Zusammenfassung:
+
+
+
+1. Gauß'schen Algorithmus auf das LGS anwenden.
+Es entsteht eine Dreiecks- bzw. Stufenform.
+2. Prüfen, welche der folgenden Eigenschaften das resultierende LGS besitzt.
+
+Widerspruch                  Es existiert kein Widerspruch.
+
+Wenigstens eine
+                             Die Anzahl der Variablen ist
+Gleichung stellt einen                                          Es gibt mehr Variable als
+                             gleich der Anzahl der
+offensichtlichen                                                nichttriviale Zeilen.
+                             nichttrivialen Zeilen.
+Widerspruch dar.
+3. Interpretation
+                                                                Das LGS hat unendlich viele
+Das LGS ist unlösbar.        Das LGS ist eindeutig lösbar.
+                                                                Lösungen.
+                             Die einzige Lösung wird            Die freien Parameter werden
+                             durch Rückwärtseinsetzen           festgelegt. Die
+                             aus dem Stufenform-LGS             Parameterdarstellung der
+                             bestimmt.                          Lösungsmenge wird bestimmt.
+
+
+
+
+Übung 3
+Untersuche das LGS auf Lösbarkeit und gib gegebenenfalls die Lösung an.
+
+
+
+
+Übung 4
+Eine dreistellige natürliche Zahl hat die Quersumme 16. Die Summe der ersten beiden Ziffern ist um 2
+größer als die letzte Ziffer. Addiert man zum Doppelten der mittleren Ziffer die erste Ziffer, so erhält
+man das Doppelte der letzten Ziffer. Wie heißt die Zahl?
+
+
+
+
+                                                   5
+

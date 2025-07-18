@@ -243,18 +243,18 @@
             }
         }
         
-        /* iPad spezifisch */
-        @media (min-width: 768px) and (max-width: 1024px) {
+        /* iPad und Tablet - Touch-Geräte */
+        @media (min-width: 768px) and (max-width: 1024px) and (pointer: coarse) {
             .mobile-controls {
                 display: flex !important;
                 bottom: 15px;
                 right: 15px;
-                opacity: 0.8;
+                opacity: 0.9;
             }
         }
         
         /* iPad Querformat */
-        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) and (pointer: coarse) {
             .mobile-controls {
                 display: flex !important;
                 bottom: 10px;
@@ -272,6 +272,13 @@
                 width: 60px !important;
                 height: 60px !important;
                 font-size: 20px !important;
+            }
+        }
+        
+        /* Fallback für alle Touch-Geräte */
+        @media (pointer: coarse) {
+            .mobile-controls {
+                display: flex !important;
             }
         }
         
@@ -605,11 +612,14 @@
                 const isMobile = window.innerWidth < 768;
                 let isColliding = false;
                 
-                if (isMobile) {
-                    // MOBILE: EXTREM großzügige Kollision
+                const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                
+                if (isTouch) {
+                    // TOUCH-GERÄTE: Extrem großzügige Kollision
                     const horizontalDistance = Math.abs(car.x - statement.x);
                     const verticalDistance = Math.abs(car.y - statement.y);
-                    isColliding = horizontalDistance < 200 && verticalDistance < 150;
+                    // Noch größere Kollisionsfläche
+                    isColliding = horizontalDistance < 250 && verticalDistance < 200;
                 } else {
                     // DESKTOP: Normal collision
                     const distance = Math.sqrt(Math.pow(car.x - statement.x, 2) + Math.pow(car.y - statement.y, 2));

@@ -158,10 +158,10 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 10px;
-            z-index: 10;
+            z-index: 30;
         }
         
         .control-row {
@@ -214,8 +214,8 @@
             }
         }
         
-        /* Querformat-Spezifische Styles */
-        @media (max-width: 768px) and (orientation: landscape) {
+        /* Querformat für alle Mobilgeräte */
+        @media (orientation: landscape) and (max-height: 500px) {
             .mobile-controls {
                 display: flex !important;
                 bottom: 5px;
@@ -224,15 +224,15 @@
             }
             
             .control-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 16px;
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
             }
             
             .shield-btn {
-                width: 50px !important;
-                height: 50px !important;
-                font-size: 18px !important;
+                width: 45px !important;
+                height: 45px !important;
+                font-size: 16px !important;
             }
             
             .ui-overlay {
@@ -240,6 +240,38 @@
                 left: 5px;
                 right: 5px;
                 font-size: 12px;
+            }
+        }
+        
+        /* iPad spezifisch */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .mobile-controls {
+                display: flex !important;
+                bottom: 15px;
+                right: 15px;
+                opacity: 0.8;
+            }
+        }
+        
+        /* iPad Querformat */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .mobile-controls {
+                display: flex !important;
+                bottom: 10px;
+                right: 10px;
+                gap: 8px;
+            }
+            
+            .control-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+            
+            .shield-btn {
+                width: 60px !important;
+                height: 60px !important;
+                font-size: 20px !important;
             }
         }
         
@@ -293,6 +325,19 @@
         // Canvas Setup
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+        
+        // Gauss Shield Image
+        const gaussImg = new Image();
+        gaussImg.src = 'Gauss_zeichnung.jpg';
+        
+        // Preload image
+        gaussImg.onload = function() {
+            console.log('Gauss image loaded successfully');
+        };
+        
+        gaussImg.onerror = function() {
+            console.log('Gauss image failed to load');
+        };
         
         // Game State
         let gameRunning = true;
@@ -449,9 +494,11 @@
             ctx.fillStyle = '#ffff00';
             ctx.fillRect(-2, -car.height/2 - 2, 4, 4);
             
-            // Draw shield if active
+            // Draw Gauss shield if active
             if (car.shieldActive) {
                 const shieldSize = 80;
+                
+                // Shield background
                 ctx.save();
                 ctx.shadowColor = '#FFD700';
                 ctx.shadowBlur = 10;
@@ -459,6 +506,31 @@
                 ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
                 ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
                 ctx.fill();
+                ctx.restore();
+                
+                // Draw Gauss portrait if loaded
+                if (gaussImg.complete && gaussImg.naturalWidth > 0) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(0, 0, shieldSize / 2 - 5, 0, 2 * Math.PI);
+                    ctx.clip();
+                    ctx.drawImage(gaussImg, -shieldSize/2, -shieldSize/2, shieldSize, shieldSize);
+                    ctx.restore();
+                } else {
+                    // Fallback: Show NOT symbol
+                    ctx.save();
+                    ctx.fillStyle = '#333';
+                    ctx.font = '24px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('¬', 0, 0);
+                    ctx.restore();
+                }
+                
+                // Shield border
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
                 ctx.strokeStyle = '#FFD700';
                 ctx.lineWidth = 4;
                 ctx.stroke();

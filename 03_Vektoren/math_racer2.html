@@ -417,29 +417,9 @@
     </div>
 
     <script>
-        // Canvas Setup with responsive sizing
+        // Canvas Setup
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        
-        // Set canvas size based on device
-        function resizeCanvas() {
-            const container = document.querySelector('.game-container');
-            const rect = container.getBoundingClientRect();
-            
-            // Set canvas actual size
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            
-            // Adjust car position for canvas size
-            car.x = canvas.width / 2;
-            car.y = canvas.height * 0.8; // 80% down from top
-            
-            console.log('Canvas resized:', canvas.width, 'x', canvas.height);
-        }
-        
-        // Initial resize and on window resize
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
         
         // Gauss Shield Image
         const gaussImg = new Image();
@@ -462,10 +442,10 @@
         let score = 0;
         let gameStartTime = Date.now();
         
-        // Car Object - Top-Down View (position set by resizeCanvas)
+        // Car Object - Top-Down View
         const car = {
-            x: 450, // Will be set by resizeCanvas
-            y: 500, // Will be set by resizeCanvas
+            x: 450, // Center horizontally
+            y: 500, // Fixed Y position (bottom third)
             angle: -Math.PI/2, // Always pointing up
             speed: 1.5, // Reduced speed for better control
             maxSpeed: 2.5, // Reduced max speed
@@ -1159,8 +1139,8 @@
             gameRunning = true;
             timeLeft = 45; // Reduced from 60 to 45 seconds
             score = 0;
-            car.x = canvas.width / 2;
-            car.y = canvas.height * 0.8; // Start on the track bottom
+            car.x = 450;
+            car.y = 450; // Start on the track bottom
             car.angle = -Math.PI/2; // Start pointing up
             car.speed = car.baseSpeed; // Start with base speed for mobile
             car.shieldActive = false;

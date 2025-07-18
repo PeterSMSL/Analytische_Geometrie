@@ -125,6 +125,68 @@
             opacity: 0.5;
         }
         
+        .video-preview {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .play-button {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
         /* Mobile-spezifische Styles */
         @media (max-width: 768px) {
             body {
@@ -203,7 +265,16 @@
             <div class="section">
                 <h2>Einführungsvideo - Lernlandkarte</h2>
                 <div class="video-container">
-                    <video controls class="video-embed">
+                    <div class="video-preview" onclick="expandVideo(this)">
+                        <video class="video-thumbnail" preload="metadata">
+                            <source src="00_Lernlandkarte.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-button">▶</div>
+                            <div class="video-title">Lernlandkarte - Einführungsvideo</div>
+                        </div>
+                    </div>
+                    <video controls class="video-embed video-full" style="display: none;">
                         <source src="00_Lernlandkarte.mp4" type="video/mp4">
                         Ihr Browser unterstützt das Video-Element nicht.
                         <a href="00_Lernlandkarte.mp4" target="_blank">
@@ -231,7 +302,16 @@
             <div class="section">
                 <h2>Fahrplan-Video</h2>
                 <div class="video-container">
-                    <video controls class="video-embed">
+                    <div class="video-preview" onclick="expandVideo(this)">
+                        <video class="video-thumbnail" preload="metadata">
+                            <source src="00_Fahrplan_Abi2027.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-button">▶</div>
+                            <div class="video-title">Fahrplan Abi 2027 - Erklärvideo</div>
+                        </div>
+                    </div>
+                    <video controls class="video-embed video-full" style="display: none;">
                         <source src="00_Fahrplan_Abi2027.mp4" type="video/mp4">
                         Ihr Browser unterstützt das Video-Element nicht.
                         <a href="00_Fahrplan_Abi2027.mp4" target="_blank">
@@ -253,5 +333,33 @@
             </p>
         </div>
     </div>
+    
+    <script>
+        function expandVideo(previewElement) {
+            const container = previewElement.parentElement;
+            const preview = container.querySelector('.video-preview');
+            const fullVideo = container.querySelector('.video-full');
+            
+            // Hide preview and show full video
+            preview.style.display = 'none';
+            fullVideo.style.display = 'block';
+            
+            // Auto-play the video
+            fullVideo.play();
+            
+            // Add event listener to minimize video when it ends
+            fullVideo.addEventListener('ended', function() {
+                fullVideo.style.display = 'none';
+                preview.style.display = 'block';
+            });
+            
+            // Allow clicking on full video to minimize
+            fullVideo.addEventListener('click', function() {
+                if (fullVideo.paused) {
+                    fullVideo.play();
+                }
+            });
+        }
+    </script>
 </body>
 </html>

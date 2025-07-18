@@ -29,6 +29,9 @@
     <!-- MathJax Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
     
+    <!-- Passwort-System -->
+    <script src="../password-system.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -1668,9 +1671,8 @@
             // Passwort prüfen
             function checkPassword() {
                 const enteredPassword = passwordInput.value.trim();
-                const correctPassword = 'test'; // Globales Passwort
                 
-                if (enteredPassword === correctPassword) {
+                if (enteredPassword === window.correctPassword) {
                     yetiHappyDance();
                     setTimeout(() => {
                         document.body.removeChild(modal);

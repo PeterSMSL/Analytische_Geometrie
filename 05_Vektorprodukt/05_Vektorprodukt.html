@@ -23,6 +23,9 @@
     <!-- MathJax Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
     
+    <!-- Passwort-System -->
+    <script src="../password-system.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -826,6 +829,42 @@
                     <button class="quiz-submit" onclick="checkAnswer('q3', ['q3a', 'q3d'])">Antwort prüfen</button>
                     <div id="q3-feedback" class="quiz-feedback"></div>
                 </div>
+                
+                <div class="quiz-question">
+                    <h4>Frage 4: Welche geometrische Eigenschaft hat das Vektorprodukt?</h4>
+                    <ul class="quiz-options">
+                        <li><label><input type="checkbox" id="q4a" value="correct">Es steht senkrecht auf beiden Ausgangsvektoren</label></li>
+                        <li><label><input type="checkbox" id="q4b" value="incorrect">Es ist parallel zu einem der Ausgangsvektoren</label></li>
+                        <li><label><input type="checkbox" id="q4c" value="incorrect">Es liegt in der Ebene der beiden Ausgangsvektoren</label></li>
+                        <li><label><input type="checkbox" id="q4d" value="incorrect">Es hat immer den Betrag 1</label></li>
+                    </ul>
+                    <button class="quiz-submit" onclick="checkAnswer('q4', ['q4a'])">Antwort prüfen</button>
+                    <div id="q4-feedback" class="quiz-feedback"></div>
+                </div>
+                
+                <div class="quiz-question">
+                    <h4>Frage 5: Was beschreibt der Betrag des Vektorprodukts geometrisch?</h4>
+                    <ul class="quiz-options">
+                        <li><label><input type="checkbox" id="q5a" value="correct">Die Fläche des von den Vektoren aufgespannten Parallelogramms</label></li>
+                        <li><label><input type="checkbox" id="q5b" value="incorrect">Den Umfang des von den Vektoren aufgespannten Parallelogramms</label></li>
+                        <li><label><input type="checkbox" id="q5c" value="incorrect">Das Volumen des von den Vektoren aufgespannten Körpers</label></li>
+                        <li><label><input type="checkbox" id="q5d" value="incorrect">Die Diagonale des von den Vektoren aufgespannten Parallelogramms</label></li>
+                    </ul>
+                    <button class="quiz-submit" onclick="checkAnswer('q5', ['q5a'])">Antwort prüfen</button>
+                    <div id="q5-feedback" class="quiz-feedback"></div>
+                </div>
+                
+                <div class="quiz-question">
+                    <h4>Frage 6: Welche Regel bestimmt die Richtung des Vektorprodukts?</h4>
+                    <ul class="quiz-options">
+                        <li><label><input type="checkbox" id="q6a" value="correct">Die Rechte-Hand-Regel</label></li>
+                        <li><label><input type="checkbox" id="q6b" value="incorrect">Die Linke-Hand-Regel</label></li>
+                        <li><label><input type="checkbox" id="q6c" value="incorrect">Die Mittelfinger-Regel</label></li>
+                        <li><label><input type="checkbox" id="q6d" value="incorrect">Die Daumen-Regel</label></li>
+                    </ul>
+                    <button class="quiz-submit" onclick="checkAnswer('q6', ['q6a'])">Antwort prüfen</button>
+                    <div id="q6-feedback" class="quiz-feedback"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -1105,9 +1144,8 @@
             // Passwort prüfen
             function checkPassword() {
                 const enteredPassword = passwordInput.value.trim();
-                const correctPassword = 'test'; // Globales Passwort
                 
-                if (enteredPassword === correctPassword) {
+                if (enteredPassword === window.correctPassword) {
                     yetiHappyDance();
                     setTimeout(() => {
                         document.body.removeChild(modal);

@@ -214,6 +214,35 @@
             }
         }
         
+        /* Querformat-Spezifische Styles */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .mobile-controls {
+                display: flex !important;
+                bottom: 5px;
+                right: 5px;
+                gap: 5px;
+            }
+            
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+            
+            .shield-btn {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 18px !important;
+            }
+            
+            .ui-overlay {
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                font-size: 12px;
+            }
+        }
+        
         .particle {
             position: absolute;
             font-weight: bold;
@@ -505,10 +534,10 @@
                 let isColliding = false;
                 
                 if (isMobile) {
-                    // MOBILE: Ultra-generous collision
+                    // MOBILE: EXTREM großzügige Kollision
                     const horizontalDistance = Math.abs(car.x - statement.x);
                     const verticalDistance = Math.abs(car.y - statement.y);
-                    isColliding = horizontalDistance < 150 && verticalDistance < 100;
+                    isColliding = horizontalDistance < 200 && verticalDistance < 150;
                 } else {
                     // DESKTOP: Normal collision
                     const distance = Math.sqrt(Math.pow(car.x - statement.x, 2) + Math.pow(car.y - statement.y, 2));

@@ -43,7 +43,7 @@
         @media (max-width: 920px) {
             .game-container {
                 width: 95vw;
-                height: 63.33vw; /* Maintain 900:600 aspect ratio */
+                height: 63.33vw;
                 max-height: 80vh;
             }
             
@@ -55,7 +55,7 @@
         @media (max-width: 768px) {
             .game-container {
                 width: 100vw;
-                height: 60vh; /* Fixed height for better control visibility */
+                height: 60vh;
                 max-height: 60vh;
                 border-radius: 0;
                 margin: 0;
@@ -77,33 +77,6 @@
             }
         }
         
-        @media (max-width: 768px) and (orientation: landscape) {
-            .game-container {
-                width: 100vw;
-                height: 85vh; /* More height in landscape */
-                max-height: 85vh;
-            }
-            
-            body {
-                align-items: center;
-                padding-top: 0;
-            }
-            
-            /* Ensure better touch interaction in landscape */
-            .mobile-controls {
-                display: flex !important;
-                bottom: 5px;
-                right: 5px;
-                gap: 4px;
-            }
-            
-            .control-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-            }
-        }
-        
         .ui-overlay {
             position: absolute;
             top: 20px;
@@ -113,76 +86,11 @@
             justify-content: space-between;
             align-items: center;
             color: white;
-            font-size: 18px;
             font-weight: bold;
+            font-size: 16px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             pointer-events: none;
             z-index: 10;
-        }
-        
-        .timer {
-            background: rgba(255,0,0,0.8);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 2px solid #fff;
-        }
-        
-        .score {
-            background: rgba(0,150,0,0.8);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 2px solid #fff;
-        }
-        
-        .speed {
-            background: rgba(0,100,255,0.8);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 2px solid #fff;
-        }
-        
-        .game-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            display: none;
-            z-index: 20;
-        }
-        
-        .stars {
-            font-size: 48px;
-            margin: 20px 0;
-        }
-        
-        .restart-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        
-        .restart-btn:hover {
-            background: #45a049;
-        }
-        
-        .instructions {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 14px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            z-index: 5;
         }
         
         .math-statement {
@@ -204,7 +112,6 @@
             line-height: 1.3;
         }
         
-        /* Mobile optimizations for better visibility and hit detection */
         @media (max-width: 768px) {
             .math-statement {
                 font-size: 16px;
@@ -217,60 +124,44 @@
             }
         }
         
-        .math-statement.correct {
-            border-color: #4CAF50;
-            background: rgba(76,175,80,0.95);
-            color: white;
-        }
-        
-        .math-statement.incorrect {
-            border-color: #f44336;
-            background: rgba(244,67,54,0.95);
-            color: white;
-        }
-        
-        .math-statement.fade-out {
-            animation: fadeOut 0.5s ease-out forwards;
-        }
-        
-        @keyframes fadeOut {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(0.8); }
-        }
-        
-        .particle {
+        .game-over {
             position: absolute;
-            pointer-events: none;
-            z-index: 25;
-            font-size: 24px;
-            font-weight: bold;
-            animation: particleFloat 1s ease-out forwards;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 20;
+            display: none;
         }
         
-        @keyframes particleFloat {
-            from {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-50px) scale(1.2);
-                opacity: 0;
-            }
+        .restart-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .restart-btn:hover {
+            background: #45a049;
         }
         
         .mobile-controls {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 10px;
-            z-index: 30;
-            pointer-events: none;
-        }
-        
-        .control-btn {
-            pointer-events: auto;
+            z-index: 10;
         }
         
         .control-row {
@@ -285,17 +176,14 @@
             background: rgba(255, 255, 255, 0.9);
             border: 3px solid #333;
             border-radius: 50%;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
             user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            transition: all 0.1s ease;
+            cursor: pointer;
+            transition: all 0.2s;
         }
         
         .control-btn:active {
@@ -303,84 +191,41 @@
             transform: scale(0.95);
         }
         
-        .control-btn:hover {
-            background: rgba(220, 220, 220, 0.9);
-        }
-        
         .shield-btn {
             background: rgba(255, 215, 0, 0.9) !important;
-            border-color: #b8860b !important;
-        }
-        
-        .shield-btn:active {
-            background: rgba(255, 193, 7, 0.9) !important;
-        }
-        
-        .shield-btn:hover {
-            background: rgba(255, 223, 0, 0.9) !important;
-        }
-        
-        
-        /* Mobile controls are always visible for testing */
-        .mobile-controls {
-            display: flex;
+            border-color: #FFD700 !important;
+            width: 70px !important;
+            height: 70px !important;
+            font-size: 24px !important;
         }
         
         @media (max-width: 768px) {
             .mobile-controls {
                 display: flex !important;
-                bottom: 5px;
-                right: 5px;
-                gap: 6px;
-            }
-            
-            .control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 16px;
-                border-width: 2px;
-            }
-            
-            .shield-btn {
-                width: 55px !important;
-                height: 55px !important;
-                font-size: 20px !important;
-                box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
+                bottom: 10px;
+                right: 10px;
             }
             
             .ui-overlay {
-                top: 5px;
-                left: 5px;
-                right: 5px;
-                font-size: 12px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .mobile-controls {
-                bottom: 2px;
-                right: 2px;
-                gap: 4px;
-            }
-            
-            .control-btn {
-                width: 45px;
-                height: 45px;
+                top: 10px;
+                left: 10px;
+                right: 10px;
                 font-size: 14px;
             }
-            
-            .shield-btn {
-                width: 50px !important;
-                height: 50px !important;
-                font-size: 18px !important;
-            }
         }
         
-        @media (min-width: 769px) {
-            .mobile-controls {
-                display: flex !important;
-                opacity: 0.7;
-            }
+        .particle {
+            position: absolute;
+            font-weight: bold;
+            font-size: 18px;
+            pointer-events: none;
+            z-index: 25;
+            animation: floatUp 1s ease-out forwards;
+        }
+        
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
         }
     </style>
 </head>
@@ -389,11 +234,10 @@
         <canvas id="gameCanvas" width="900" height="600"></canvas>
         
         <div class="ui-overlay">
-            <div class="timer">⏱️ Zeit: <span id="timeLeft">60</span>s</div>
+            <div class="timer">⏱️ Zeit: <span id="timeLeft">45</span>s</div>
             <div class="score">🏆 Punkte: <span id="score">0</span></div>
             <div class="speed">🚴 <span id="speed">0</span> km/h</div>
         </div>
-        
         
         <div class="game-over" id="gameOver">
             <h2 id="gameResult">Spiel beendet!</h2>
@@ -421,43 +265,25 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         
-        // Gauss Shield Image
-        const gaussImg = new Image();
-        gaussImg.src = 'Gauss_zeichnung.jpg';
-        
-        // Preload image
-        gaussImg.onload = function() {
-            console.log('Gauss image loaded successfully', gaussImg.naturalWidth, 'x', gaussImg.naturalHeight);
-        };
-        
-        gaussImg.onerror = function() {
-            console.log('Gauss image failed to load - trying different path');
-            // Try alternative filename
-            gaussImg.src = './Gauss_zeichnung.jpg';
-        };
-        
         // Game State
         let gameRunning = true;
-        let timeLeft = 45; // Reduced from 60 to 45 seconds
+        let timeLeft = 45;
         let score = 0;
-        let gameStartTime = Date.now();
         
         // Car Object - Top-Down View
         const car = {
-            x: 450, // Center horizontally
-            y: 500, // Fixed Y position (bottom third)
-            angle: -Math.PI/2, // Always pointing up
-            speed: 1.5, // Reduced speed for better control
-            maxSpeed: 2.5, // Reduced max speed
-            baseSpeed: 1, // Reduced base speed
-            acceleration: 0.2, // Reduced acceleration
+            x: 450,
+            y: 500,
+            speed: 1.5,
+            maxSpeed: 2.5,
+            baseSpeed: 1,
+            acceleration: 0.2,
             friction: 0.9,
-            turnSpeed: 0.08,
             width: 30,
-            height: 40, // Taller for top-down view
+            height: 40,
             shieldActive: false,
             shieldTimeLeft: 0,
-            roadOffset: 0 // For scrolling road effect
+            roadOffset: 0
         };
         
         // Input State
@@ -469,139 +295,26 @@
             shield: false
         };
         
-        // Math Statements Pool - More correct answers, column vector notation
+        // Math Statements Pool
         const mathStatements = [
-            // Grundlagen - WAHR (mehr richtige Aussagen)
             { text: "Ein Vektor hat Richtung und Betrag", correct: true },
             { text: "Der Nullvektor ist (0; 0; 0)", correct: true },
             { text: "Vektoren werden komponentenweise addiert", correct: true },
             { text: "Einheitsvektoren haben Betrag 1", correct: true },
-            { text: "Zwei kollineare Vektoren sind linear abhängig", correct: true },
-            { text: "Der Betrag ist immer ≥ 0", correct: true },
-            { text: "Vektoren haben eine Richtung und Länge", correct: true },
-            { text: "Parallele Vektoren sind linear abhängig", correct: true },
-            
-            // 3D Vektoraddition - WAHR (mehr Beispiele)
             { text: "(1; 2; 3) + (4; 5; 6) = (5; 7; 9)", correct: true },
-            { text: "(2; -1; 4) + (3; 2; -1) = (5; 1; 3)", correct: true },
-            { text: "(0; 1; 2) + (3; 0; -2) = (3; 1; 0)", correct: true },
-            { text: "(1; 0; 1) + (0; 2; 0) = (1; 2; 1)", correct: true },
-            { text: "(3; 3; 3) + (-1; -1; -1) = (2; 2; 2)", correct: true },
-            { text: "(5; 0; 2) + (1; 3; 1) = (6; 3; 3)", correct: true },
-            { text: "(4; 1; 0) + (0; 2; 5) = (4; 3; 5)", correct: true },
-            { text: "(-1; 2; 3) + (1; -2; -3) = (0; 0; 0)", correct: true },
-            
-            // 3D Vektorsubtraktion - WAHR (mehr Beispiele)
-            { text: "(5; 3; 1) - (2; 1; 4) = (3; 2; -3)", correct: true },
-            { text: "(4; 0; 2) - (1; 3; 2) = (3; -3; 0)", correct: true },
-            { text: "(1; 1; 1) - (1; 1; 1) = (0; 0; 0)", correct: true },
-            { text: "(6; 4; 2) - (3; 2; 1) = (3; 2; 1)", correct: true },
-            { text: "(0; 5; 0) - (0; 2; 0) = (0; 3; 0)", correct: true },
-            { text: "(3; 3; 3) - (2; 2; 2) = (1; 1; 1)", correct: true },
-            
-            // Skalare Multiplikation - WAHR (mehr Beispiele)
             { text: "3 · (1; 2; 4) = (3; 6; 12)", correct: true },
-            { text: "-2 · (3; -1; 2) = (-6; 2; -4)", correct: true },
-            { text: "0,5 · (2; 4; 6) = (1; 2; 3)", correct: true },
-            { text: "4 · (1; 0; 2) = (4; 0; 8)", correct: true },
-            { text: "-1 · (5; 3; 1) = (-5; -3; -1)", correct: true },
-            { text: "2 · (2; 1; 3) = (4; 2; 6)", correct: true },
-            { text: "0 · (5; 3; 1) = (0; 0; 0)", correct: true },
-            { text: "1 · (7; 2; 4) = (7; 2; 4)", correct: true },
-            { text: "5 · (1; 0; 0) = (5; 0; 0)", correct: true },
-            
-            // Vektorbeträge - WAHR (mehr Beispiele)
             { text: "|(3; 4; 0)| = 5", correct: true },
-            { text: "|(1; 2; 2)| = 3", correct: true },
-            { text: "|(6; 8; 0)| = 10", correct: true },
-            { text: "|(0; 0; 5)| = 5", correct: true },
-            { text: "|(1; 1; 1)| = √3", correct: true },
-            { text: "|(5; 0; 0)| = 5", correct: true },
-            { text: "|(0; 3; 4)| = 5", correct: true },
-            { text: "|(2; 2; 1)| = 3", correct: true },
-            { text: "|(1; 0; 0)| = 1", correct: true },
-            { text: "|(0; 0; 0)| = 0", correct: true },
-            
-            // Linearkombinationen - WAHR (mehr Beispiele)
-            { text: "2a⃗ + 3b⃗ ist eine Linearkombination", correct: true },
-            { text: "a⃗ - b⃗ = a⃗ + (-1)b⃗", correct: true },
-            { text: "0⃗ = 0a⃗ + 0b⃗ für alle Vektoren", correct: true },
-            { text: "r·a⃗ + s·b⃗ ist eine Linearkombination", correct: true },
-            { text: "5a⃗ - 3b⃗ + 2c⃗ ist eine Linearkombination", correct: true },
-            { text: "a⃗ + b⃗ + c⃗ ist eine Linearkombination", correct: true },
-            { text: "0,5a⃗ + 1,5b⃗ ist eine Linearkombination", correct: true },
-            { text: "a⃗ + a⃗ = 2a⃗", correct: true },
-            
-            // Lineare Unabhängigkeit - WAHR (mehr Beispiele)
-            { text: "Die Standardbasis ist linear unabhängig", correct: true },
-            { text: "(1; 2; 3) und (2; 4; 6) sind linear abhängig", correct: true },
-            { text: "(1; 0; 0) und (0; 1; 0) sind linear unabhängig", correct: true },
-            { text: "(1; 1; 0) und (1; 0; 1) sind linear unabhängig", correct: true },
-            { text: "(2; 0; 0) und (4; 0; 0) sind linear abhängig", correct: true },
-            { text: "Der Nullvektor ist zu jedem Vektor linear abhängig", correct: true },
-            
-            // ===== FALSCHE AUSSAGEN (weniger als wahre) =====
-            
-            // Grundlagen - FALSCH
             { text: "Vektoren haben immer 3 Komponenten", correct: false },
-            { text: "Die Notation (2|3|4) ist für Vektoren korrekt", correct: false },
             { text: "Der Nullvektor ist (1; 1; 1)", correct: false },
-            { text: "Vektoren werden durch Multiplikation addiert", correct: false },
-            { text: "Alle Vektoren sind linear unabhängig", correct: false },
-            { text: "Der Betrag kann negativ sein", correct: false },
-            
-            // Vektoraddition - FALSCH
             { text: "(1; 2; 3) + (4; 5; 6) = (4; 10; 18)", correct: false },
-            { text: "(2; 1; 0) + (1; 3; 2) = (2; 3; 0)", correct: false },
-            { text: "(5; 2; 1) + (1; 1; 1) = (5; 2; 2)", correct: false },
-            { text: "(3; 0; 2) + (1; 1; 1) = (3; 1; 2)", correct: false },
-            { text: "(1; 1; 1) + (1; 1; 1) = (1; 1; 1)", correct: false },
-            
-            // Vektorsubtraktion - FALSCH
-            { text: "(5; 3; 1) - (2; 1; 4) = (3; 2; 5)", correct: false },
-            { text: "(4; 2; 6) - (1; 1; 1) = (4; 2; 6)", correct: false },
-            { text: "(6; 4; 2) - (3; 2; 1) = (3; 2; 3)", correct: false },
-            { text: "(1; 1; 1) - (0; 0; 0) = (0; 0; 0)", correct: false },
-            
-            // Skalare Multiplikation - FALSCH
             { text: "2 · (1; 3; 4) = (2; 5; 6)", correct: false },
-            { text: "-1 · (2; 4; 6) = (1; 3; 5)", correct: false },
-            { text: "3 · (1; 2; 1) = (3; 6; 4)", correct: false },
-            { text: "0 · (5; 3; 1) = (5; 3; 1)", correct: false },
-            { text: "2 · (0; 1; 0) = (0; 2; 2)", correct: false },
-            
-            // Vektorbeträge - FALSCH  
-            { text: "|(3; 4; 0)| = 7", correct: false },
-            { text: "|(1; 1; 1)| = 3", correct: false },
-            { text: "|(5; 12; 0)| = 17", correct: false },
-            { text: "|(0; 3; 4)| = 7", correct: false },
-            { text: "|(2; 2; 2)| = 6", correct: false },
-            
-            // Linearkombinationen - FALSCH
-            { text: "2a⃗ + 3b⃗ = 5a⃗b⃗", correct: false },
-            { text: "a⃗ - b⃗ = a⃗ + b⃗", correct: false },
-            { text: "3(a⃗ + b⃗) = 3a⃗ + b⃗", correct: false },
-            { text: "2a⃗ + 2b⃗ = 4a⃗b⃗", correct: false },
-            
-            // Lineare Unabhängigkeit - FALSCH
-            { text: "(1; 2; 3) und (2; 4; 6) sind linear unabhängig", correct: false },
-            { text: "(1; 0; 0) und (0; 0; 0) sind linear unabhängig", correct: false },
-            { text: "(1; 1; 1) und (1; 1; 1) sind linear unabhängig", correct: false },
-            
-            // Weitere falsche Aussagen
-            { text: "(2; 4; 8) - (1; 2; 4) = (1; 2; 5)", correct: false },
-            { text: "4 · (1; 1; 2) = (4; 4; 6)", correct: false },
-            { text: "|(4; 3; 0)| = 6", correct: false },
-            { text: "Kollineare Vektoren sind linear unabhängig", correct: false },
-            { text: "(0; 1; 2) + (1; 0; 1) = (1; 1; 4)", correct: false }
+            { text: "|(3; 4; 0)| = 7", correct: false }
         ];
         
         // Active Math Statements
         let activeStatements = [];
         let lastSpawnTime = 0;
-        const spawnInterval = 3500; // 3.5 seconds (more frequent spawning)
-        const statementLifetime = 5500; // 5.5 seconds (balanced lifetime)
-        const minDistanceBetweenStatements = 120; // Reduced distance for more statements
+        const spawnInterval = 3500;
         
         // Track Generation - Top-Down Road
         function drawTrack() {
@@ -610,7 +323,7 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             // Road surface - wider road for mobile
-            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Wider road
+            const roadWidth = window.innerWidth < 768 ? 400 : 350;
             const roadLeft = (canvas.width - roadWidth) / 2;
             const roadRight = roadLeft + roadWidth;
             
@@ -642,15 +355,15 @@
             ctx.stroke();
             
             // Trees on left side - narrower forest area
-            const forestWidth = window.innerWidth < 768 ? 15 : 25; // Narrower forest on mobile
-            for (let i = 0; i < 10; i++) { // Fewer trees
+            const forestWidth = window.innerWidth < 768 ? 15 : 25;
+            for (let i = 0; i < 10; i++) {
                 const treeY = (i * 80 + car.roadOffset * 0.5) % (canvas.height + 80);
                 const treeX = Math.random() * (roadLeft - forestWidth) + 5;
                 if (treeX > 0) drawTree(treeX, treeY);
             }
             
             // Trees on right side - narrower forest area
-            for (let i = 0; i < 10; i++) { // Fewer trees
+            for (let i = 0; i < 10; i++) {
                 const treeY = (i * 80 + car.roadOffset * 0.5) % (canvas.height + 80);
                 const treeX = roadRight + 5 + Math.random() * (canvas.width - roadRight - forestWidth - 10);
                 if (treeX < canvas.width - 5) drawTree(treeX, treeY);
@@ -685,16 +398,16 @@
             // Bicycle wheels (top-down circles)
             ctx.fillStyle = '#333333';
             ctx.beginPath();
-            ctx.arc(0, -car.height/2 + 5, 8, 0, 2 * Math.PI); // Front wheel
-            ctx.arc(0, car.height/2 - 5, 8, 0, 2 * Math.PI);  // Back wheel
+            ctx.arc(0, -car.height/2 + 5, 8, 0, 2 * Math.PI);
+            ctx.arc(0, car.height/2 - 5, 8, 0, 2 * Math.PI);
             ctx.fill();
             
             // Wheel details
             ctx.strokeStyle = '#666666';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.arc(0, -car.height/2 + 5, 8, 0, 2 * Math.PI); // Front wheel
-            ctx.arc(0, car.height/2 - 5, 8, 0, 2 * Math.PI);  // Back wheel
+            ctx.arc(0, -car.height/2 + 5, 8, 0, 2 * Math.PI);
+            ctx.arc(0, car.height/2 - 5, 8, 0, 2 * Math.PI);
             ctx.stroke();
             
             // Rider (simple representation)
@@ -707,14 +420,9 @@
             ctx.fillStyle = '#ffff00';
             ctx.fillRect(-2, -car.height/2 - 2, 4, 4);
             
-            // Draw Gauss shield if active
+            // Draw shield if active
             if (car.shieldActive) {
-                // Shield size and position - smaller on mobile
-                const shieldSize = window.innerWidth < 768 ? 60 : 80;
-                const shieldX = -shieldSize / 2;
-                const shieldY = -shieldSize / 2;
-                
-                // Draw circular shield background with glow
+                const shieldSize = 80;
                 ctx.save();
                 ctx.shadowColor = '#FFD700';
                 ctx.shadowBlur = 10;
@@ -722,51 +430,8 @@
                 ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
                 ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
                 ctx.fill();
-                ctx.restore();
-                
-                // Draw Gauss portrait if loaded, otherwise show symbol
-                if (gaussImg.complete && gaussImg.naturalWidth > 0 && gaussImg.naturalHeight > 0) {
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.arc(0, 0, shieldSize / 2 - 5, 0, 2 * Math.PI);
-                    ctx.clip();
-                    ctx.drawImage(gaussImg, shieldX, shieldY, shieldSize, shieldSize);
-                    ctx.restore();
-                } else {
-                    // Debug: Show what's happening
-                    console.log('Gauss image status:', {
-                        complete: gaussImg.complete,
-                        naturalWidth: gaussImg.naturalWidth,
-                        naturalHeight: gaussImg.naturalHeight,
-                        src: gaussImg.src
-                    });
-                    
-                    // Fallback: Show mathematical symbols
-                    ctx.save();
-                    ctx.fillStyle = '#333';
-                    ctx.font = `${shieldSize / 3}px Arial`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText('¬', 0, 0);
-                    ctx.restore();
-                }
-                
-                // Shield border
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(0, 0, shieldSize / 2, 0, 2 * Math.PI);
                 ctx.strokeStyle = '#FFD700';
                 ctx.lineWidth = 4;
-                ctx.stroke();
-                ctx.restore();
-                
-                // Shield timer indicator
-                ctx.save();
-                const timeRatio = car.shieldTimeLeft / 2000;
-                ctx.beginPath();
-                ctx.arc(0, 0, shieldSize / 2 + 8, -Math.PI / 2, -Math.PI / 2 + (timeRatio * 2 * Math.PI));
-                ctx.strokeStyle = '#FF6B6B';
-                ctx.lineWidth = 6;
                 ctx.stroke();
                 ctx.restore();
             }
@@ -774,41 +439,19 @@
             ctx.restore();
         }
         
-        // Collision Detection with Road (Top-Down)
-        function isOnRoad(x, y) {
-            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Match drawTrack road width
-            const roadLeft = (canvas.width - roadWidth) / 2;
-            const roadRight = roadLeft + roadWidth;
-            
-            return x >= roadLeft && x <= roadRight;
-        }
-        
-        // Math Statement Management - Top-Down Version
+        // Math Statement Management
         function spawnMathStatement() {
             if (Date.now() - lastSpawnTime < spawnInterval) return;
             
             const statement = mathStatements[Math.floor(Math.random() * mathStatements.length)];
             
-            // Spawn from top of screen, on the road (wider spawn area)
-            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Match road width
-            const roadLeft = (canvas.width - roadWidth) / 2 + 5; // Minimal margin
-            const roadRight = roadLeft + roadWidth - 10; // Minimal margin
+            // Spawn from top of screen, on the road
+            const roadWidth = window.innerWidth < 768 ? 400 : 350;
+            const roadLeft = (canvas.width - roadWidth) / 2 + 5;
+            const roadRight = roadLeft + roadWidth - 10;
             
-            // Random position on road
-            let x = roadLeft + Math.random() * (roadRight - roadLeft);
-            let y = -50; // Start above screen
-            
-            // Check distance from existing statements
-            let tooClose = false;
-            for (let existing of activeStatements) {
-                const distance = Math.sqrt(Math.pow(x - existing.x, 2) + Math.pow(y - existing.y, 2));
-                if (distance < minDistanceBetweenStatements) {
-                    tooClose = true;
-                    break;
-                }
-            }
-            
-            if (tooClose) return; // Skip spawning if too close
+            const x = roadLeft + Math.random() * (roadRight - roadLeft);
+            const y = -50;
             
             const newStatement = {
                 ...statement,
@@ -816,7 +459,7 @@
                 y: y,
                 spawnTime: Date.now(),
                 id: Date.now() + Math.random(),
-                moveSpeed: 1 + Math.random() * 1.5 // Slower individual movement speed
+                moveSpeed: 1 + Math.random() * 1.5
             };
             
             activeStatements.push(newStatement);
@@ -828,7 +471,6 @@
             statementEl.textContent = newStatement.text;
             statementEl.id = 'statement-' + newStatement.id;
             
-            // Better positioning for mobile - wider statements
             const isMobile = window.innerWidth < 768;
             const boxWidth = isMobile ? 280 : 250;
             statementEl.style.left = (newStatement.x - boxWidth / 2) + 'px';
@@ -842,17 +484,12 @@
             activeStatements = activeStatements.filter(statement => {
                 const statementEl = document.getElementById('statement-' + statement.id);
                 
-                // Move statement down the screen (slower)
+                // Move statement down the screen
                 statement.y += (statement.moveSpeed + car.speed) * 0.6;
                 
                 // Update DOM position
                 if (statementEl) {
                     statementEl.style.top = (statement.y - 30) + 'px';
-                    // Update width for responsive design
-                    const isMobile = window.innerWidth < 768;
-                    const boxWidth = isMobile ? 280 : 250;
-                    statementEl.style.left = (statement.x - boxWidth / 2) + 'px';
-                    statementEl.style.width = boxWidth + 'px';
                 }
                 
                 // Remove if off screen
@@ -863,40 +500,22 @@
                     return false;
                 }
                 
-                // Check collision with car - SUPER EASY collision for mobile
+                // Check collision with car - SUPER EASY on mobile
                 const isMobile = window.innerWidth < 768;
+                let isColliding = false;
                 
                 if (isMobile) {
-                    // MOBILE: Ultra-generous collision - just check if horizontally aligned
+                    // MOBILE: Ultra-generous collision
                     const horizontalDistance = Math.abs(car.x - statement.x);
                     const verticalDistance = Math.abs(car.y - statement.y);
-                    
-                    // Much more forgiving collision on mobile
-                    const hitZone = horizontalDistance < 150 && verticalDistance < 100;
-                    
-                    if (hitZone) {
-                        console.log('MOBILE HIT!', horizontalDistance, verticalDistance);
+                    isColliding = horizontalDistance < 150 && verticalDistance < 100;
                 } else {
-                    // DESKTOP: Normal rectangular collision
-                    const boxWidth = 250;
-                    const boxHeight = 60;
-                    
-                    const carLeft = car.x - 15;
-                    const carRight = car.x + 15;
-                    const carTop = car.y - 20;
-                    const carBottom = car.y + 20;
-                    
-                    const boxLeft = statement.x - boxWidth / 2;
-                    const boxRight = statement.x + boxWidth / 2;
-                    const boxTop = statement.y - boxHeight / 2;
-                    const boxBottom = statement.y + boxHeight / 2;
-                    
-                    const isColliding = carLeft < boxRight && carRight > boxLeft && carTop < boxBottom && carBottom > boxTop;
-                    
-                    if (isColliding) {
+                    // DESKTOP: Normal collision
+                    const distance = Math.sqrt(Math.pow(car.x - statement.x, 2) + Math.pow(car.y - statement.y, 2));
+                    isColliding = distance < 65;
                 }
                 
-                if ((isMobile && hitZone) || (!isMobile && isColliding)) { // Combined collision check
+                if (isColliding) {
                     handleStatementCollision(statement);
                     if (statementEl) {
                         statementEl.remove();
@@ -909,30 +528,20 @@
         }
         
         function handleStatementCollision(statement) {
-            // Gauß-Schild wirkt wie NOT-Operator in boolescher Algebra
+            // Shield acts as NOT operator
             const effectiveResult = car.shieldActive ? !statement.correct : statement.correct;
             
             if (effectiveResult) {
-                // Effektiv richtige Antwort
                 timeLeft += 6;
                 score += 100;
-                if (car.shieldActive) {
-                    createParticle(statement.x, statement.y, '🛡️ NOT-Operator', '#FFD700');
-                } else {
-                    createParticle(statement.x, statement.y, '+6s', '#4CAF50');
-                }
+                createParticle(statement.x, statement.y, '+6s', '#4CAF50');
             } else {
-                // Effektiv falsche Antwort
                 timeLeft -= 5;
                 score = Math.max(0, score - 50);
-                if (car.shieldActive) {
-                    createParticle(statement.x, statement.y, '🛡️ Fehler!', '#FF6B6B');
-                } else {
-                    createParticle(statement.x, statement.y, '-5s', '#f44336');
-                }
+                createParticle(statement.x, statement.y, '-5s', '#f44336');
             }
             
-            // Schild deaktiviert sich nach jeder Nutzung
+            // Deactivate shield after use
             if (car.shieldActive) {
                 car.shieldActive = false;
                 car.shieldTimeLeft = 0;
@@ -952,7 +561,7 @@
             setTimeout(() => particle.remove(), 1000);
         }
         
-        // Input Handling - WASD + Space for shield
+        // Input Handling
         document.addEventListener('keydown', (e) => {
             switch(e.code) {
                 case 'KeyW':
@@ -1003,14 +612,7 @@
             const rightBtn = document.getElementById('rightBtn');
             const shieldBtn = document.getElementById('shieldBtn');
             
-            // Prevent scrolling on touch devices
-            document.body.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-            }, { passive: false });
-            
-            // Helper function to handle button press
             function handleButtonPress(button, key) {
-                // Touch events
                 button.addEventListener('touchstart', (e) => {
                     e.preventDefault();
                     keys[key] = true;
@@ -1023,13 +625,6 @@
                     button.style.background = 'rgba(255, 255, 255, 0.9)';
                 }, { passive: false });
                 
-                button.addEventListener('touchcancel', (e) => {
-                    e.preventDefault();
-                    keys[key] = false;
-                    button.style.background = 'rgba(255, 255, 255, 0.9)';
-                }, { passive: false });
-                
-                // Mouse events for desktop testing
                 button.addEventListener('mousedown', (e) => {
                     e.preventDefault();
                     keys[key] = true;
@@ -1041,14 +636,8 @@
                     keys[key] = false;
                     button.style.background = 'rgba(255, 255, 255, 0.9)';
                 });
-                
-                button.addEventListener('mouseleave', (e) => {
-                    keys[key] = false;
-                    button.style.background = 'rgba(255, 255, 255, 0.9)';
-                });
             }
             
-            // Set up all buttons
             handleButtonPress(upBtn, 'up');
             handleButtonPress(downBtn, 'down');
             handleButtonPress(leftBtn, 'left');
@@ -1058,19 +647,19 @@
         
         setupTouchControls();
         
-        // Car Physics - Top-Down Version
+        // Car Physics
         function updateCar() {
             if (!gameRunning) return;
             
             // Shield activation
             if (keys.shield && !car.shieldActive) {
                 car.shieldActive = true;
-                car.shieldTimeLeft = 2000; // 2 seconds
+                car.shieldTimeLeft = 2000;
             }
             
             // Shield timer
             if (car.shieldActive) {
-                car.shieldTimeLeft -= 1000/60; // 60 FPS
+                car.shieldTimeLeft -= 1000/60;
                 if (car.shieldTimeLeft <= 0) {
                     car.shieldActive = false;
                     car.shieldTimeLeft = 0;
@@ -1083,11 +672,10 @@
             } else if (keys.down) {
                 car.speed = Math.max(car.speed - car.acceleration, car.baseSpeed * 0.5);
             } else {
-                // Maintain base speed for constant forward movement
                 car.speed = Math.max(car.speed * car.friction, car.baseSpeed);
             }
             
-            // Horizontal movement only
+            // Horizontal movement
             if (keys.left) {
                 car.x -= 4;
             }
@@ -1095,16 +683,15 @@
                 car.x += 4;
             }
             
-            // Update road scrolling effect (slower)
+            // Update road scrolling effect
             car.roadOffset += car.speed * 1.2;
             
-            // Keep car on road horizontally (wider movement area)
-            const roadWidth = window.innerWidth < 768 ? 400 : 350; // Match road width
-            const roadLeft = (canvas.width - roadWidth) / 2 + 5; // Minimal margin
-            const roadRight = roadLeft + roadWidth - 10; // Minimal margin
+            // Keep car on road
+            const roadWidth = window.innerWidth < 768 ? 400 : 350;
+            const roadLeft = (canvas.width - roadWidth) / 2 + 5;
+            const roadRight = roadLeft + roadWidth - 10;
             car.x = Math.max(roadLeft, Math.min(roadRight, car.x));
             
-            // Keep car in vertical bounds (shouldn't move much)
             car.y = Math.max(car.height, Math.min(canvas.height - car.height, car.y));
         }
         
@@ -1119,7 +706,7 @@
         function endGame() {
             gameRunning = false;
             
-            const stars = score >= 1212 ? 3 : score >= 750 ? 2 : score >= 500 ? 1 : 0;
+            const stars = score >= 1200 ? 3 : score >= 750 ? 2 : score >= 500 ? 1 : 0;
             
             document.getElementById('gameResult').textContent = stars > 0 ? 'Gewonnen!' : 'Verloren!';
             document.getElementById('starDisplay').textContent = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
@@ -1137,14 +724,14 @@
         
         function restartGame() {
             gameRunning = true;
-            timeLeft = 45; // Reduced from 60 to 45 seconds
+            timeLeft = 45;
             score = 0;
             car.x = 450;
-            car.y = 450; // Start on the track bottom
-            car.angle = -Math.PI/2; // Start pointing up
-            car.speed = car.baseSpeed; // Start with base speed for mobile
+            car.y = 500;
+            car.speed = car.baseSpeed;
             car.shieldActive = false;
             car.shieldTimeLeft = 0;
+            car.roadOffset = 0;
             activeStatements = [];
             lastSpawnTime = 0;
             
@@ -1158,13 +745,11 @@
         // Game Loop
         function gameLoop() {
             if (gameRunning) {
-                // Update game state
                 updateCar();
                 spawnMathStatement();
                 updateMathStatements();
                 
-                // Update timer
-                timeLeft -= 1/60; // 60 FPS
+                timeLeft -= 1/60;
                 
                 if (timeLeft <= 0) {
                     endGame();
@@ -1173,7 +758,7 @@
             
             // Render
             drawTrack();
-            drawCar(); // Still called drawCar for backwards compatibility
+            drawCar();
             updateUI();
             
             requestAnimationFrame(gameLoop);

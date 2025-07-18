@@ -1023,7 +1023,16 @@
                     </div>
                     
                     <div class="video-container" style="text-align: center; margin: 1.5rem 0;">
-                        <video controls style="width: 100%; max-width: 800px; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div class="video-preview" onclick="expandVideo(this)">
+                            <video class="video-thumbnail" preload="metadata">
+                                <source src="01_LGS_2-2_Abi2027.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-button">▶</div>
+                                <div class="video-title">Lösungsverfahren für 2x2 Systeme</div>
+                            </div>
+                        </div>
+                        <video controls class="video-full" style="display: none; width: 100%; max-width: 800px; height: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                             <source src="01_LGS_2-2_Abi2027.mp4" type="video/mp4">
                             Dein Browser unterstützt das Video-Element nicht.
                         </video>

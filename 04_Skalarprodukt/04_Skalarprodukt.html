@@ -486,7 +486,7 @@
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="theory">Theorie</button>
             <button class="nav-tab" data-tab="exercises">Übungen</button>
-            <button class="nav-tab" data-tab="quiz">Quiz</button>
+            <button class="nav-tab" data-tab="quiz">Snake</button>
         </div>
         
         <div class="content">
@@ -611,7 +611,18 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution1')">💡 Lösung anzeigen</button>
                     <div id="solution1" class="solution">
                         <strong>Lösung:</strong><br>
-                        $$\vec{a} \cdot \vec{b} = 1 \cdot 4 + 2 \cdot 5 + 3 \cdot 6 = 4 + 10 + 18 = 32$$
+                        <strong>Schritt 1:</strong> Formel für das Skalarprodukt<br>
+                        $$\vec{a} \cdot \vec{b} = a_1 \cdot b_1 + a_2 \cdot b_2 + a_3 \cdot b_3$$
+                        
+                        <strong>Schritt 2:</strong> Komponenten einsetzen<br>
+                        $$\vec{a} \cdot \vec{b} = 1 \cdot 4 + 2 \cdot 5 + 3 \cdot 6$$
+                        
+                        <strong>Schritt 3:</strong> Berechnen<br>
+                        $$\vec{a} \cdot \vec{b} = 4 + 10 + 18 = 32$$
+                        
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong>💡 Wichtig:</strong> Das Skalarprodukt ist immer eine reelle Zahl (Skalar), niemals ein Vektor!
+                        </div>
                     </div>
                 </div>
                 
@@ -624,12 +635,23 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution2')">💡 Lösung anzeigen</button>
                     <div id="solution2" class="solution">
                         <strong>Lösung:</strong><br>
+                        <strong>Schritt 1:</strong> Formel für den Winkel zwischen Vektoren<br>
+                        $$\cos(\alpha) = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}| \cdot |\vec{b}|}$$
+                        
+                        <strong>Schritt 2:</strong> Skalarprodukt berechnen<br>
                         $$\vec{a} \cdot \vec{b} = 3 \cdot 0 + 0 \cdot 4 + 0 \cdot 0 = 0$$
-                        $$|\vec{a}| = 3, \quad |\vec{b}| = 4$$
+                        
+                        <strong>Schritt 3:</strong> Beträge berechnen<br>
+                        $$|\vec{a}| = \sqrt{3^2 + 0^2 + 0^2} = 3$$
+                        $$|\vec{b}| = \sqrt{0^2 + 4^2 + 0^2} = 4$$
+                        
+                        <strong>Schritt 4:</strong> Winkel bestimmen<br>
                         $$\cos(\alpha) = \frac{0}{3 \cdot 4} = 0$$
                         $$\alpha = \arccos(0) = 90°$$
-                        <br>
-                        <strong>Die Vektoren sind orthogonal (90° Winkel).</strong>
+                        
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong>🎯 Geometrische Deutung:</strong> \(\vec{a}\) zeigt entlang der x-Achse, \(\vec{b}\) entlang der y-Achse. Diese stehen senkrecht aufeinander!
+                        </div>
                     </div>
                 </div>
                 
@@ -642,54 +664,135 @@
                     <button class="solution-toggle" onclick="toggleSolution('solution3')">💡 Lösung anzeigen</button>
                     <div id="solution3" class="solution">
                         <strong>Lösung:</strong><br>
-                        $$\vec{a} \cdot \vec{b} = 2 \cdot 1 + 1 \cdot (-1) + (-1) \cdot 1 = 2 - 1 - 1 = 0$$
-                        <br>
-                        <strong>Da \(\vec{a} \cdot \vec{b} = 0\), sind die Vektoren orthogonal.</strong>
+                        <strong>Schritt 1:</strong> Orthogonalitätsbedingung<br>
+                        Zwei Vektoren sind orthogonal, wenn ihr Skalarprodukt null ist: \(\vec{a} \cdot \vec{b} = 0\)
+                        
+                        <strong>Schritt 2:</strong> Skalarprodukt berechnen<br>
+                        $$\vec{a} \cdot \vec{b} = 2 \cdot 1 + 1 \cdot (-1) + (-1) \cdot 1$$
+                        $$= 2 - 1 - 1 = 0$$
+                        
+                        <strong>Schritt 3:</strong> Prüfung<br>
+                        Da \(\vec{a} \cdot \vec{b} = 0\), sind die Vektoren <strong>orthogonal</strong>.
+                        
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong>📚 Merksatz:</strong> Orthogonale Vektoren stehen senkrecht zueinander. In der Physik sind das z.B. Kraft- und Geschwindigkeitskomponenten bei Kreisbewegungen.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 4: Anwendung in der Physik</h4>
+                    <p>Ein Kraftvektor $\vec{F} = \begin{pmatrix} 6 \\ 8 \\ 0 \end{pmatrix}$ N wirkt auf einen Körper.</p>
+                    <p>Der Körper bewegt sich entlang des Weges \(\vec{s} = \begin{pmatrix} 4 \\ 3 \\ 0 \end{pmatrix}\) m.</p>
+                    <p>Berechne die verrichtete Arbeit \(W = \vec{F} \cdot \vec{s}\).</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('solution4')">💡 Lösung anzeigen</button>
+                    <div id="solution4" class="solution">
+                        <strong>Lösung:</strong><br>
+                        <strong>Schritt 1:</strong> Physikalische Formel<br>
+                        Die Arbeit ist definiert als: \(W = \vec{F} \cdot \vec{s}\)
+                        
+                        <strong>Schritt 2:</strong> Skalarprodukt berechnen<br>
+                        $$W = \vec{F} \cdot \vec{s} = 6 \cdot 4 + 8 \cdot 3 + 0 \cdot 0$$
+                        $$W = 24 + 24 + 0 = 48 \text{ J}$$
+                        
+                        <strong>Schritt 3:</strong> Interpretation<br>
+                        Es wurden 48 Joule Arbeit verrichtet.
+                        
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong>⚡ Physikalische Bedeutung:</strong> Das Skalarprodukt gibt die Arbeit an, die verrichtet wird, wenn eine Kraft entlang eines Weges wirkt.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 5: Komplexere Winkelberechnung</h4>
+                    <p>Berechne den Winkel zwischen den Vektoren:</p>
+                    <div class="math-formula">
+                        $$\vec{a} = \begin{pmatrix} 1 \\ 2 \\ 2 \end{pmatrix} \text{ und } \vec{b} = \begin{pmatrix} 2 \\ 1 \\ 0 \end{pmatrix}$$
+                    </div>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('solution5')">💡 Lösung anzeigen</button>
+                    <div id="solution5" class="solution">
+                        <strong>Lösung:</strong><br>
+                        <strong>Schritt 1:</strong> Skalarprodukt berechnen<br>
+                        $$\vec{a} \cdot \vec{b} = 1 \cdot 2 + 2 \cdot 1 + 2 \cdot 0 = 2 + 2 + 0 = 4$$
+                        
+                        <strong>Schritt 2:</strong> Beträge berechnen<br>
+                        $$|\vec{a}| = \sqrt{1^2 + 2^2 + 2^2} = \sqrt{1 + 4 + 4} = \sqrt{9} = 3$$
+                        $$|\vec{b}| = \sqrt{2^2 + 1^2 + 0^2} = \sqrt{4 + 1 + 0} = \sqrt{5}$$
+                        
+                        <strong>Schritt 3:</strong> Winkel bestimmen<br>
+                        $$\cos(\alpha) = \frac{4}{3 \cdot \sqrt{5}} = \frac{4}{3\sqrt{5}} = \frac{4\sqrt{5}}{15}$$
+                        $$\alpha = \arccos\left(\frac{4\sqrt{5}}{15}\right) \approx 53.13°$$
+                        
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong>🔢 Tipp:</strong> Bei komplexeren Zahlen ist es oft praktisch, den Taschenrechner für \(\arccos\) zu verwenden.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h4>Übung 6: Orthogonalen Vektor finden</h4>
+                    <p>Gegeben ist der Vektor \(\vec{a} = \begin{pmatrix} 2 \\ 3 \\ 0 \end{pmatrix}\).</p>
+                    <p>Bestimme einen Vektor \(\vec{b}\), der orthogonal zu \(\vec{a}\) ist.</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('solution6')">💡 Lösung anzeigen</button>
+                    <div id="solution6" class="solution">
+                        <strong>Lösung:</strong><br>
+                        <strong>Schritt 1:</strong> Orthogonalitätsbedingung<br>
+                        Für \(\vec{b} = \begin{pmatrix} x \\ y \\ z \end{pmatrix}\) muss gelten: \(\vec{a} \cdot \vec{b} = 0\)
+                        
+                        <strong>Schritt 2:</strong> Gleichung aufstellen<br>
+                        $$2x + 3y + 0z = 0$$
+                        $$2x + 3y = 0$$
+                        $$x = -\frac{3y}{2}$$
+                        
+                        <strong>Schritt 3:</strong> Lösungen finden<br>
+                        Wähle \(y = 2\), dann \(x = -3\) und \(z\) beliebig (z.B. \(z = 0\)):<br>
+                        $$\vec{b} = \begin{pmatrix} -3 \\ 2 \\ 0 \end{pmatrix}$$
+                        
+                        <strong>Schritt 4:</strong> Probe<br>
+                        $$\vec{a} \cdot \vec{b} = 2 \cdot (-3) + 3 \cdot 2 + 0 \cdot 0 = -6 + 6 + 0 = 0 \checkmark$$
+                        
+                        <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong>💡 Hinweis:</strong> Es gibt unendlich viele orthogonale Vektoren zu einem gegebenen Vektor. Hier ist nur eine mögliche Lösung gezeigt.
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Quiz Tab -->
+            <!-- Snake Tab -->
             <div id="quiz" class="tab-content">
-                <h2>🎯 Quiz</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <h2>🐍 Snake - Skalarprodukt Quiz</h2>
+                <p style="text-align: center; margin-bottom: 1rem; color: #666; font-size: 0.9rem;">
+                    Sammle Fragen und beantworte sie richtig! Nach jeder dritten Frage wird das Spiel 5% schneller. 
+                    Nutze die Pfeiltasten oder Touch-Controls zur Steuerung.
+                </p>
+                
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <iframe src="snake_game.html" 
+                            width="100%" 
+                            height="650" 
+                            style="border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <p>Ihr Browser unterstützt keine iframes. 
+                           <a href="snake_game.html" target="_blank">
+                               Klicken Sie hier, um das Spiel zu öffnen
+                           </a>
+                        </p>
+                    </iframe>
                 </div>
                 
-                <div class="quiz-question">
-                    <h4>Frage 1: Was ist das Ergebnis des Skalarprodukts zweier Vektoren?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q1a" value="correct">Ein Skalar (reelle Zahl)</label></li>
-                        <li><label><input type="checkbox" id="q1b" value="incorrect">Ein Vektor</label></li>
-                        <li><label><input type="checkbox" id="q1c" value="incorrect">Eine Matrix</label></li>
-                        <li><label><input type="checkbox" id="q1d" value="incorrect">Ein komplexe Zahl</label></li>
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <h4>🎮 Spielregeln:</h4>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Steuere die Schlange mit den Pfeiltasten oder Touch-Controls</li>
+                        <li>Sammle die Fragezeichen-Futter</li>
+                        <li>Beantworte die Skalarprodukt-Fragen mit WAHR oder FALSCH</li>
+                        <li>Richtige Antworten: +100 Punkte, Falsche: -50 Punkte</li>
+                        <li>Alle 3 Fragen wird das Spiel 5% schneller</li>
+                        <li>Vermeide die Wände und dich selbst!</li>
                     </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q1', ['q1a'])">Antwort prüfen</button>
-                    <div id="q1-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 2: Wann sind zwei Vektoren orthogonal?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q2a" value="incorrect">Wenn sie parallel sind</label></li>
-                        <li><label><input type="checkbox" id="q2b" value="correct">Wenn ihr Skalarprodukt null ist</label></li>
-                        <li><label><input type="checkbox" id="q2c" value="incorrect">Wenn sie den gleichen Betrag haben</label></li>
-                        <li><label><input type="checkbox" id="q2d" value="incorrect">Wenn sie entgegengesetzt sind</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q2', ['q2b'])">Antwort prüfen</button>
-                    <div id="q2-feedback" class="quiz-feedback"></div>
-                </div>
-                
-                <div class="quiz-question">
-                    <h4>Frage 3: Welche Eigenschaft hat das Skalarprodukt?</h4>
-                    <ul class="quiz-options">
-                        <li><label><input type="checkbox" id="q3a" value="correct">Es ist kommutativ</label></li>
-                        <li><label><input type="checkbox" id="q3b" value="correct">Es ist distributiv</label></li>
-                        <li><label><input type="checkbox" id="q3c" value="incorrect">Es ist assoziativ mit der Vektoraddition</label></li>
-                        <li><label><input type="checkbox" id="q3d" value="incorrect">Es ist nur für Einheitsvektoren definiert</label></li>
-                    </ul>
-                    <button class="quiz-submit" onclick="checkAnswer('q3', ['q3a', 'q3b'])">Antwort prüfen</button>
-                    <div id="q3-feedback" class="quiz-feedback"></div>
                 </div>
             </div>
         </div>

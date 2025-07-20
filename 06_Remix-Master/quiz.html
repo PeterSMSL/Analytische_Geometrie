@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathe Quiz - Analytische Geometrie</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .progress-section {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #81C784);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .quiz-content {
+            padding: 40px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .question-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .category-badge {
+            background: #FFD700;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .math-problem {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .problem-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+
+        .equation-system {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .answers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .answer-option:hover {
+            border-color: #4CAF50;
+            background: #f8fff8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+        }
+
+        .answer-option.selected {
+            border-color: #4CAF50;
+            background: #e8f5e8;
+            font-weight: bold;
+        }
+
+        .answer-option.correct {
+            border-color: #4CAF50;
+            background: #c8e6c9;
+            color: #2E7D32;
+        }
+
+        .answer-option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+            color: #c62828;
+            opacity: 0.7;
+        }
+
+        .answer-option::before {
+            content: attr(data-letter);
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .explanation-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-warning {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #f57c00;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .score-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score-display {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .completion-screen {
+            text-align: center;
+            padding: 50px 20px;
+            display: none;
+        }
+
+        .completion-screen.show {
+            display: block;
+        }
+
+        .completion-title {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .final-score {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .star-rating {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        .category-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .category-stat {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .answers {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Lernzielkontrolle</h1>
+            <p>Grundlagen der Analytischen Geometrie</p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progressText">Frage 1 von 181</span>
+                <span class="score-display" id="scoreDisplay">Score: 0</span>
+            </div>
+        </div>
+
+        <div class="quiz-content" id="quizContent">
+            <div class="question-container" id="questionContainer">
+                <!-- Questions will be loaded here -->
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Vorherige</button>
+                <div class="score-section">
+                    <div>Richtig: <span id="correctCount">0</span> | Falsch: <span id="incorrectCount">0</span></div>
+                </div>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Nächste →</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                <button class="btn btn-warning" id="quitBtn" onclick="quitQuiz()">🏁 Quiz beenden</button>
+            </div>
+        </div>
+
+        <div class="completion-screen" id="completionScreen">
+            <div class="completion-title">🎉 Quiz Abgeschlossen!</div>
+            <div class="final-score">
+                Endpunktzahl: <span id="finalScore">0</span> / <span id="totalQuestions">181</span>
+            </div>
+            <div class="star-rating" id="starRating">⭐⭐⭐</div>
+            <div class="category-stats" id="categoryStats">
+                <!-- Category statistics will be shown here -->
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Quiz wiederholen</button>
+                <button class="btn btn-warning" onclick="downloadEvaluation()">📥 Auswertung herunterladen</button>
+                <a href="06_Remix-Master.html" class="btn btn-secondary">🎮 Zum Tower Defense</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="fullQuestionBank.js"></script>
+    <script>
+        class MathQuiz {
+            constructor() {
+                this.questions = [];
+                this.currentQuestionIndex = 0;
+                this.score = 0;
+                this.answers = [];
+                this.categoryStats = {};
+                
+                this.loadQuestions();
+                this.shuffleQuestions();
+                this.initializeUI();
+                this.showQuestion();
+            }
+            
+            loadQuestions() {
+                // Load all questions from fullQuestionBank and flatten them
+                if (typeof fullQuestionBank === 'undefined') {
+                    alert('Fehler: Fragen-Datenbank nicht gefunden!');
+                    return;
+                }
+                
+                // Combine all categories into one array
+                for (const [category, questions] of Object.entries(fullQuestionBank)) {
+                    for (const question of questions) {
+                        this.questions.push({
+                            ...question,
+                            categoryKey: category
+                        });
+                    }
+                }
+                
+                console.log(`Loaded ${this.questions.length} questions from ${Object.keys(fullQuestionBank).length} categories`);
+            }
+            
+            shuffleQuestions() {
+                // Fisher-Yates shuffle algorithm for complete randomization
+                for (let i = this.questions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
+                }
+                console.log('Questions shuffled randomly');
+            }
+            
+            initializeUI() {
+                // Initialize category statistics
+                for (const category of Object.keys(fullQuestionBank)) {
+                    this.categoryStats[category] = {
+                        total: 0,
+                        correct: 0,
+                        name: this.getCategoryDisplayName(category)
+                    };
+                }
+                
+                // Initialize answers array
+                this.answers = new Array(this.questions.length).fill(null);
+                
+                // Update total questions display
+                document.getElementById('totalQuestions').textContent = this.questions.length;
+            }
+            
+            getCategoryDisplayName(category) {
+                const names = {
+                    'basic': 'Allgemeine Mathematik',
+                    'lgs': 'Lineare Gleichungssysteme',
+                    'point': 'Punkte im Raum',
+                    'vector': 'Vektoren',
+                    'scalar': 'Skalarprodukt',
+                    'vectorproduct': 'Vektorprodukt'
+                };
+                return names[category] || category;
+            }
+            
+            showQuestion() {
+                if (this.currentQuestionIndex >= this.questions.length) {
+                    this.showCompletion();
+                    return;
+                }
+                
+                const question = this.questions[this.currentQuestionIndex];
+                const container = document.getElementById('questionContainer');
+                
+                // Update progress
+                this.updateProgress();
+                
+                // Build question HTML
+                container.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">Frage ${this.currentQuestionIndex + 1}</div>
+                        <div class="category-badge">${question.category || this.getCategoryDisplayName(question.categoryKey)}</div>
+                    </div>
+                    
+                    <div class="question-content">
+                        ${question.question}
+                    </div>
+                    
+                    <div class="answers" id="answersContainer">
+                        ${question.options.map((option, index) => `
+                            <div class="answer-option" 
+                                 data-letter="${String.fromCharCode(65 + index)}" 
+                                 data-index="${index}"
+                                 onclick="selectAnswer(${index})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="explanation" id="explanation">
+                        <div class="explanation-title">💡 Erklärung:</div>
+                        <div>${question.explanation}</div>
+                    </div>
+                `;
+                
+                // Show previously selected answer if exists
+                if (this.answers[this.currentQuestionIndex] !== null) {
+                    this.showAnswerResult(this.answers[this.currentQuestionIndex]);
+                }
+                
+                // Update navigation buttons
+                document.getElementById('prevBtn').disabled = this.currentQuestionIndex === 0;
+                
+                // Re-render MathJax for mathematical expressions
+                if (window.MathJax) {
+                    MathJax.typesetPromise([container]).catch((err) => console.log('MathJax error:', err));
+                }
+            }
+            
+            updateProgress() {
+                const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = 
+                    `Frage ${this.currentQuestionIndex + 1} von ${this.questions.length}`;
+                document.getElementById('scoreDisplay').textContent = `Fortschritt: ${this.score}`;
+                const correctAnswers = this.answers.filter((answer, index) => 
+                    answer !== null && answer === this.questions[index].correct).length;
+                document.getElementById('correctCount').textContent = correctAnswers;
+                document.getElementById('incorrectCount').textContent = 
+                    this.answers.filter(a => a !== null).length - correctAnswers;
+            }
+            
+            selectAnswer(selectedIndex) {
+                const question = this.questions[this.currentQuestionIndex];
+                
+                // Only allow answering if not already answered
+                if (this.answers[this.currentQuestionIndex] !== null) {
+                    return; // Already answered
+                }
+                
+                // Record answer
+                this.answers[this.currentQuestionIndex] = selectedIndex;
+                
+                // Update score - 1 point per question regardless of correctness
+                this.score++;
+                
+                // Update category stats
+                this.categoryStats[question.categoryKey].total++;
+                const wasCorrect = selectedIndex === question.correct;
+                if (wasCorrect) {
+                    this.categoryStats[question.categoryKey].correct++;
+                }
+                
+                this.showAnswerResult(selectedIndex);
+                this.updateProgress();
+            }
+            
+            showAnswerResult(selectedIndex) {
+                const question = this.questions[this.currentQuestionIndex];
+                const options = document.querySelectorAll('.answer-option');
+                
+                // Clear previous selections
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selected answer
+                options[selectedIndex].classList.add('selected');
+                
+                // Show correct/incorrect styling
+                if (selectedIndex === question.correct) {
+                    options[selectedIndex].classList.add('correct');
+                } else {
+                    options[selectedIndex].classList.add('incorrect');
+                    options[question.correct].classList.add('correct');
+                }
+                
+                // Show explanation
+                document.getElementById('explanation').classList.add('show');
+            }
+            
+            previousQuestion() {
+                if (this.currentQuestionIndex > 0) {
+                    this.currentQuestionIndex--;
+                    this.showQuestion();
+                }
+            }
+            
+            nextQuestion() {
+                if (this.currentQuestionIndex < this.questions.length - 1) {
+                    this.currentQuestionIndex++;
+                    this.showQuestion();
+                } else {
+                    this.showCompletion();
+                }
+            }
+            
+            showCompletion() {
+                document.getElementById('quizContent').style.display = 'none';
+                document.getElementById('completionScreen').classList.add('show');
+                
+                // Calculate final statistics
+                const percentage = Math.round((this.score / this.questions.length) * 100);
+                document.getElementById('finalScore').textContent = this.score;
+                
+                // Show star rating
+                let stars = '⭐';
+                if (percentage >= 90) stars = '⭐⭐⭐';
+                else if (percentage >= 75) stars = '⭐⭐';
+                else if (percentage >= 50) stars = '⭐';
+                else stars = '💪 Weiter üben!';
+                
+                document.getElementById('starRating').textContent = stars;
+                
+                // Show category statistics
+                this.showCategoryStats();
+                
+                console.log(`Quiz completed: ${this.score}/${this.questions.length} (${percentage}%)`);
+            }
+            
+            showCategoryStats() {
+                const container = document.getElementById('categoryStats');
+                const statsHTML = Object.entries(this.categoryStats)
+                    .map(([key, stats]) => {
+                        const percentage = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                        return `
+                            <div class="category-stat">
+                                <strong>${stats.name}</strong><br>
+                                ${stats.correct} / ${stats.total} richtig (${percentage}%)
+                            </div>
+                        `;
+                    }).join('');
+                
+                container.innerHTML = statsHTML;
+            }
+            
+            restart() {
+                this.currentQuestionIndex = 0;
+                this.score = 0;
+                this.answers = new Array(this.questions.length).fill(null);
+                
+                // Reset category stats
+                for (const category of Object.keys(this.categoryStats)) {
+                    this.categoryStats[category].total = 0;
+                    this.categoryStats[category].correct = 0;
+                }
+                
+                // Re-shuffle questions
+                this.shuffleQuestions();
+                
+                // Show quiz content again
+                document.getElementById('quizContent').style.display = 'block';
+                document.getElementById('completionScreen').classList.remove('show');
+                
+                this.showQuestion();
+            }
+            
+            downloadEvaluation() {
+                const currentDate = new Date();
+                const dateStr = currentDate.toLocaleDateString('de-DE');
+                const timeStr = currentDate.toLocaleTimeString('de-DE');
+                
+                // Calculate statistics
+                const answeredQuestions = this.answers.filter(a => a !== null).length;
+                const correctAnswers = this.answers.filter((answer, index) => 
+                    answer !== null && answer === this.questions[index].correct).length;
+                const incorrectAnswers = answeredQuestions - correctAnswers;
+                const percentage = answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0;
+                
+                // Create detailed evaluation report
+                let report = `QUIZ-AUSWERTUNG - ANALYTISCHE GEOMETRIE
+=====================================
+
+Datum: ${dateStr}
+Uhrzeit: ${timeStr}
+Gesamtfragen verfügbar: ${this.questions.length}
+
+ÜBERSICHT
+---------
+Beantwortete Fragen: ${answeredQuestions}
+Richtige Antworten: ${correctAnswers}
+Falsche Antworten: ${incorrectAnswers}
+Erfolgsquote: ${percentage}%
+
+KATEGORIE-STATISTIKEN
+-------------------
+`;
+
+                // Add category statistics
+                Object.entries(this.categoryStats).forEach(([key, stats]) => {
+                    const catPercentage = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                    report += `${stats.name}: ${stats.correct}/${stats.total} (${catPercentage}%)\n`;
+                });
+
+                report += `\nDETAILLIERTE ANTWORTEN
+---------------------
+`;
+
+                // Add detailed answers for answered questions
+                this.answers.forEach((answer, index) => {
+                    if (answer !== null) {
+                        const question = this.questions[index];
+                        const isCorrect = answer === question.correct;
+                        const status = isCorrect ? '✓' : '✗';
+                        const categoryName = this.getCategoryDisplayName(question.categoryKey);
+                        
+                        report += `\nFrage ${index + 1} [${categoryName}] ${status}\n`;
+                        report += `Gewählte Antwort: ${question.options[answer]}\n`;
+                        if (!isCorrect) {
+                            report += `Richtige Antwort: ${question.options[question.correct]}\n`;
+                        }
+                    }
+                });
+
+                report += `\n\nBEWERTUNG
+---------
+`;
+                if (percentage >= 90) {
+                    report += `Ausgezeichnet! ⭐⭐⭐\nDu beherrschst die Analytische Geometrie sehr gut!`;
+                } else if (percentage >= 75) {
+                    report += `Gut gemacht! ⭐⭐\nDu hast ein solides Verständnis der Themen.`;
+                } else if (percentage >= 50) {
+                    report += `Nicht schlecht! ⭐\nEs gibt noch Raum für Verbesserungen.`;
+                } else {
+                    report += `Weiter üben! 💪\nWiederhole die Grundlagen und versuche es erneut.`;
+                }
+
+                report += `\n\nGeneriert von: Mathe Quiz - Analytische Geometrie
+© 2024 Elterninitiative Freie Montessori Schule Landau`;
+
+                // Create and download file
+                const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Quiz_Auswertung_${dateStr.replace(/\./g, '-')}_${timeStr.replace(/:/g, '-')}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                console.log('Quiz evaluation downloaded');
+            }
+        }
+        
+        // Global functions for button clicks
+        let quiz;
+        
+        function selectAnswer(index) {
+            quiz.selectAnswer(index);
+        }
+        
+        function previousQuestion() {
+            quiz.previousQuestion();
+        }
+        
+        function nextQuestion() {
+            quiz.nextQuestion();
+        }
+        
+        function restartQuiz() {
+            quiz.restart();
+        }
+        
+        function quitQuiz() {
+            if (confirm('Möchtest du das Quiz wirklich beenden? Dein Fortschritt wird in der Auswertung angezeigt.')) {
+                quiz.showCompletion();
+            }
+        }
+        
+        function downloadEvaluation() {
+            quiz.downloadEvaluation();
+        }
+        
+        // Initialize quiz when page loads
+        window.addEventListener('load', () => {
+            quiz = new MathQuiz();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathe Tower Defense - Remix Master</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🏰 Mathe Tower Defense - Remix Master</h1>
+        <p>Verteidige dein Haus mit mathematischem Wissen!</p>
+    </header>
+
+    <div class="game-container">
+        <!-- Game Stats UI -->
+        <div class="game-ui">
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">❤️ Leben:</span>
+                    <span id="health">100</span>
+                </div>
+                <div class="stat">
+                    <span class="label">💰 Score:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">🌊 Welle:</span>
+                    <span id="wave">1</span>
+                </div>
+            </div>
+            
+            <!-- Tower Selection -->
+            <div class="tower-menu">
+                <h3>🏗️ Türme bauen</h3>
+                <button class="tower-btn" data-tower="basic" data-cost="0">
+                    🏰 Allgemein Turm
+                </button>
+                <button class="tower-btn" data-tower="lgs" data-cost="0">
+                    🔢 LGS Solver
+                </button>
+                <button class="tower-btn" data-tower="point" data-cost="0" disabled>
+                    📍 Punkt Laser
+                </button>
+                <button class="tower-btn" data-tower="vector" data-cost="0" disabled>
+                    ➡️ Vektor Kanone
+                </button>
+                <button class="tower-btn" data-tower="scalar" data-cost="0" disabled>
+                    ⚡ Skalar Verstärker
+                </button>
+                <button class="tower-btn" data-tower="vectorproduct" data-cost="0" disabled>
+                    ✖️ Vektor Kreuz
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+        <!-- Game Controls -->
+        <div class="controls">
+            <button id="startWave">🌊 Nächste Welle</button>
+            <button id="pauseGame">⏸️ Pause</button>
+            <button id="fastForward">⏩ Fast Forward</button>
+            <button id="panicButton" class="panic-btn">🚨 PANIC! 🚨</button>
+            <a href="auswahl.html" id="backButton" style="background: #6b7280; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; font-weight: bold;">← Zurück</a>
+            <!-- <button id="requestCertificate">🏆 Zertifikat</button> -->
+        </div>
+    </div>
+
+    <!-- Question Modal -->
+    <div id="questionModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>🧮 Mathe-Aufgabe lösen</h2>
+            <div id="questionContent">
+                <div id="questionText">Lade Aufgabe...</div>
+                <div id="answerOptions"></div>
+            </div>
+            <div class="modal-actions">
+                <button id="submitAnswer">✅ Antwort bestätigen</button>
+                <button id="skipQuestion">⏭️ Überspringen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts in order -->
+    <script src="gameLogger.js"></script>
+    <script src="fullQuestionBank.js"></script>
+    <script src="gameEngine.js"></script>
+    <script src="questionSystem.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

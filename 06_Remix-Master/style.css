@@ -1,0 +1,355 @@
+/* Mathe Tower Defense - Remix Master Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* Game UI */
+.game-ui {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 250px;
+    height: fit-content;
+}
+
+.stats {
+    margin-bottom: 30px;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.stat .label {
+    font-weight: bold;
+}
+
+/* Tower Menu */
+.tower-menu h3 {
+    margin-bottom: 15px;
+    text-align: center;
+    color: #FFD700;
+}
+
+.tower-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tower-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tower-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.tower-btn.selected {
+    background: linear-gradient(45deg, #FF6B6B, #FF5252);
+    transform: scale(1.05);
+}
+
+/* Game Canvas */
+#gameCanvas {
+    border: 3px solid #FFD700;
+    border-radius: 10px;
+    background: #2d5a27;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.controls button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-weight: bold;
+}
+
+#startWave {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+#pauseGame {
+    background: linear-gradient(45deg, #FF9800, #F57C00);
+}
+
+#fastForward {
+    background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+}
+
+#fastForward.active {
+    background: linear-gradient(45deg, #E91E63, #C2185B);
+    animation: pulse 1s infinite;
+}
+
+.panic-btn {
+    background: linear-gradient(45deg, #FF0000, #CC0000) !important;
+    font-size: 1.2rem !important;
+    font-weight: 900 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    box-shadow: 0 4px 15px rgba(255,0,0,0.5);
+    border: 3px solid #FF6666 !important;
+    animation: panicPulse 1.5s infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.panic-btn:hover {
+    background: linear-gradient(45deg, #FF3333, #FF0000) !important;
+    box-shadow: 0 6px 20px rgba(255,0,0,0.8);
+    transform: scale(1.05);
+}
+
+.panic-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes panicPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(255,0,0,0.5);
+        border-color: #FF6666;
+    }
+    50% { 
+        box-shadow: 0 6px 25px rgba(255,0,0,0.9);
+        border-color: #FF0000;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#showQuestions {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+}
+
+#downloadLogs {
+    background: linear-gradient(45deg, #607D8B, #455A64);
+}
+
+#backButton:hover {
+    background: #5a6268 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1976D2;
+}
+
+#questionText {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+#answerOptions {
+    margin-bottom: 20px;
+}
+
+.answer-option {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.answer-option:hover {
+    border-color: #2196F3;
+    background: #e3f2fd;
+}
+
+.answer-option.selected {
+    border-color: #4CAF50;
+    background: #e8f5e8;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-actions button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-weight: bold;
+}
+
+#submitAnswer {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+#skipQuestion {
+    background: linear-gradient(45deg, #FF9800, #F57C00);
+}
+
+.modal-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Math formatting */
+.math-problem {
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.problem-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+.equation-system {
+    text-align: center;
+}
+
+.equation {
+    font-size: 1.3rem;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+    }
+    
+    .controls {
+        padding: 0 10px;
+    }
+    
+    .controls button {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+}

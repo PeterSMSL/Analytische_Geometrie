@@ -25,6 +25,12 @@ class GameEngine {
         this.projectiles = [];
         this.selectedTowerType = null;
         
+        // Tower preview system
+        this.previewMode = false;
+        this.previewTower = null;
+        this.mousePosition = { x: 0, y: 0 };
+        this.previewValid = false;
+        
         // Tower unlocking progression
         this.unlockedTowers = ['basic', 'lgs']; // Start with these unlocked
         
@@ -101,6 +107,25 @@ class GameEngine {
             this.handleCanvasClick(e);
         });
         
+        // Canvas mouse movement for tower preview
+        this.canvas.addEventListener('mousemove', (e) => {
+            if (this.fastForward) return;
+            this.handleCanvasMouseMove(e);
+        });
+        
+        // Cancel preview on right click or ESC
+        this.canvas.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            this.cancelPreview();
+        });
+        
+        // ESC key to cancel preview
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.cancelPreview();
+            }
+        });
+        
         // Tower selection buttons
         document.querySelectorAll('.tower-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -151,13 +176,20 @@ class GameEngine {
         // Update selection
         this.selectedTowerType = towerType;
         
+        // Enter preview mode
+        this.previewMode = true;
+        this.previewTower = this.createPreviewTower(towerType);
+        
         // Update UI
         document.querySelectorAll('.tower-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
         document.querySelector(`[data-tower="${towerType}"]`)?.classList.add('selected');
         
-        gameLogger.logTower('Tower type selected', { towerType });
+        // Change cursor to indicate building mode
+        this.canvas.style.cursor = 'crosshair';
+        
+        gameLogger.logTower('Tower type selected, preview mode activated', { towerType });
     }
     
     handleCanvasClick(e) {
@@ -178,8 +210,10 @@ class GameEngine {
             return;
         }
         
-        if (this.selectedTowerType) {
-            this.attemptTowerPlacement(x, y);
+        if (this.previewMode && this.selectedTowerType) {
+            if (this.previewValid) {
+                this.attemptTowerPlacement(x, y);
+            }
         }
         
         gameLogger.logGame('Canvas click', { x, y, selectedTower: this.selectedTowerType, clickedTower: !!clickedTower });
@@ -323,14 +357,14 @@ class GameEngine {
         const currentLevel = tower.level || 1;
         
         if (tower.type === 'basic' && currentLevel >= 6) {
-            return 'Der Allgemein Turm kann maximal Level 6 erreichen.';
+            return '🚫 Der Allgemein Turm kann maximal Level 6 erreichen.';
         }
         
         if (this.currentWave < 10 && currentLevel >= 6) {
-            return `Alle Türme sind vor Welle 10 auf Level 6 begrenzt. Aktuell: Welle ${this.currentWave}`;
+            return `🚫 Alle Türme sind vor Welle 10 auf Level 6 begrenzt.\n\n🌊 Aktuell: Welle ${this.currentWave}\n⏳ Ab Welle 10: Weitere Upgrades möglich!`;
         }
         
-        return 'Maximales Level erreicht.';
+        return '🚫 Maximales Level für diesen Turm erreicht.';
     }
     
     upgradeTower(tower) {
@@ -553,6 +587,9 @@ class GameEngine {
         this.towers.push(tower);
         this.score += 50; // Reward for building tower
         this.updateUI();
+        
+        // Cancel preview mode after successful tower build
+        this.cancelPreview();
         
         gameLogger.logTower('Tower built', {
             tower: { type, x, y, id: tower.id, level: tower.level, stats: baseStats },
@@ -1348,6 +1385,9 @@ class GameEngine {
         
         // Draw projectiles
         this.drawProjectiles();
+        
+        // Draw tower preview (on top of everything)
+        this.drawTowerPreview();
         
         // Draw UI overlays
         this.drawGameStateOverlay();
@@ -2192,18 +2232,24 @@ Generiert von: Mathe Tower Defense - Remix Master
                         <p style="color: white; font-size: 18px; margin: 8px 0;"><strong>Türme gebaut:</strong> ${this.towers.length}</p>
                     </div>
                     
-                    <div style="margin: 20px 0;">
-                        <p style="color: white; font-size: 16px;">Lade dein persönliches Grundlagen-Zertifikat herunter:</p>
+                    <div style="margin: 25px 0;">
+                        <p style="color: white; font-size: 16px; margin-bottom: 15px;">Lade dein persönliches Grundlagen-Zertifikat herunter:</p>
                         <input type="text" id="gameOverPlayerName" placeholder="Dein Name für das Zertifikat" 
-                               style="padding: 12px; font-size: 16px; border: none; border-radius: 8px; width: 300px; text-align: center; margin: 10px 0;">
+                               style="padding: 15px; font-size: 16px; border: none; border-radius: 10px; width: 320px; max-width: 90%; text-align: center; margin: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                     </div>
                     
-                    <div style="margin-top: 30px;">
-                        <button id="downloadGameOverCertificate" style="background: #FFD700; color: black; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; margin: 0 10px;">
+                    <div style="margin-top: 35px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                        <button id="downloadGameOverCertificate" style="background: linear-gradient(45deg, #FFD700, #FFA000); color: black; border: none; padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 6px 20px rgba(255,215,0,0.4); transition: all 0.3s ease;">
                             🏆 Zertifikat herunterladen
                         </button>
-                        <button id="playAgain" style="background: #4CAF50; color: white; border: none; padding: 15px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 0 10px;">
+                        <button id="playAgain" style="background: linear-gradient(45deg, #4CAF50, #45a049); color: white; border: none; padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 6px 20px rgba(76,175,80,0.4); transition: all 0.3s ease;">
                             🔄 Nochmal spielen
+                        </button>
+                        <button onclick="window.location.href='auswahl.html'" style="background: linear-gradient(45deg, #2196F3, #1976D2); color: white; border: none; padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 6px 20px rgba(33,150,243,0.4); transition: all 0.3s ease;">
+                            🎮 Spiele-Auswahl
+                        </button>
+                        <button onclick="window.location.href='../index.html'" style="background: linear-gradient(45deg, #6b7280, #4b5563); color: white; border: none; padding: 15px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: bold; box-shadow: 0 6px 20px rgba(107,114,128,0.4); transition: all 0.3s ease;">
+                            ← Hauptmenü
                         </button>
                     </div>
                 </div>
@@ -2543,6 +2589,116 @@ Entwickelt für interaktives Mathematiklernen
             remainingTime: timeString,
             remainingMs: this.panicCooldown
         });
+    }
+    
+    // ===== TOWER PREVIEW SYSTEM =====
+    
+    handleCanvasMouseMove(e) {
+        if (!this.previewMode) return;
+        
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        // Scale coordinates if canvas is resized
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        
+        this.mousePosition.x = mouseX * scaleX;
+        this.mousePosition.y = mouseY * scaleY;
+        
+        // Validate placement position
+        this.previewValid = this.isValidTowerPlacement(this.mousePosition.x, this.mousePosition.y);
+    }
+    
+    createPreviewTower(towerType) {
+        // Get tower properties for preview
+        const towerConfigs = {
+            basic: { range: 80, color: '#4CAF50', symbol: '🏰' },
+            lgs: { range: 100, color: '#2196F3', symbol: '🔢' },
+            point: { range: 120, color: '#FF9800', symbol: '📍' },
+            vector: { range: 90, color: '#9C27B0', symbol: '➡️' },
+            scalar: { range: 110, color: '#F44336', symbol: '⚡' },
+            vectorproduct: { range: 85, color: '#795548', symbol: '✖️' }
+        };
+        
+        return towerConfigs[towerType] || towerConfigs.basic;
+    }
+    
+    isValidTowerPlacement(x, y) {
+        // Use the existing validation method for consistency
+        return this.isValidTowerPosition(x, y);
+    }
+    
+    cancelPreview() {
+        if (!this.previewMode) return;
+        
+        this.previewMode = false;
+        this.previewTower = null;
+        this.selectedTowerType = null;
+        this.previewValid = false;
+        
+        // Reset UI
+        document.querySelectorAll('.tower-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        this.canvas.style.cursor = 'default';
+        
+        gameLogger.logTower('Tower preview cancelled');
+    }
+    
+    drawTowerPreview() {
+        if (!this.previewMode || !this.previewTower) return;
+        
+        const ctx = this.ctx;
+        const tower = this.previewTower;
+        const pos = this.mousePosition;
+        
+        // Set transparency for preview
+        ctx.globalAlpha = 0.7;
+        
+        // Choose colors based on validity
+        const rangeColor = this.previewValid ? 'rgba(76, 175, 80, 0.2)' : 'rgba(244, 67, 54, 0.2)';
+        const rangeBorderColor = this.previewValid ? 'rgba(76, 175, 80, 0.5)' : 'rgba(244, 67, 54, 0.5)';
+        const towerColor = this.previewValid ? tower.color : '#f44336';
+        
+        // Draw range circle
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, tower.range, 0, Math.PI * 2);
+        ctx.fillStyle = rangeColor;
+        ctx.fill();
+        ctx.strokeStyle = rangeBorderColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw tower base
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2);
+        ctx.fillStyle = towerColor;
+        ctx.fill();
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw tower symbol
+        ctx.fillStyle = '#fff';
+        ctx.font = '20px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(tower.symbol, pos.x, pos.y);
+        
+        // Reset transparency
+        ctx.globalAlpha = 1.0;
+        
+        // Draw validity indicator
+        ctx.fillStyle = this.previewValid ? '#4CAF50' : '#f44336';
+        ctx.font = 'bold 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(
+            this.previewValid ? '✓ Baubar' : '✗ Nicht baubar', 
+            pos.x, 
+            pos.y - 45
+        );
     }
 }
 

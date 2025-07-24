@@ -547,7 +547,7 @@
                 document.getElementById('progressFill').style.width = progress + '%';
                 document.getElementById('progressText').textContent = 
                     `Frage ${this.currentQuestionIndex + 1} von ${this.questions.length}`;
-                document.getElementById('scoreDisplay').textContent = `Fortschritt: ${this.score}`;
+                document.getElementById('scoreDisplay').textContent = `Richtige: ${this.score}`;
                 const correctAnswers = this.answers.filter((answer, index) => 
                     answer !== null && answer === this.questions[index].correct).length;
                 document.getElementById('correctCount').textContent = correctAnswers;
@@ -566,14 +566,12 @@
                 // Record answer
                 this.answers[this.currentQuestionIndex] = selectedIndex;
                 
-                // Update score - 1 point per question regardless of correctness
-                this.score++;
-                
-                // Update category stats
+                // Update category stats and score
                 this.categoryStats[question.categoryKey].total++;
                 const wasCorrect = selectedIndex === question.correct;
                 if (wasCorrect) {
                     this.categoryStats[question.categoryKey].correct++;
+                    this.score++; // Only increment score for correct answers
                 }
                 
                 this.showAnswerResult(selectedIndex);
@@ -624,23 +622,26 @@
                 document.getElementById('quizContent').style.display = 'none';
                 document.getElementById('completionScreen').classList.add('show');
                 
-                // Calculate final statistics
-                const percentage = Math.round((this.score / this.questions.length) * 100);
-                document.getElementById('finalScore').textContent = this.score;
+                // Calculate correct answers and percentage
+                const correctAnswers = this.answers.filter((answer, index) => 
+                    answer !== null && answer === this.questions[index].correct).length;
+                const answeredQuestions = this.answers.filter(a => a !== null).length;
+                const percentage = answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0;
                 
-                // Show star rating
-                let stars = '⭐';
-                if (percentage >= 90) stars = '⭐⭐⭐';
-                else if (percentage >= 75) stars = '⭐⭐';
-                else if (percentage >= 50) stars = '⭐';
-                else stars = '💪 Weiter üben!';
+                document.getElementById('finalScore').textContent = correctAnswers;
+                
+                // Show star rating based on percentage of CORRECT answers
+                let stars = '💪 Weiter üben!';
+                if (percentage >= 90) stars = '⭐⭐⭐ Ausgezeichnet!';
+                else if (percentage >= 75) stars = '⭐⭐ Gut gemacht!';
+                else if (percentage >= 50) stars = '⭐ Nicht schlecht!';
                 
                 document.getElementById('starRating').textContent = stars;
                 
                 // Show category statistics
                 this.showCategoryStats();
                 
-                console.log(`Quiz completed: ${this.score}/${this.questions.length} (${percentage}%)`);
+                console.log(`Quiz completed: ${correctAnswers}/${answeredQuestions} correct (${percentage}%)`);
             }
             
             showCategoryStats() {

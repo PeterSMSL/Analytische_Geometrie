@@ -477,10 +477,10 @@
             <h1>Skalarprodukt</h1>
             <p>Das innere Produkt zweier Vektoren</p>
             <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="04_Skalarprodukt.pdf" target="_blank" class="pdf-link" onclick="openPdfOrFallback(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="04_Skalarprodukt.pdf" target="_blank" class="pdf-link" class="pdf-link pdf-arbeitsblatt" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Arbeitsblatt
                 </a>
-                <a href="04_Skalarprodukt_Loesung.pdf" target="_blank" class="pdf-link" onclick="openPdfWithPassword(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="04_Skalarprodukt_Loesung.pdf" target="_blank" class="pdf-link" class="pdf-link pdf-loesung" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Lösung
                 </a>
             </div>
@@ -912,11 +912,27 @@
             });
         });
         
+        // iOS-optimierte PDF-Download-Funktion
+        function openPdfIOS(pdfUrl) {
+            // Direkte Navigation für iOS/Safari
+            window.location.href = pdfUrl;
+        }
+        
         // Globale Funktion: Teste PDF mit iframe, dann öffne oder zeige Coming Soon
         function openPdfOrFallback(link, event) {
             event.preventDefault();
             
             const pdfUrl = link.getAttribute('href');
+            
+            // iOS/Safari Detection und direkter Download
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (isIOS || isSafari) {
+                openPdfIOS(pdfUrl);
+                return;
+            }
             
             // Erstelle unsichtbaren iframe zum Testen
             const testFrame = document.createElement('iframe');
@@ -1141,6 +1157,31 @@
                 passwordInput.focus();
             }, 100);
         }
+        
+        // Touch-Event-Handler für PDF-Buttons hinzufügen
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.pdf-arbeitsblatt').forEach(link => {
+                link.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openPdfOrFallback(this, e);
+                });
+                link.addEventListener('click', function(e) {
+                    openPdfOrFallback(this, e);  
+                });
+            });
+            
+            document.querySelectorAll('.pdf-loesung').forEach(link => {
+                link.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openPdfWithPassword(this, e);
+                });
+                link.addEventListener('click', function(e) {
+                    openPdfWithPassword(this, e);
+                });
+            });
+        });
     </script>
     
     <!-- Footer -->

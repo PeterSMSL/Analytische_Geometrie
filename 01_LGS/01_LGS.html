@@ -76,6 +76,16 @@
             background: #e2e8f0;
         }
         
+        /* Touch-optimierte States für mobile Geräte */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-tab:hover {
+                background: none;
+            }
+            .nav-tab:active {
+                background: #e2e8f0;
+            }
+        }
+        
         .nav-tab.active {
             background: #4f46e5;
             color: white;
@@ -885,6 +895,70 @@
             transform: translateY(-2px);
         }
         
+        /* Touch-optimierte States für alle interaktiven Elemente */
+        @media (hover: none) and (pointer: coarse) {
+            .video-preview:hover,
+            .play-button:hover,
+            .solution-toggle:hover,
+            .quiz-options li:hover,
+            .quiz-options label:hover,
+            .quiz-submit:hover,
+            .quest-option:hover,
+            .rpg-button.attack:hover,
+            .rpg-button.help:hover,
+            .rpg-button.theory:hover,
+            .rpg-button.continue:hover {
+                background: inherit;
+                transform: none;
+                box-shadow: inherit;
+            }
+            
+            .video-preview:active {
+                transform: scale(1.02);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            }
+            
+            .solution-toggle:active {
+                background: #d97706;
+                transform: translateY(-2px);
+            }
+            
+            .quiz-options li:active,
+            .quiz-options label:active {
+                background: #e0f2fe;
+            }
+            
+            .quiz-submit:active {
+                background: #0284c7;
+                transform: translateY(-2px);
+            }
+            
+            .quest-option:active {
+                background: #f8fafc;
+                border-color: #0ea5e9;
+            }
+            
+            .rpg-button.attack:active {
+                background: #b91c1c;
+                transform: translateY(-2px);
+            }
+            
+            .rpg-button.help:active {
+                background: #d97706;
+                transform: translateY(-2px);
+            }
+            
+            .rpg-button.theory:active {
+                background: #4f46e5;
+                transform: translateY(-2px);
+            }
+            
+            .rpg-button.continue:active {
+                background: #15803d;
+                transform: translateY(-2px);
+            }
+        }
+        
         .rpg-feedback {
             position: fixed;
             top: 0;
@@ -1002,10 +1076,10 @@
             <h1>Lineare Gleichungssysteme</h1>
             <p>Lernkarte für LGS</p>
             <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="01_Lineare_Gleichungssysteme.pdf" target="_blank" class="pdf-link" onclick="openPdfOrFallback(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="01_Lineare_Gleichungssysteme.pdf" target="_blank" class="pdf-link pdf-arbeitsblatt" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Arbeitsblatt
                 </a>
-                <a href="01_Lineare_Gleichungssysteme_Loesung.pdf" target="_blank" class="pdf-link" onclick="openPdfWithPassword(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="01_Lineare_Gleichungssysteme_Loesung.pdf" target="_blank" class="pdf-link pdf-loesung" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Lösung
                 </a>
             </div>
@@ -1968,11 +2042,27 @@
             });
         }
         
+        // iOS-optimierte PDF-Download-Funktion
+        function openPdfIOS(pdfUrl) {
+            // Direkte Navigation für iOS/Safari
+            window.location.href = pdfUrl;
+        }
+        
         // Globale Funktion: Teste PDF mit iframe, dann öffne oder zeige Coming Soon
         function openPdfOrFallback(link, event) {
             event.preventDefault();
             
             const pdfUrl = link.getAttribute('href');
+            
+            // iOS/Safari Detection und direkter Download
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (isIOS || isSafari) {
+                openPdfIOS(pdfUrl);
+                return;
+            }
             
             // Erstelle unsichtbaren iframe zum Testen
             const testFrame = document.createElement('iframe');
@@ -2197,6 +2287,31 @@
                 passwordInput.focus();
             }, 100);
         }
+        
+        // Touch-Event-Handler für PDF-Buttons hinzufügen
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.pdf-arbeitsblatt').forEach(link => {
+                link.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openPdfOrFallback(this, e);
+                });
+                link.addEventListener('click', function(e) {
+                    openPdfOrFallback(this, e);  
+                });
+            });
+            
+            document.querySelectorAll('.pdf-loesung').forEach(link => {
+                link.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openPdfWithPassword(this, e);
+                });
+                link.addEventListener('click', function(e) {
+                    openPdfWithPassword(this, e);
+                });
+            });
+        });
     </script>
     
     <!-- Footer -->

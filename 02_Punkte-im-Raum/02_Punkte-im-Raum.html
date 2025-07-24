@@ -590,6 +590,91 @@
             75% { transform: translateY(-8px) scale(1.03); }
         }
         
+        .video-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .video-embed {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-preview {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .play-button {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        .video-full {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            display: none;
+        }
+
         /* Mobile-spezifische Styles */
         @media (max-width: 768px) {
             body {
@@ -737,10 +822,10 @@
             <h1>Punkte im Raum</h1>
             <p>Koordinaten und Darstellung im dreidimensionalen Raum</p>
             <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="02_Punkte_im_Raum.pdf" target="_blank" class="pdf-link" onclick="openPdfOrFallback(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="02_Punkte_im_Raum.pdf" target="_blank" class="pdf-link" class="pdf-link pdf-arbeitsblatt" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Arbeitsblatt
                 </a>
-                <a href="02_Punkte_im_Raum_Loesung.pdf" target="_blank" class="pdf-link" onclick="openPdfWithPassword(this, event)" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                <a href="02_Punkte_im_Raum_Loesung.pdf" target="_blank" class="pdf-link" class="pdf-link pdf-loesung" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Lösung
                 </a>
             </div>
@@ -763,6 +848,22 @@
                     <p>Ein Punkt P im Raum wird durch ein Koordinatentripel beschrieben:</p>
                     <div class="math-formula">
                         $$P(x \mid y \mid z) \text{ oder } P(x_1 \mid x_2 \mid x_3)$$
+                    </div>
+                    
+                    <div class="video-container" style="text-align: center; margin: 1.5rem 0;">
+                        <div class="video-preview" onclick="expandVideo(this)">
+                            <video class="video-thumbnail" preload="metadata">
+                                <source src="01_Punkte-im-Raum_Abi2027.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-button">▶</div>
+                                <div class="video-title">Erklärvideo: Punkte im Raum</div>
+                            </div>
+                        </div>
+                        <video class="video-full" controls preload="metadata">
+                            <source src="01_Punkte-im-Raum_Abi2027.mp4" type="video/mp4">
+                            Ihr Browser unterstützt das Video-Tag nicht.
+                        </video>
                     </div>
                     
                     <div style="text-align: center; margin: 2rem 0;">
@@ -1444,6 +1545,36 @@
             completeDiv.style.display = 'block';
         }
         
+        function expandVideo(previewElement) {
+            const container = previewElement.parentElement;
+            const preview = container.querySelector('.video-preview');
+            const fullVideo = container.querySelector('.video-full');
+            
+            // Hide preview and show full video
+            preview.style.display = 'none';
+            fullVideo.style.display = 'block';
+            
+            // Auto-play the video
+            fullVideo.play();
+            
+            // Add event listener to minimize video when it ends
+            fullVideo.addEventListener('ended', function() {
+                fullVideo.style.display = 'none';
+                preview.style.display = 'block';
+            });
+            
+            // Allow clicking on full video to minimize
+            fullVideo.addEventListener('click', function() {
+                if (fullVideo.paused) {
+                    fullVideo.play();
+                } else {
+                    fullVideo.pause();
+                    fullVideo.style.display = 'none';
+                    preview.style.display = 'block';
+                }
+            });
+        }
+
         function resetGame() {
             // Reset game state
             gameState.score = 0;
@@ -1507,11 +1638,27 @@
             initializeGame();
         });
         
+        // iOS-optimierte PDF-Download-Funktion
+        function openPdfIOS(pdfUrl) {
+            // Direkte Navigation für iOS/Safari
+            window.location.href = pdfUrl;
+        }
+        
         // Globale Funktion: Teste PDF mit iframe, dann öffne oder zeige Coming Soon
         function openPdfOrFallback(link, event) {
             event.preventDefault();
             
             const pdfUrl = link.getAttribute('href');
+            
+            // iOS/Safari Detection und direkter Download
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (isIOS || isSafari) {
+                openPdfIOS(pdfUrl);
+                return;
+            }
             
             // Erstelle unsichtbaren iframe zum Testen
             const testFrame = document.createElement('iframe');
@@ -1736,6 +1883,31 @@
                 passwordInput.focus();
             }, 100);
         }
+        
+        // Touch-Event-Handler für PDF-Buttons hinzufügen
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.pdf-arbeitsblatt').forEach(link => {
+                link.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openPdfOrFallback(this, e);
+                });
+                link.addEventListener('click', function(e) {
+                    openPdfOrFallback(this, e);  
+                });
+            });
+            
+            document.querySelectorAll('.pdf-loesung').forEach(link => {
+                link.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openPdfWithPassword(this, e);
+                });
+                link.addEventListener('click', function(e) {
+                    openPdfWithPassword(this, e);
+                });
+            });
+        });
     </script>
     
     <!-- Footer -->

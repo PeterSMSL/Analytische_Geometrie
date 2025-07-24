@@ -2590,6 +2590,45 @@ const fullQuestionBank = {
     ]
 };
 
+
+// Funktion zum zufälligen Permutieren der Antworten
+function shuffleAnswers() {
+    // Durchlaufe alle Kategorien
+    Object.keys(fullQuestionBank).forEach(category => {
+        fullQuestionBank[category].forEach(question => {
+            if (question.type === 'multiple_choice' && question.options && Array.isArray(question.options)) {
+                // Speichere die ursprünglich richtige Option
+                const correctAnswer = question.options[question.correct];
+                
+                // Erstelle Array mit Indizes für Shuffle
+                const indices = question.options.map((_, index) => index);
+                
+                // Fisher-Yates Shuffle Algorithmus
+                for (let i = indices.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [indices[i], indices[j]] = [indices[j], indices[i]];
+                }
+                
+                // Erstelle neue permutierte Options-Array
+                const shuffledOptions = indices.map(index => question.options[index]);
+                
+                // Finde den neuen Index der richtigen Antwort
+                const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
+                
+                // Aktualisiere die Frage
+                question.options = shuffledOptions;
+                question.correct = newCorrectIndex;
+                
+                // Debug-Log (optional, kann entfernt werden)
+                console.log(`Question ${question.id}: Richtige Antwort "${correctAnswer}" ist jetzt bei Index ${newCorrectIndex}`);
+            }
+        });
+    });
+}
+
+// Führe die Permutation aus
+shuffleAnswers();
+
 // Export für Verwendung in questionSystem.js
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = fullQuestionBank;

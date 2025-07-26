@@ -546,8 +546,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Lernzielkontrolle</h1>
-            <p>Allgemein • LGS • Punkte im Raum • Vektoren • Skalarprodukt • Vektorprodukt</p>
+            <h1>Quiz: Geraden und Lage von Geraden</h1>
+            <p>Geraden Grundlagen • Lage von Geraden</p>
         </div>
 
         <!-- Quiz Configuration Screen -->
@@ -567,11 +567,6 @@
                         <div class="preset-title">Groß</div>
                         <div class="preset-subtitle" id="largeSubtitle">Alle Fragen</div>
                     </div>
-                </div>
-                <div class="custom-input">
-                    <label for="customCount" style="color: #e0e0e0;">Individuell:</label>
-                    <input type="number" id="customCount" min="1" max="500" placeholder="z.B. 30">
-                    <span style="color: #b0b0b0;">Fragen</span>
                 </div>
             </div>
 
@@ -604,7 +599,8 @@
             
             <div style="text-align: center; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
                 <button class="btn btn-warning" id="quitBtn" onclick="quitQuiz()">Quiz beenden</button>
-                <a href="../index.html" class="btn btn-secondary" style="margin-left: 10px;">← Zurück zur Übersicht</a>
+                <a href="07_Geraden_und_Lage-von-Geraden.html" class="btn btn-secondary" style="margin-left: 10px;">← Zurück zur Theorie</a>
+                <a href="../index.html" class="btn btn-secondary" style="margin-left: 10px;">← Zur Übersicht</a>
             </div>
         </div>
 
@@ -623,8 +619,8 @@
             <div style="margin-top: 30px;">
                 <button class="btn btn-primary" onclick="restartQuiz()">Quiz wiederholen</button>
                 <button class="btn btn-warning" onclick="downloadEvaluation()">Auswertung herunterladen</button>
-                <a href="06_Remix-Master.html" class="btn btn-secondary">Zum Tower Defense</a>
-                <a href="../index.html" class="btn btn-secondary">← Zurück zur Übersicht</a>
+                <a href="07_Geraden_und_Lage-von-Geraden.html" class="btn btn-secondary">← Zurück zur Theorie</a>
+                <a href="../index.html" class="btn btn-secondary">← Zur Übersicht</a>
             </div>
         </div>
     </div>
@@ -634,34 +630,24 @@
     <script>
         // Quiz Configuration Logic
         let quizConfig = {
-            questionCount: 25,
-            selectedCategories: ['all'],
+            questionCount: 8,
             preset: 'medium'
         };
 
         // Initialize configuration screen when everything is loaded
         window.addEventListener('load', function() {
-            setupConfigurationHandlers();
-            setupCustomInputHandler();
-        });
-
-        function setupCustomInputHandler() {
-            const customInput = document.getElementById('customCount');
-            if (customInput) {
-                customInput.addEventListener('input', function() {
-                    const customCount = parseInt(this.value);
-                    if (customCount && customCount > 0) {
-                        quizConfig.questionCount = customCount;
-                        quizConfig.preset = 'custom';
-                        
-                        // Clear preset selection
-                        document.querySelectorAll('.preset-option').forEach(opt => opt.classList.remove('selected'));
-                        
-                        updateDebugInfo();
-                    }
+            console.log('Window loaded, checking fullQuestionBank...');
+            if (typeof fullQuestionBank !== 'undefined') {
+                console.log('fullQuestionBank is available:', Object.keys(fullQuestionBank));
+                console.log('Question counts:', {
+                    geraden_basics: fullQuestionBank.geraden_basics?.length || 0,
+                    lage_von_geraden: fullQuestionBank.lage_von_geraden?.length || 0
                 });
+            } else {
+                console.error('fullQuestionBank is not loaded!');
             }
-        }
+            setupConfigurationHandlers();
+        });
 
         function setupConfigurationHandlers() {
             console.log('Setting up configuration handlers...');
@@ -680,84 +666,21 @@
                     quizConfig.preset = preset;
                     
                     // Update question count based on preset
+                    const totalQuestions = getTotalQuestionCount();
                     const presetCounts = {
-                        small: 15,
-                        medium: 25,
-                        large: 40,
-                        all: getTotalQuestionCount()
+                        small: Math.ceil(totalQuestions / 3),
+                        medium: Math.ceil(totalQuestions * 2 / 3),
+                        large: totalQuestions
                     };
                     
                     quizConfig.questionCount = presetCounts[preset];
                     
-                    // Clear custom input if preset is selected
-                    if (preset !== 'custom') {
-                        document.getElementById('customCount').value = '';
-                    }
                     
                     updateDebugInfo();
                 });
             });
 
-            // Custom count input handler
-            document.getElementById('customCount').addEventListener('input', function() {
-                const customCount = parseInt(this.value);
-                if (customCount && customCount > 0) {
-                    quizConfig.questionCount = customCount;
-                    quizConfig.preset = 'custom';
-                    document.querySelectorAll('.preset-option').forEach(opt => opt.classList.remove('selected'));
-                    updateDebugInfo();
-                }
-            });
 
-            // Category selection handlers
-            document.querySelectorAll('.category-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const category = this.dataset.category;
-                    
-                    if (category === 'all') {
-                        // Select/deselect all
-                        const isSelected = this.classList.contains('selected');
-                        document.querySelectorAll('.category-option').forEach(opt => {
-                            if (isSelected) {
-                                opt.classList.remove('selected');
-                                opt.querySelector('.category-checkbox').textContent = '';
-                            } else {
-                                opt.classList.add('selected');
-                                opt.querySelector('.category-checkbox').textContent = '✓';
-                            }
-                        });
-                        
-                        quizConfig.selectedCategories = isSelected ? [] : ['all'];
-                        updateDebugInfo();
-                    } else {
-                        // Individual category selection
-                        const allOption = document.querySelector('[data-category="all"]');
-                        allOption.classList.remove('selected');
-                        allOption.querySelector('.category-checkbox').textContent = '';
-                        
-                        this.classList.toggle('selected');
-                        const checkbox = this.querySelector('.category-checkbox');
-                        checkbox.textContent = this.classList.contains('selected') ? '✓' : '';
-                        
-                        // Update selected categories
-                        const selectedCategories = Array.from(document.querySelectorAll('.category-option.selected'))
-                            .map(opt => opt.dataset.category)
-                            .filter(cat => cat !== 'all');
-                            
-                        quizConfig.selectedCategories = selectedCategories.length > 0 ? selectedCategories : ['all'];
-                        
-                        // If all individual categories are selected, select "all"
-                        const totalCategories = document.querySelectorAll('.category-option[data-category!="all"]').length;
-                        if (selectedCategories.length === totalCategories) {
-                            allOption.classList.add('selected');
-                            allOption.querySelector('.category-checkbox').textContent = '✓';
-                            quizConfig.selectedCategories = ['all'];
-                        }
-                        
-                        updateDebugInfo();
-                    }
-                });
-            });
         }
 
         function getTotalQuestionCount() {
@@ -773,21 +696,6 @@
             return total;
         }
 
-        function testFunction() {
-            try {
-                alert('JavaScript funktioniert!');
-                console.log('Test function called successfully');
-                if (typeof quizConfig !== 'undefined') {
-                    console.log('quizConfig exists:', quizConfig);
-                } else {
-                    console.log('quizConfig is undefined');
-                }
-                updateDebugInfo();
-            } catch (error) {
-                alert('JavaScript Fehler: ' + error.message);
-                console.error('testFunction error:', error);
-            }
-        }
 
         function selectPreset(preset, element) {
             console.log('selectPreset called:', preset);
@@ -813,67 +721,16 @@
             document.getElementById('mediumSubtitle').textContent = `${presets.medium} Fragen`;
             document.getElementById('largeSubtitle').textContent = `${presets.large} Fragen`;
             
-            // Clear custom input
-            const customInput = document.getElementById('customCount');
-            if (customInput) {
-                customInput.value = '';
-            }
             
             updateDebugInfo();
         }
 
-        function toggleCategory(category, element) {
-            console.log('toggleCategory called:', category);
-            
-            if (category === 'all') {
-                // Toggle all categories
-                const isSelected = element.classList.contains('selected');
-                
-                document.querySelectorAll('.category-option').forEach(opt => {
-                    if (isSelected) {
-                        opt.classList.remove('selected');
-                        opt.querySelector('.category-checkbox').textContent = '';
-                    } else {
-                        opt.classList.add('selected');
-                        opt.querySelector('.category-checkbox').textContent = '✓';
-                    }
-                });
-                
-                quizConfig.selectedCategories = isSelected ? [] : ['all'];
-            } else {
-                // Individual category toggle
-                const allOption = document.querySelector('[data-category="all"]');
-                allOption.classList.remove('selected');
-                allOption.querySelector('.category-checkbox').textContent = '';
-                
-                element.classList.toggle('selected');
-                const checkbox = element.querySelector('.category-checkbox');
-                checkbox.textContent = element.classList.contains('selected') ? '✓' : '';
-                
-                // Update selected categories
-                const selectedCategories = Array.from(document.querySelectorAll('.category-option.selected'))
-                    .map(opt => opt.dataset.category)
-                    .filter(cat => cat !== 'all');
-                    
-                quizConfig.selectedCategories = selectedCategories.length > 0 ? selectedCategories : ['all'];
-                
-                // If all individual categories are selected, select "all"
-                const totalCategories = document.querySelectorAll('.category-option[data-category!="all"]').length;
-                if (selectedCategories.length === totalCategories) {
-                    allOption.classList.add('selected');
-                    allOption.querySelector('.category-checkbox').textContent = '✓';
-                    quizConfig.selectedCategories = ['all'];
-                }
-            }
-            
-            updateDebugInfo();
-        }
 
         function updateDebugInfo() {
             const debugElement = document.getElementById('debugInfo');
             if (debugElement) {
                 try {
-                    const info = `${quizConfig.questionCount} Fragen, Kategorien: ${quizConfig.selectedCategories.join(', ')}`;
+                    const info = `${quizConfig.questionCount} Fragen bereit`;
                     debugElement.textContent = info;
                     console.log('Debug info updated:', info);
                 } catch (error) {
@@ -887,11 +744,6 @@
             console.log('Starting quiz with config:', quizConfig);
             
             // Validate configuration
-            if (quizConfig.selectedCategories.length === 0) {
-                alert('Bitte wähle mindestens eine Kategorie aus.');
-                return;
-            }
-
             if (quizConfig.questionCount <= 0) {
                 alert('Bitte wähle eine gültige Anzahl von Fragen.');
                 return;
@@ -914,7 +766,7 @@
 
         class MathQuiz {
             constructor(config = null) {
-                this.config = config || { questionCount: 25, selectedCategories: ['all'] };
+                this.config = config || { questionCount: 8 };
                 this.questions = [];
                 this.currentQuestionIndex = 0;
                 this.score = 0;
@@ -934,14 +786,9 @@
                     return;
                 }
                 
-                // Filter categories based on selection
-                const categoriesToLoad = this.config.selectedCategories.includes('all') 
-                    ? Object.keys(fullQuestionBank)
-                    : this.config.selectedCategories;
-                
-                // Load questions from selected categories
+                // Load all available questions from both categories
                 let allQuestions = [];
-                for (const category of categoriesToLoad) {
+                for (const category of Object.keys(fullQuestionBank)) {
                     if (fullQuestionBank[category]) {
                         for (const question of fullQuestionBank[category]) {
                             allQuestions.push({
@@ -958,7 +805,7 @@
                 // Select the specified number of questions
                 this.questions = allQuestions.slice(0, this.config.questionCount);
                 
-                console.log(`Loaded ${this.questions.length} questions from ${categoriesToLoad.length} categories (${categoriesToLoad.join(', ')})`);
+                console.log(`Loaded ${this.questions.length} questions from ${Object.keys(fullQuestionBank).length} categories`);
                 console.log(`Configuration: ${this.config.questionCount} questions requested`);
             }
             

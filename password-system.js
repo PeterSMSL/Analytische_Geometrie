@@ -7,7 +7,8 @@ const passwords = {
     '02_Punkte-im-Raum': '784629',
     '03_Vektoren': '156834',
     '04_Skalarprodukt': '927403',
-    '05_Vektorprodukt': '501762'
+    '05_Vektorprodukt': '501762',
+    '07_Geraden_und_Lage-von-Geraden': '619837'
 };
 
 // Globales Passwort für aktuelles Kapitel
@@ -21,6 +22,7 @@ function getCurrentChapter() {
     if (path.includes('03_Vektoren')) return '03_Vektoren';
     if (path.includes('04_Skalarprodukt')) return '04_Skalarprodukt';
     if (path.includes('05_Vektorprodukt')) return '05_Vektorprodukt';
+    if (path.includes('07_Geraden_und_Lage-von-Geraden')) return '07_Geraden_und_Lage-von-Geraden';
     return null;
 }
 

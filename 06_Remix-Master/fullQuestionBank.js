@@ -1060,7 +1060,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(5, 3, 5)$', '$(6, 6, 10)$', '$(10, 6, 2)$', '$(3, 1, 1)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{2+8}{2}, \\frac{4+2}{2}, \\frac{6+4}{2}\\right) = (5, 3, 5)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{2+8}{2}, \\frac{4+2}{2}, \\frac{6+4}{2}\\right) = \\left(5, 3, 5\\right)$, also Mittelpunkt $M(5, 3, 5)$'
         },
         {
             id: 'point_3',
@@ -1084,7 +1084,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(3, 4, 2)$', '$(6, 8, 4)$', '$(0, 0, 0)$', '$(12, 16, 8)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{0+6}{2}, \\frac{0+8}{2}, \\frac{0+4}{2}\\right) = (3, 4, 2)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{0+6}{2}, \\frac{0+8}{2}, \\frac{0+4}{2}\\right) = \\left(3, 4, 2\\right)$, also Mittelpunkt $M(3, 4, 2)$'
         },
         {
             id: 'point_5',
@@ -1108,7 +1108,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(5, 4, 5)$', '$(2, 4, 6)$', '$(10, 8, 10)$', '$(1, 2, 3)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{4+6}{2}, \\frac{2+6}{2}, \\frac{8+2}{2}\\right) = (5, 4, 5)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{4+6}{2}, \\frac{2+6}{2}, \\frac{8+2}{2}\\right) = \\left(5, 4, 5\\right)$, also Mittelpunkt $M(5, 4, 5)$'
         },
         {
             id: 'point_7',
@@ -1156,7 +1156,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(3, 4, 5)$', '$(4, 4, 4)$', '$(6, 8, 10)$', '$(2, 3, 4)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{1+5}{2}, \\frac{2+6}{2}, \\frac{3+7}{2}\\right) = (3, 4, 5)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{1+5}{2}, \\frac{2+6}{2}, \\frac{3+7}{2}\\right) = \\left(3, 4, 5\\right)$, also Mittelpunkt $M(3, 4, 5)$'
         },
         // Additional point variations with different values
         {
@@ -1181,7 +1181,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(6, 4, 6)$', '$(5, 8, 12)$', '$(12, 8, 2)$', '$(6, 2, 2)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{3+9}{2}, \\frac{5+3}{2}, \\frac{7+5}{2}\\right) = (6, 4, 6)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{3+9}{2}, \\frac{5+3}{2}, \\frac{7+5}{2}\\right) = \\left(6, 4, 6\\right)$, also Mittelpunkt $M(6, 4, 6)$'
         },
         {
             id: 'point_13',
@@ -1205,7 +1205,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(4, 5, 3)$', '$(6, 8, 4)$', '$(8, 10, 6)$', '$(3, 4, 2)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{1+7}{2}, \\frac{1+9}{2}, \\frac{1+5}{2}\\right) = (4, 5, 3)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{1+7}{2}, \\frac{1+9}{2}, \\frac{1+5}{2}\\right) = \\left(4, 5, 3\\right)$, also Mittelpunkt $M(4, 5, 3)$'
         },
         {
             id: 'point_15',
@@ -1229,7 +1229,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(6, 5, 6)$', '$(2, 4, 6)$', '$(12, 10, 12)$', '$(1, 2, 3)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{5+7}{2}, \\frac{3+7}{2}, \\frac{9+3}{2}\\right) = (6, 5, 6)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{5+7}{2}, \\frac{3+7}{2}, \\frac{9+3}{2}\\right) = \\left(6, 5, 6\\right)$, also Mittelpunkt $M(6, 5, 6)$'
         },
         {
             id: 'point_17',
@@ -1277,7 +1277,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(4, 5, 6)$', '$(5, 5, 5)$', '$(8, 10, 12)$', '$(3, 4, 5)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{2+6}{2}, \\frac{3+7}{2}, \\frac{4+8}{2}\\right) = (4, 5, 6)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{2+6}{2}, \\frac{3+7}{2}, \\frac{4+8}{2}\\right) = \\left(4, 5, 6\\right)$, also Mittelpunkt $M(4, 5, 6)$'
         },
         {
             id: 'point_21',
@@ -1301,7 +1301,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(2, 4, 6)$', '$(4, 8, 12)$', '$(0, 2, 4)$', '$(1, 2, 3)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{0+4}{2}, \\frac{2+6}{2}, \\frac{4+8}{2}\\right) = (2, 4, 6)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{0+4}{2}, \\frac{2+6}{2}, \\frac{4+8}{2}\\right) = \\left(2, 4, 6\\right)$, also Mittelpunkt $M(2, 4, 6)$'
         },
         {
             id: 'point_23',
@@ -1337,7 +1337,7 @@ const fullQuestionBank = {
             type: 'multiple_choice',
             options: ['$(5, 3, 7)$', '$(4, 4, 4)$', '$(10, 6, 14)$', '$(4, 2, 6)$'],
             correct: 0,
-            explanation: 'Mittelpunktformel: $M = \\left(\\frac{3+7}{2}, \\frac{1+5}{2}, \\frac{5+9}{2}\\right) = (5, 3, 7)$'
+            explanation: 'Mittelpunktformel: $M = \\left(\\frac{3+7}{2}, \\frac{1+5}{2}, \\frac{5+9}{2}\\right) = \\left(5, 3, 7\\right)$, also Mittelpunkt $M(5, 3, 7)$'
         }
     ],
 
@@ -1843,8 +1843,8 @@ const fullQuestionBank = {
             </div>`,
             type: 'multiple_choice',
             options: ['Ja', 'Nein', 'Kann nicht bestimmt werden', 'Nur bei bestimmten Bedingungen'],
-            correct: 1,
-            explanation: 'Skalarprodukt: $\\vec{x} \\cdot \\vec{y} = 1 \\cdot 1 + 1 \\cdot (-2) + 1 \\cdot 1 = 1 - 2 + 1 = 0$. Da das Skalarprodukt 0 ist, sind sie orthogonal. [Korrektur: Antwort sollte "Ja" sein]'
+            correct: 0,
+            explanation: 'Skalarprodukt: $\\vec{x} \\cdot \\vec{y} = 1 \\cdot 1 + 1 \\cdot (-2) + 1 \\cdot 1 = 1 - 2 + 1 = 0$. Da das Skalarprodukt 0 ist, sind die Vektoren orthogonal.'
         },
         {
             id: 'scalar_10',
@@ -1972,8 +1972,8 @@ const fullQuestionBank = {
             </div>`,
             type: 'multiple_choice',
             options: ['Nein', 'Ja', 'Kann nicht bestimmt werden', 'Nur bei bestimmten Bedingungen'],
-            correct: 0,
-            explanation: 'Skalarprodukt: $\\vec{x} \\cdot \\vec{y} = 2 \\cdot 1 + 2 \\cdot (-3) + 2 \\cdot 2 = 2 - 6 + 4 = 0$. Da das Skalarprodukt 0 ist, sind sie orthogonal. [Korrektur: Antwort sollte "Ja" sein]'
+            correct: 1,
+            explanation: 'Skalarprodukt: $\\vec{x} \\cdot \\vec{y} = 2 \\cdot 1 + 2 \\cdot (-3) + 2 \\cdot 2 = 2 - 6 + 4 = 0$. Da das Skalarprodukt 0 ist, sind die Vektoren orthogonal.'
         },
         {
             id: 'scalar_20',
@@ -2389,16 +2389,16 @@ const fullQuestionBank = {
                 <div class="equation-system">
                     $$\\begin{align}
                     x + 2y + z &= 9 \\\\
-                    2x - y + 3z &= 13 \\\\
-                    3x + y - z &= 4
+                    2x - y + 3z &= 12 \\\\
+                    3x + y - z &= 1
                     \\end{align}$$
                 </div>
                 <p><em>Tipp: Nutze das Gauß-Verfahren</em></p>
             </div>`,
             type: 'multiple_choice',
-            options: ['$x = 2, y = 3, z = 1$', '$x = 1, y = 3, z = 2$', '$x = 3, y = 1, z = 2$', '$x = 1, y = 2, z = 3$'],
+            options: ['$x = 1, y = 2, z = 4$', '$x = 2, y = 3, z = 1$', '$x = 3, y = 1, z = 2$', '$x = 1, y = 3, z = 2$'],
             correct: 0,
-            explanation: 'Gauß-Verfahren führt zu: $x = 2, y = 3, z = 1$. Probe: $2 + 6 + 1 = 9$ ✓, $4 - 3 + 3 = 4$ ≠ 13... System nochmal prüfen!'
+            explanation: 'Gauß-Verfahren: I: $x + 2y + z = 9$, II: $2x - y + 3z = 12$, III: $3x + y - z = 1$. Elimination ergibt $x = 1, y = 2, z = 4$. Probe: $1 + 4 + 4 = 9$ ✓, $2 - 2 + 12 = 12$ ✓, $3 + 2 - 4 = 1$ ✓'
         },
         {
             id: 'lgs_adv_2', 
@@ -2408,16 +2408,16 @@ const fullQuestionBank = {
                 <div class="problem-title">Lineares System mit Parameter:</div>
                 <div class="equation-system">
                     $$\\begin{align}
-                    x + 2y + z &= 6 \\\\
-                    2x - y + 3z &= 14 \\\\
-                    x + y - z &= -2
+                    x + 2y + z &= 7 \\\\
+                    2x - y + 3z &= 11 \\\\
+                    x + y - z &= 2
                     \\end{align}$$
                 </div>
             </div>`,
             type: 'multiple_choice',
-            options: ['$x = 2, y = 1, z = 3$', '$x = 1, y = 2, z = 3$', '$x = 3, y = 1, z = 2$', '$x = 2, y = 3, z = 1$'],
+            options: ['$x = 3, y = 1, z = 2$', '$x = 2, y = 1, z = 3$', '$x = 1, y = 2, z = 3$', '$x = 2, y = 3, z = 1$'],
             correct: 0,
-            explanation: 'Systematisches Lösen: $x = 2, y = 1, z = 3$. Probe: $2 + 2(1) + 3 = 7$ ≠ 6... Rechnung überprüfen!'
+            explanation: 'Gauß-Verfahren: I: $x + 2y + z = 7$, II: $2x - y + 3z = 11$, III: $x + y - z = 2$. Lösung: $x = 3, y = 1, z = 2$. Probe: $3 + 2 + 2 = 7$ ✓, $6 - 1 + 6 = 11$ ✓, $3 + 1 - 2 = 2$ ✓'
         },
         {
             id: 'lgs_theory_1',
@@ -2486,13 +2486,13 @@ const fullQuestionBank = {
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Winkel zwischen Vektoren:</div>
-                <p>$\\vec{u} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 0 \\end{pmatrix}$ und $\\vec{v} = \\begin{pmatrix} 0 \\\\ 3 \\\\ 4 \\end{pmatrix}$</p>
+                <p>$\\vec{u} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$ und $\\vec{v} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$</p>
                 <p>Berechne den Winkel $\\alpha$ zwischen den Vektoren (in Grad).</p>
             </div>`,
             type: 'multiple_choice',
-            options: ['53,1°', '60°', '36,9°', '48,2°'],
+            options: ['45°', '60°', '30°', '90°'],
             correct: 0,
-            explanation: '$\\vec{u} \\cdot \\vec{v} = 0 + 12 + 0 = 12$, $|\\vec{u}| = 5$, $|\\vec{v}| = 5$. Also $\\cos(\\alpha) = \\frac{12}{25} = 0,48 \\Rightarrow \\alpha = \\arccos(0,48) ≈ 61,3°$. Nächste Option: 53,1°'
+            explanation: '$\\vec{u} \\cdot \\vec{v} = 1 \\cdot 1 + 0 \\cdot 1 + 0 \\cdot 0 = 1$, $|\\vec{u}| = 1$, $|\\vec{v}| = \\sqrt{1+1} = \\sqrt{2}$. Also $\\cos(\\alpha) = \\frac{1}{1 \\cdot \\sqrt{2}} = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2} \\Rightarrow \\alpha = 45°$.'
         },
         {
             id: 'scalar_theory_1',
@@ -2565,9 +2565,9 @@ const fullQuestionBank = {
                 <p>Berechne das Spatprodukt $\\vec{a} \\cdot (\\vec{b} \\times \\vec{c})$</p>
             </div>`,
             type: 'multiple_choice',
-            options: ['6', '-6', '3', '-3'],
+            options: ['4', '6', '-6', '3'],
             correct: 0,
-            explanation: '$\\vec{b} \\times \\vec{c} = \\begin{pmatrix} 3 \\\\ -2 \\\\ 1 \\end{pmatrix}$, dann $\\vec{a} \\cdot (\\vec{b} \\times \\vec{c}) = 2 \\cdot 3 + 1 \\cdot (-2) + 0 \\cdot 1 = 6 - 2 = 4$... Rechnung überprüfen!'
+            explanation: '$\\vec{b} \\times \\vec{c} = \\begin{pmatrix} 2 \\cdot 2 - 1 \\cdot 1 \\\\ 1 \\cdot 0 - 1 \\cdot 2 \\\\ 1 \\cdot 1 - 2 \\cdot 0 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\ -2 \\\\ 1 \\end{pmatrix}$, dann $\\vec{a} \\cdot (\\vec{b} \\times \\vec{c}) = 2 \\cdot 3 + 1 \\cdot (-2) + 0 \\cdot 1 = 6 - 2 = 4$.'
         },
         {
             id: 'vectorprod_theory_1',

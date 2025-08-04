@@ -6,7 +6,7 @@ const fullQuestionBank = {
         // SEHR EINFACHE Grundlagen - Level deutlich reduziert
         {
             id: 'basic_1',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Addition:</div>
                 <p>$3 + 4 = ?$</p>
@@ -18,7 +18,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_2',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Subtraktion:</div>
                 <p>$10 - 6 = ?$</p>
@@ -30,7 +30,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_3',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Multiplikation:</div>
                 <p>$5 \\times 3 = ?$</p>
@@ -42,7 +42,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_4',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Division:</div>
                 <p>$12 \\div 3 = ?$</p>
@@ -54,7 +54,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_5',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>10% von 20 sind:</p>
@@ -66,7 +66,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_6',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Quadratzahl:</div>
                 <p>$2^2 = ?$</p>
@@ -78,7 +78,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_7',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfacher Bruch:</div>
                 <p>$\\frac{1}{2}$ von 8 ist:</p>
@@ -90,7 +90,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_8',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Reihenfolge:</div>
                 <p>$5 + 2 \\times 3 = ?$</p>
@@ -102,7 +102,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_9',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>50% von 10 sind:</p>
@@ -114,7 +114,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_10',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfache Gleichung:</div>
                 <p>$x + 3 = 8$. Was ist $x$?</p>
@@ -126,7 +126,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_11',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Addition:</div>
                 <p>$6 + 7 = ?$</p>
@@ -138,7 +138,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_12',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Subtraktion:</div>
                 <p>$20 - 12 = ?$</p>
@@ -150,7 +150,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_13',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Multiplikation:</div>
                 <p>$4 \\times 6 = ?$</p>
@@ -162,7 +162,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_14',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Division:</div>
                 <p>$18 \\div 6 = ?$</p>
@@ -174,7 +174,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_15',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Quadratzahl:</div>
                 <p>$3^2 = ?$</p>
@@ -186,7 +186,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_16',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>25% von 12 sind:</p>
@@ -198,7 +198,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_17',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfacher Bruch:</div>
                 <p>$\\frac{1}{4}$ von 16 ist:</p>
@@ -210,7 +210,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_18',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Addition:</div>
                 <p>$8 + 5 = ?$</p>
@@ -222,7 +222,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_19',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Klammern:</div>
                 <p>$(2 + 3) \\times 4 = ?$</p>
@@ -234,7 +234,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_20',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Quadratzahl:</div>
                 <p>$4^2 = ?$</p>
@@ -248,7 +248,7 @@ const fullQuestionBank = {
         // Erweiterte Basic-Aufgaben - Variationen der bestehenden
         {
             id: 'basic_21',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Addition:</div>
                 <p>$8 + 7 = ?$</p>
@@ -260,7 +260,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_22',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Addition:</div>
                 <p>$12 + 9 = ?$</p>
@@ -272,7 +272,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_23',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Addition:</div>
                 <p>$15 + 18 = ?$</p>
@@ -284,7 +284,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_24',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Subtraktion:</div>
                 <p>$25 - 17 = ?$</p>
@@ -296,7 +296,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_25',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Subtraktion:</div>
                 <p>$34 - 19 = ?$</p>
@@ -308,7 +308,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_26',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Subtraktion:</div>
                 <p>$42 - 28 = ?$</p>
@@ -320,7 +320,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_27',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Multiplikation:</div>
                 <p>$7 \\times 8 = ?$</p>
@@ -332,7 +332,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_28',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Multiplikation:</div>
                 <p>$9 \\times 7 = ?$</p>
@@ -344,7 +344,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_29',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Multiplikation:</div>
                 <p>$12 \\times 6 = ?$</p>
@@ -356,7 +356,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_30',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Division:</div>
                 <p>$48 \\div 6 = ?$</p>
@@ -368,7 +368,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_31',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Division:</div>
                 <p>$56 \\div 7 = ?$</p>
@@ -380,7 +380,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_32',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Division:</div>
                 <p>$81 \\div 9 = ?$</p>
@@ -392,7 +392,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_33',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>25% von 80 sind:</p>
@@ -404,7 +404,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_34',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>30% von 60 sind:</p>
@@ -416,7 +416,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_35',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>15% von 200 sind:</p>
@@ -428,7 +428,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_36',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Quadratzahl:</div>
                 <p>$5^2 = ?$</p>
@@ -440,7 +440,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_37',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Quadratzahl:</div>
                 <p>$6^2 = ?$</p>
@@ -452,7 +452,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_38',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Quadratzahl:</div>
                 <p>$7^2 = ?$</p>
@@ -464,7 +464,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_39',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Bruch:</div>
                 <p>$\\frac{2}{3}$ von 18 ist:</p>
@@ -476,7 +476,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_40',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Bruch:</div>
                 <p>$\\frac{3}{4}$ von 20 ist:</p>
@@ -488,7 +488,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_41',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Bruch:</div>
                 <p>$\\frac{5}{6}$ von 24 ist:</p>
@@ -500,7 +500,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_42',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Reihenfolge:</div>
                 <p>$8 + 4 \\times 2 = ?$</p>
@@ -512,7 +512,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_43',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Reihenfolge:</div>
                 <p>$15 - 3 \\times 4 = ?$</p>
@@ -524,7 +524,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_44',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Reihenfolge:</div>
                 <p>$(6 + 4) \\times 2 = ?$</p>
@@ -536,7 +536,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_45',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Prozent:</div>
                 <p>40% von 125 sind:</p>
@@ -548,7 +548,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_46',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfache Gleichung:</div>
                 <p>$x + 8 = 15$. Was ist $x$?</p>
@@ -560,7 +560,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_47',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfache Gleichung:</div>
                 <p>$x - 6 = 12$. Was ist $x$?</p>
@@ -572,7 +572,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_48',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfache Gleichung:</div>
                 <p>$3x = 21$. Was ist $x$?</p>
@@ -584,7 +584,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_49',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Wurzel:</div>
                 <p>$\\sqrt{64} = ?$</p>
@@ -596,7 +596,7 @@ const fullQuestionBank = {
         },
         {
             id: 'basic_50',
-            category: 'Allgemein',
+            category: '🎯 Grundlagen-Mix',
             question: `<div class="math-problem">
                 <div class="problem-title">Wurzel:</div>
                 <p>$\\sqrt{81} = ?$</p>
@@ -611,7 +611,7 @@ const fullQuestionBank = {
     lgs: [
         {
             id: 'lgs_1',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">Einfaches LGS:</div>
                 <div class="equation-system">
@@ -628,7 +628,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_2',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -645,7 +645,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_3',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -662,7 +662,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_4',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -679,7 +679,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_5',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -696,7 +696,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_6',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -713,7 +713,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_7',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -730,7 +730,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_8',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -747,7 +747,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_9',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -764,7 +764,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_10',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -782,7 +782,7 @@ const fullQuestionBank = {
         // Additional LGS variations with different values
         {
             id: 'lgs_11',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -799,7 +799,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_12',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -816,7 +816,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_13',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -833,7 +833,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_14',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -850,7 +850,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_15',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -867,7 +867,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_16',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -884,7 +884,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_17',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -901,7 +901,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_18',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -918,7 +918,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_19',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -935,7 +935,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_20',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -952,7 +952,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_21',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -969,7 +969,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_22',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -986,7 +986,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_23',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -1003,7 +1003,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_24',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -1020,7 +1020,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_25',
-            category: 'LGS',
+            category: '📊 Lineare Gleichungssysteme',
             question: `<div class="math-problem">
                 <div class="problem-title">LGS lösen:</div>
                 <div class="equation-system">
@@ -1040,7 +1040,7 @@ const fullQuestionBank = {
     point: [
         {
             id: 'point_1',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $A(1, 2, 3)$ und $B(4, 6, 3)$ ist:</p>
@@ -1052,7 +1052,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_2',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $P(2, 4, 6)$ zu $Q(8, 2, 4)$ ist:</p>
@@ -1064,7 +1064,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_3',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $C(0, 0, 0)$ und $D(3, 4, 0)$ ist:</p>
@@ -1076,7 +1076,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_4',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $A(0, 0, 0)$ zu $B(6, 8, 4)$ ist:</p>
@@ -1088,7 +1088,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_5',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $E(1, 1, 1)$ und $F(4, 5, 1)$ ist:</p>
@@ -1100,7 +1100,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_6',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $P(4, 2, 8)$ zu $Q(6, 6, 2)$ ist:</p>
@@ -1112,7 +1112,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_7',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $G(2, 3, 6)$ und $H(2, 7, 6)$ ist:</p>
@@ -1124,7 +1124,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_8',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Koordinaten ablesen:</div>
                 <p>Punkt $A$ hat die x-Koordinate 5, y-Koordinate 3 und z-Koordinate 7. Wie schreibt man $A$?</p>
@@ -1136,7 +1136,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_9',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $I(0, 3, 4)$ und $J(0, 0, 0)$ ist:</p>
@@ -1148,7 +1148,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_10',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $M(1, 2, 3)$ zu $N(5, 6, 7)$ ist:</p>
@@ -1161,7 +1161,7 @@ const fullQuestionBank = {
         // Additional point variations with different values
         {
             id: 'point_11',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $A(2, 1, 4)$ und $B(5, 5, 4)$ ist:</p>
@@ -1173,7 +1173,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_12',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $P(3, 5, 7)$ zu $Q(9, 3, 5)$ ist:</p>
@@ -1185,7 +1185,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_13',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $C(1, 1, 2)$ und $D(4, 5, 2)$ ist:</p>
@@ -1197,7 +1197,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_14',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $A(1, 1, 1)$ zu $B(7, 9, 5)$ ist:</p>
@@ -1209,7 +1209,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_15',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $E(0, 0, 3)$ und $F(0, 4, 0)$ ist:</p>
@@ -1221,7 +1221,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_16',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $P(5, 3, 9)$ zu $Q(7, 7, 3)$ ist:</p>
@@ -1233,7 +1233,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_17',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $G(3, 4, 5)$ und $H(3, 8, 5)$ ist:</p>
@@ -1245,7 +1245,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_18',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Koordinaten ablesen:</div>
                 <p>Punkt $B$ hat die x-Koordinate 7, y-Koordinate 2 und z-Koordinate 9. Wie schreibt man $B$?</p>
@@ -1257,7 +1257,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_19',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $I(1, 5, 2)$ und $J(1, 1, 2)$ ist:</p>
@@ -1269,7 +1269,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_20',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $M(2, 3, 4)$ zu $N(6, 7, 8)$ ist:</p>
@@ -1281,7 +1281,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_21',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $A(0, 5, 0)$ und $B(0, 0, 12)$ ist:</p>
@@ -1293,7 +1293,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_22',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $P(0, 2, 4)$ zu $Q(4, 6, 8)$ ist:</p>
@@ -1305,7 +1305,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_23',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Abstand berechnen:</div>
                 <p>Der Abstand zwischen $C(2, 2, 1)$ und $D(5, 6, 1)$ ist:</p>
@@ -1317,7 +1317,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_24',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Koordinaten ablesen:</div>
                 <p>Punkt $C$ hat die x-Koordinate 8, y-Koordinate 1 und z-Koordinate 6. Wie schreibt man $C$?</p>
@@ -1329,7 +1329,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_25',
-            category: 'Punkte im Raum',
+            category: '📍 Punkte & Koordinaten',
             question: `<div class="math-problem">
                 <div class="problem-title">Mittelpunkt:</div>
                 <p>Der Mittelpunkt der Strecke von $M(3, 1, 5)$ zu $N(7, 5, 9)$ ist:</p>
@@ -1344,7 +1344,7 @@ const fullQuestionBank = {
     vector: [
         {
             id: 'vector_1',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektoraddition:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 1 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 1 \\\\ -2 \\\\ 4 \\end{pmatrix}$</p>
@@ -1362,7 +1362,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_2',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{v} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 0 \\end{pmatrix}$ ist:</p>
@@ -1374,7 +1374,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_3',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorsubtraktion:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 5 \\\\ 2 \\\\ 8 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix}$</p>
@@ -1392,7 +1392,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_4',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarmultiplikation:</div>
                 <p>$2 \\cdot \\begin{pmatrix} 3 \\\\ 1 \\\\ 4 \\end{pmatrix} = ?$</p>
@@ -1409,7 +1409,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_5',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{w} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 12 \\end{pmatrix}$ ist:</p>
@@ -1421,7 +1421,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_6',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektoraddition:</div>
                 <p>$\\vec{e} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix}$ und $\\vec{f} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 1 \\end{pmatrix}$</p>
@@ -1439,7 +1439,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_7',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{u} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 2 \\end{pmatrix}$ ist:</p>
@@ -1451,7 +1451,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_8',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarmultiplikation:</div>
                 <p>$3 \\cdot \\begin{pmatrix} 2 \\\\ 1 \\\\ 4 \\end{pmatrix} = ?$</p>
@@ -1468,7 +1468,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_9',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorsubtraktion:</div>
                 <p>$\\vec{g} = \\begin{pmatrix} 7 \\\\ 5 \\\\ 3 \\end{pmatrix}$ und $\\vec{h} = \\begin{pmatrix} 4 \\\\ 2 \\\\ 1 \\end{pmatrix}$</p>
@@ -1486,7 +1486,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_10',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Einheitsvektor:</div>
                 <p>Welche Länge hat der Vektor $\\vec{e_1} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$?</p>
@@ -1499,7 +1499,7 @@ const fullQuestionBank = {
         // Additional vector variations with different values
         {
             id: 'vector_11',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektoraddition:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 2 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 2 \\\\ -1 \\\\ 5 \\end{pmatrix}$</p>
@@ -1517,7 +1517,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_12',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{v} = \\begin{pmatrix} 6 \\\\ 8 \\\\ 0 \\end{pmatrix}$ ist:</p>
@@ -1529,7 +1529,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_13',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorsubtraktion:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 6 \\\\ 3 \\\\ 9 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 3 \\\\ 2 \\\\ 4 \\end{pmatrix}$</p>
@@ -1547,7 +1547,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_14',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarmultiplikation:</div>
                 <p>$4 \\cdot \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix} = ?$</p>
@@ -1564,7 +1564,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_15',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{w} = \\begin{pmatrix} 0 \\\\ 3 \\\\ 4 \\end{pmatrix}$ ist:</p>
@@ -1576,7 +1576,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_16',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektoraddition:</div>
                 <p>$\\vec{e} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix}$ und $\\vec{f} = \\begin{pmatrix} 4 \\\\ 5 \\\\ 2 \\end{pmatrix}$</p>
@@ -1594,7 +1594,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_17',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{u} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 6 \\end{pmatrix}$ ist:</p>
@@ -1606,7 +1606,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_18',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarmultiplikation:</div>
                 <p>$5 \\cdot \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix} = ?$</p>
@@ -1623,7 +1623,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_19',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorsubtraktion:</div>
                 <p>$\\vec{g} = \\begin{pmatrix} 8 \\\\ 6 \\\\ 4 \\end{pmatrix}$ und $\\vec{h} = \\begin{pmatrix} 5 \\\\ 3 \\\\ 2 \\end{pmatrix}$</p>
@@ -1641,7 +1641,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_20',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Einheitsvektor:</div>
                 <p>Welche Länge hat der Vektor $\\vec{e_2} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$?</p>
@@ -1653,7 +1653,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_21',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektoraddition:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 1 \\\\ 5 \\\\ 3 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 4 \\\\ -2 \\\\ 6 \\end{pmatrix}$</p>
@@ -1671,7 +1671,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_22',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorlänge:</div>
                 <p>Die Länge des Vektors $\\vec{v} = \\begin{pmatrix} 1 \\\\ 4 \\\\ 8 \\end{pmatrix}$ ist:</p>
@@ -1683,7 +1683,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_23',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Nullvektor:</div>
                 <p>Welche Länge hat der Nullvektor $\\vec{0} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 0 \\end{pmatrix}$?</p>
@@ -1695,7 +1695,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_24',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarmultiplikation:</div>
                 <p>$-2 \\cdot \\begin{pmatrix} 3 \\\\ 1 \\\\ 4 \\end{pmatrix} = ?$</p>
@@ -1712,7 +1712,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_25',
-            category: 'Vektoren',
+            category: '🎯 Vektoren & Rechnung',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorsubtraktion:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 9 \\\\ 7 \\\\ 5 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 4 \\\\ 3 \\\\ 2 \\end{pmatrix}$</p>
@@ -1733,7 +1733,7 @@ const fullQuestionBank = {
     scalar: [
         {
             id: 'scalar_1',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 1 \\\\ 4 \\\\ 2 \\end{pmatrix}$</p>
@@ -1746,7 +1746,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_2',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität:</div>
                 <p>Für welchen Wert von $k$ sind die Vektoren orthogonal?</p>
@@ -1759,7 +1759,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_3',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 3 \\\\ 2 \\\\ 1 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 2 \\end{pmatrix}$</p>
@@ -1772,7 +1772,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_4',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{e} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 3 \\end{pmatrix}$ und $\\vec{f} = \\begin{pmatrix} 2 \\\\ 5 \\\\ 1 \\end{pmatrix}$</p>
@@ -1785,7 +1785,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_5',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität prüfen:</div>
                 <p>Sind die Vektoren $\\vec{p} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 2 \\\\ -1 \\\\ 3 \\end{pmatrix}$ orthogonal?</p>
@@ -1797,7 +1797,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_6',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{g} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 2 \\end{pmatrix}$ und $\\vec{h} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 0 \\end{pmatrix}$</p>
@@ -1810,7 +1810,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_7',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität:</div>
                 <p>Für welchen Wert von $m$ sind die Vektoren orthogonal?</p>
@@ -1823,7 +1823,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_8',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{i} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 4 \\end{pmatrix}$ und $\\vec{j} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 1 \\end{pmatrix}$</p>
@@ -1836,7 +1836,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_9',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität prüfen:</div>
                 <p>Sind die Vektoren $\\vec{x} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix}$ und $\\vec{y} = \\begin{pmatrix} 1 \\\\ -2 \\\\ 1 \\end{pmatrix}$ orthogonal?</p>
@@ -1848,7 +1848,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_10',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{k} = \\begin{pmatrix} 5 \\\\ 0 \\\\ 2 \\end{pmatrix}$ und $\\vec{l} = \\begin{pmatrix} 1 \\\\ 4 \\\\ 3 \\end{pmatrix}$</p>
@@ -1862,7 +1862,7 @@ const fullQuestionBank = {
         // Additional scalar product variations with different values
         {
             id: 'scalar_11',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 3 \\\\ 2 \\\\ 4 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 2 \\\\ 5 \\\\ 1 \\end{pmatrix}$</p>
@@ -1875,7 +1875,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_12',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität:</div>
                 <p>Für welchen Wert von $k$ sind die Vektoren orthogonal?</p>
@@ -1888,7 +1888,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_13',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 4 \\\\ 3 \\\\ 2 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 3 \\end{pmatrix}$</p>
@@ -1901,7 +1901,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_14',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{e} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 4 \\end{pmatrix}$ und $\\vec{f} = \\begin{pmatrix} 3 \\\\ 6 \\\\ 2 \\end{pmatrix}$</p>
@@ -1914,7 +1914,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_15',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität prüfen:</div>
                 <p>Sind die Vektoren $\\vec{p} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 1 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 3 \\\\ -2 \\\\ 0 \\end{pmatrix}$ orthogonal?</p>
@@ -1926,7 +1926,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_16',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{g} = \\begin{pmatrix} 5 \\\\ 2 \\\\ 3 \\end{pmatrix}$ und $\\vec{h} = \\begin{pmatrix} 2 \\\\ 4 \\\\ 1 \\end{pmatrix}$</p>
@@ -1939,7 +1939,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_17',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität:</div>
                 <p>Für welchen Wert von $m$ sind die Vektoren orthogonal?</p>
@@ -1952,7 +1952,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_18',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{i} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 5 \\end{pmatrix}$ und $\\vec{j} = \\begin{pmatrix} 2 \\\\ 3 \\\\ 2 \\end{pmatrix}$</p>
@@ -1965,7 +1965,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_19',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität prüfen:</div>
                 <p>Sind die Vektoren $\\vec{x} = \\begin{pmatrix} 2 \\\\ 2 \\\\ 2 \\end{pmatrix}$ und $\\vec{y} = \\begin{pmatrix} 1 \\\\ -3 \\\\ 2 \\end{pmatrix}$ orthogonal?</p>
@@ -1977,7 +1977,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_20',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{k} = \\begin{pmatrix} 6 \\\\ 1 \\\\ 3 \\end{pmatrix}$ und $\\vec{l} = \\begin{pmatrix} 2 \\\\ 5 \\\\ 4 \\end{pmatrix}$</p>
@@ -1990,7 +1990,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_21',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 5 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 4 \\\\ 2 \\\\ 3 \\end{pmatrix}$</p>
@@ -2003,7 +2003,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_22',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität:</div>
                 <p>Für welchen Wert von $t$ sind die Vektoren orthogonal?</p>
@@ -2016,7 +2016,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_23',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 7 \\\\ 1 \\\\ 4 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 2 \\end{pmatrix}$</p>
@@ -2029,7 +2029,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_24',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Orthogonalität prüfen:</div>
                 <p>Sind die Vektoren $\\vec{p} = \\begin{pmatrix} 3 \\\\ 4 \\\\ 0 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 4 \\\\ -3 \\\\ 5 \\end{pmatrix}$ orthogonal?</p>
@@ -2041,7 +2041,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_25',
-            category: 'Skalarprodukt',
+            category: '⚡ Skalarprodukt & Winkel',
             question: `<div class="math-problem">
                 <div class="problem-title">Skalarprodukt:</div>
                 <p>$\\vec{e} = \\begin{pmatrix} 8 \\\\ 2 \\\\ 1 \\end{pmatrix}$ und $\\vec{f} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 6 \\end{pmatrix}$</p>
@@ -2057,7 +2057,7 @@ const fullQuestionBank = {
     vectorproduct: [
         {
             id: 'vectorproduct_1',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$</p>
@@ -2075,7 +2075,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_2',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Fläche eines Parallelogramms:</div>
                 <p>Ein Parallelogramm wird von den Vektoren $\\vec{u} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 0 \\end{pmatrix}$ und $\\vec{v} = \\begin{pmatrix} 0 \\\\ 4 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2088,7 +2088,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_3',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt berechnen:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$</p>
@@ -2106,7 +2106,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_4',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Normalenvektor:</div>
                 <p>Die Vektoren $\\vec{p} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \\end{pmatrix}$ spannen eine Ebene auf.</p>
@@ -2124,7 +2124,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_5',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Dreiecksfläche:</div>
                 <p>Ein Dreieck wird von den Vektoren $\\vec{r} = \\begin{pmatrix} 2 \\\\ 0 \\\\ 0 \\end{pmatrix}$ und $\\vec{s} = \\begin{pmatrix} 0 \\\\ 3 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2138,7 +2138,7 @@ const fullQuestionBank = {
         // Additional vectorproduct variations with different values
         {
             id: 'vectorproduct_6',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 1 \\end{pmatrix}$</p>
@@ -2156,7 +2156,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_7',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Fläche eines Parallelogramms:</div>
                 <p>Ein Parallelogramm wird von den Vektoren $\\vec{u} = \\begin{pmatrix} 4 \\\\ 0 \\\\ 0 \\end{pmatrix}$ und $\\vec{v} = \\begin{pmatrix} 0 \\\\ 2 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2169,7 +2169,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_8',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt berechnen:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 3 \\\\ 2 \\\\ 0 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 2 \\end{pmatrix}$</p>
@@ -2187,7 +2187,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_9',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Normalenvektor:</div>
                 <p>Die Vektoren $\\vec{p} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 2 \\end{pmatrix}$ spannen eine Ebene auf.</p>
@@ -2205,7 +2205,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_10',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Dreiecksfläche:</div>
                 <p>Ein Dreieck wird von den Vektoren $\\vec{r} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 0 \\end{pmatrix}$ und $\\vec{s} = \\begin{pmatrix} 0 \\\\ 4 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2218,7 +2218,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_11',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 0 \\\\ 0 \\\\ 1 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$</p>
@@ -2236,7 +2236,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_12',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Fläche eines Parallelogramms:</div>
                 <p>Ein Parallelogramm wird von den Vektoren $\\vec{u} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix}$ und $\\vec{v} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2249,7 +2249,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_13',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt berechnen:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 2 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 3 \\end{pmatrix}$</p>
@@ -2267,7 +2267,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_14',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Normalenvektor:</div>
                 <p>Die Vektoren $\\vec{p} = \\begin{pmatrix} 3 \\\\ 0 \\\\ 1 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 0 \\\\ 2 \\\\ 1 \\end{pmatrix}$ spannen eine Ebene auf.</p>
@@ -2285,7 +2285,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_15',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Dreiecksfläche:</div>
                 <p>Ein Dreieck wird von den Vektoren $\\vec{r} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 0 \\end{pmatrix}$ und $\\vec{s} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2298,7 +2298,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_16',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Fläche eines Parallelogramms:</div>
                 <p>Ein Parallelogramm wird von den Vektoren $\\vec{u} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 0 \\end{pmatrix}$ und $\\vec{v} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2311,7 +2311,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_17',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt:</div>
                 <p>$\\vec{a} = \\begin{pmatrix} 2 \\\\ 0 \\\\ 1 \\end{pmatrix}$ und $\\vec{b} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 0 \\end{pmatrix}$</p>
@@ -2329,7 +2329,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_18',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Normalenvektor:</div>
                 <p>Die Vektoren $\\vec{p} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 2 \\end{pmatrix}$ und $\\vec{q} = \\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\end{pmatrix}$ spannen eine Ebene auf.</p>
@@ -2347,7 +2347,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_19',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Dreiecksfläche:</div>
                 <p>Ein Dreieck wird von den Vektoren $\\vec{r} = \\begin{pmatrix} 4 \\\\ 1 \\\\ 0 \\end{pmatrix}$ und $\\vec{s} = \\begin{pmatrix} 1 \\\\ 4 \\\\ 0 \\end{pmatrix}$ aufgespannt.</p>
@@ -2360,7 +2360,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorproduct_20',
-            category: 'Vektorprodukt',
+            category: '🌀 Vektorprodukt & Flächen',
             question: `<div class="math-problem">
                 <div class="problem-title">Kreuzprodukt berechnen:</div>
                 <p>$\\vec{c} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$ und $\\vec{d} = \\begin{pmatrix} 3 \\\\ 2 \\\\ 1 \\end{pmatrix}$</p>
@@ -2382,7 +2382,7 @@ const fullQuestionBank = {
     lgs_advanced: [
         {
             id: 'lgs_adv_1',
-            category: 'LGS Erweitert',
+            category: '📊 Lineare Gleichungssysteme',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">3×3 Gleichungssystem lösen:</div>
@@ -2402,7 +2402,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_adv_2', 
-            category: 'LGS Erweitert',
+            category: '📊 Lineare Gleichungssysteme',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Lineares System mit Parameter:</div>
@@ -2421,7 +2421,7 @@ const fullQuestionBank = {
         },
         {
             id: 'lgs_theory_1',
-            category: 'LGS Theorie',
+            category: '📊 Lineare Gleichungssysteme',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Theorie: Lösbarkeit von LGS</div>
@@ -2442,7 +2442,7 @@ const fullQuestionBank = {
     vector_advanced: [
         {
             id: 'vector_adv_1',
-            category: 'Vektoren Erweitert',
+            category: '🎯 Vektoren & Rechnung',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Vektorrechnung im Raum:</div>
@@ -2461,7 +2461,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vector_theory_1',
-            category: 'Vektoren Theorie',
+            category: '🎯 Vektoren & Rechnung',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Theorie: Lineare Unabhängigkeit</div>
@@ -2482,7 +2482,7 @@ const fullQuestionBank = {
     scalar_advanced: [
         {
             id: 'scalar_adv_1',
-            category: 'Skalarprodukt Erweitert',
+            category: '⚡ Skalarprodukt & Winkel',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Winkel zwischen Vektoren:</div>
@@ -2496,7 +2496,7 @@ const fullQuestionBank = {
         },
         {
             id: 'scalar_theory_1',
-            category: 'Skalarprodukt Theorie',
+            category: '⚡ Skalarprodukt & Winkel',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Theorie: Koordinatenform des Skalarprodukts</div>
@@ -2517,7 +2517,7 @@ const fullQuestionBank = {
     point_advanced: [
         {
             id: 'point_adv_1',
-            category: 'Punkte im Raum Erweitert',
+            category: '📍 Punkte & Koordinaten',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Schwerpunkt eines Dreiecks:</div>
@@ -2536,7 +2536,7 @@ const fullQuestionBank = {
         },
         {
             id: 'point_theory_1',
-            category: 'Punkte im Raum Theorie',
+            category: '📍 Punkte & Koordinaten',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Theorie: Abstandsformel</div>
@@ -2557,7 +2557,7 @@ const fullQuestionBank = {
     vectorproduct_advanced: [
         {
             id: 'vectorprod_adv_1',
-            category: 'Vektorprodukt Erweitert',
+            category: '🌀 Vektorprodukt & Flächen',
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Spatprodukt berechnen:</div>
@@ -2571,7 +2571,7 @@ const fullQuestionBank = {
         },
         {
             id: 'vectorprod_theory_1',
-            category: 'Vektorprodukt Theorie', 
+            category: '🌀 Vektorprodukt & Flächen', 
             difficulty: 'hard',
             question: `<div class="math-problem">
                 <div class="problem-title">Theorie: Eigenschaften des Kreuzprodukts</div>

@@ -147,6 +147,93 @@
             overflow-x: auto;
         }
         
+        .video-placeholder {
+            background: #f3f4f6;
+            border: 2px dashed #9ca3af;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .video-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .video-embed {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-preview {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .play-button {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }        
         .example-box {
             background: #faf5ff;
             border: 2px solid #a855f7;
@@ -578,7 +665,21 @@
                 <div class="theory-section">
                     <h2>1. Was ist ein Vektor?</h2>
                     <p>Ein Vektor ist eine mathematische Größe, die sowohl einen Betrag (Länge) als auch eine Richtung hat. Im dreidimensionalen Raum wird ein Vektor durch drei Komponenten beschrieben.</p>
-                    
+                    <div class="video-container">
+                        <div class="video-preview" onclick="expandVideo(this)">
+                            <video class="video-thumbnail" preload="metadata">
+                                <source src="03_Vektoren_Definition-Rechenregeln_Abi2027.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-button">▶</div>
+                                <div class="video-title">Definition Vektoren und Rechenregeln</div>
+                            </div>
+                        </div>
+                        <video controls class="video-embed video-full" style="display: none;">
+                            <source src="03_Vektoren_Definition-Rechenregeln_Abi2027.mp4" type="video/mp4">
+                            Dein Browser unterstützt das Video-Element nicht.
+                        </video>
+                    </div>
                     <h3>1.1 Darstellung von Vektoren</h3>
                     <p>Vektoren können auf verschiedene Arten dargestellt werden:</p>
                     <ul style="margin-left: 2rem; margin-top: 1rem;">
@@ -649,8 +750,29 @@
                 </div>
                 
                 <div class="theory-section">
-                    <h3>3. Betrag eines Vektors</h3>
-                    <p>Der Betrag (die Länge) eines Vektors wird mit dem Satz des Pythagoras berechnet:</p>
+                    <h3>3. Linearkombinationen, lineare Unabhängigkeit und Abhängigkeit und Betrag eines Vektors</h3>
+                    <p>ToDO</p>
+ 					<div class="video-container">
+                        <div class="video-preview" onclick="expandVideo(this)">
+                            <video class="video-thumbnail" preload="metadata">
+                                <source src="03_Vektoren_Linearkombinationen_Betrag_und_Laenge_Abi2027.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-button">▶</div>
+                                <div class="video-title">Linearkombinationen und Betrag eines Vektors</div>
+                            </div>
+                        </div>
+                        <video controls class="video-embed video-full" style="display: none;">
+                            <source src="03_Vektoren_Linearkombinationen_Betrag_und_Laenge_Abi2027.mp4" type="video/mp4">
+                            Dein Browser unterstützt das Video-Element nicht.
+                        </video>
+                    </div>                   
+                    
+                </div>
+                    <p>ToDo Linearkombinationen</p>
+					<p>ToDo Lineare Unabhängigkeit und Abhängigkeit</p>
+					
+					<p>Der Betrag (die Länge) eines Vektors wird mit dem Satz des Pythagoras berechnet:</p>
                     
                     <div class="math-formula">
                         $$|\vec{a}| = \sqrt{a_1^2 + a_2^2 + a_3^2}$$
@@ -665,7 +787,9 @@
                             $$|\vec{a}| = \sqrt{3^2 + 4^2 + 5^2} = \sqrt{9 + 16 + 25} = \sqrt{50} \approx 7{,}07$$
                         </div>
                     </div>
-                </div>
+                </div>				
+				
+				
             </div>
             
             <!-- Übungen Tab -->
@@ -1074,6 +1198,33 @@
             });
         });
         
+		// Video expand functionality
+        function expandVideo(previewElement) {
+            const container = previewElement.parentElement;
+            const preview = container.querySelector('.video-preview');
+            const fullVideo = container.querySelector('.video-full');
+            
+            // Hide preview and show full video
+            preview.style.display = 'none';
+            fullVideo.style.display = 'block';
+            
+            // Auto-play the video
+            fullVideo.play();
+            
+            // Add event listener to minimize video when it ends
+            fullVideo.addEventListener('ended', function() {
+                fullVideo.style.display = 'none';
+                preview.style.display = 'block';
+            });
+            
+            // Allow clicking on full video to minimize
+            fullVideo.addEventListener('click', function() {
+                if (fullVideo.paused) {
+                    fullVideo.play();
+                }
+            });
+        }
+		
         // iOS-optimierte PDF-Download-Funktion
         function openPdfIOS(pdfUrl) {
             // Direkte Navigation für iOS/Safari

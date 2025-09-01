@@ -3,7 +3,7 @@
 
 // Passwort-Mapping
 const passwords = {
-    '01_LGS': '342951',
+    '01_LGS': 'msl',
     '02_Punkte-im-Raum': '784629',
     '03_Vektoren': '156834',
     '04_Skalarprodukt': '927403',

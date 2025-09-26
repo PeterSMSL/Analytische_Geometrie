@@ -447,6 +447,73 @@
                 font-size: 1rem;
             }
         }
+
+        /* Styles für die neue Visualisierung */
+        .vector-input {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .vector-group {
+            flex: 1;
+            min-width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .vector-group h3 {
+            margin: 0 0 15px 0;
+            color: #495057;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-row label {
+            width: 20px;
+            font-weight: bold;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #007bff;
+        }
         
         /* Kleinere Bildschirme */
         @media (max-width: 480px) {
@@ -491,12 +558,19 @@
                 <a href="04_Skalarprodukt_Loesung.pdf" target="_blank" class="pdf-link" class="pdf-link pdf-loesung" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Lösung
                 </a>
+                <a href="Marius.pdf" target="_blank" class="pdf-link" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
+                    Marius
+                </a>
+                <a href="Marius_Loesung.pdf" target="_blank" class="pdf-link" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
+                    Marius Lösungen
+                </a>
             </div>
         </div>
         
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="theory">Theorie</button>
             <button class="nav-tab" data-tab="exercises">Übungen</button>
+            <button class="nav-tab" data-tab="visualization">Visualisierung</button>
             <button class="nav-tab" data-tab="quiz">Snake</button>
         </div>
         
@@ -618,6 +692,39 @@
                 </div>
             </div>
             
+            <!-- Visualisierung Tab -->
+            <div id="visualization" class="tab-content">
+                <h2>📐 3D-Skalarprodukt Visualisierung</h2>
+                <p style="text-align: center; margin-bottom: 1rem;">
+                    Interaktive 3D-Visualisierung des Skalarprodukts
+                </p>
+
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <iframe src="visualisierung.html"
+                            width="100%"
+                            height="800"
+                            style="border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <p>Ihr Browser unterstützt keine iframes.
+                           <a href="visualisierung.html" target="_blank">
+                               Klicken Sie hier, um die Visualisierung zu öffnen
+                           </a>
+                        </p>
+                    </iframe>
+                </div>
+
+                <div class="info-box">
+                    <strong>🎯 Interaktion:</strong>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>Maus ziehen:</strong> Dreht das 3D-Koordinatensystem horizontal (Z-Achse bleibt vertikal)</li>
+                        <li><strong>Hellorangener Vektor:</strong> a⃗ - Referenzvektor</li>
+                        <li><strong>Dunkelorangener Vektor:</strong> b⃗ - Zu projizierender Vektor</li>
+                        <li><strong>Grüner Vektor:</strong> Projektion von b⃗ auf a⃗ (ohne Beschriftung)</li>
+                        <li><strong>Blaues Rechteck:</strong> Geometrische Darstellung des Skalarprodukts</li>
+                        <li><strong>Dynamische Achsen:</strong> Skalieren automatisch mit der Vektorgröße</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Übungen Tab -->
             <div id="exercises" class="tab-content">
                 <h2>✏️ Übungen</h2>
@@ -824,27 +931,52 @@
         const totalQuestions = 3;
         
         function showTab(tabName) {
+            console.log('showTab called with:', tabName);
+
             // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            
+            console.log('Found tab contents:', tabs.length);
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                console.log('Hidden tab:', tab.id);
+            });
+
             // Remove active class from all nav tabs
             const navTabs = document.querySelectorAll('.nav-tab');
             navTabs.forEach(tab => tab.classList.remove('active'));
-            
+
             // Show selected tab
             const targetContent = document.getElementById(tabName);
             if (targetContent) {
                 targetContent.classList.add('active');
+                console.log('Activated tab content:', tabName);
+            } else {
+                console.error('Tab content not found:', tabName);
             }
-            
+
             // Add active class to correct nav tab
             const targetTab = document.querySelector(`[data-tab="${tabName}"]`);
             if (targetTab) {
                 targetTab.classList.add('active');
+                console.log('Activated nav tab:', tabName);
+            } else {
+                console.error('Nav tab not found:', tabName);
             }
-            
+
             currentTab = tabName;
+
+            // Initialize new visualization when visualization tab is shown
+            if (tabName === 'visualization') {
+                console.log('Initializing visualization tab');
+                setTimeout(function() {
+                    if (typeof newUpdateVisualization === 'function') {
+                        console.log('Calling newUpdateVisualization');
+                        newUpdateVisualization();
+                    } else {
+                        console.error('newUpdateVisualization function not found');
+                    }
+                }, 100);
+            }
         }
         
         function toggleSolution(solutionId) {
@@ -896,22 +1028,21 @@
         
         // Event listeners für Tab-Navigation
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab navigation - robuste Event-Behandlung
+            console.log('DOM loaded, initializing tabs');
+
+            // Tab navigation - einfache, robuste Event-Behandlung
             const navTabs = document.querySelectorAll('.nav-tab');
-            
-            navTabs.forEach(tab => {
-                // Click event für alle Geräte
+            console.log('Found nav tabs:', navTabs.length);
+
+            navTabs.forEach((tab, index) => {
+                console.log(`Tab ${index}:`, tab.getAttribute('data-tab'));
+
+                // Nur Click event
                 tab.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const tabName = this.getAttribute('data-tab');
-                    showTab(tabName);
-                });
-                
-                // Touch event für mobile Geräte
-                tab.addEventListener('touchend', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     const tabName = this.getAttribute('data-tab');
+                    console.log('Tab clicked:', tabName);
                     showTab(tabName);
                 });
             });
@@ -928,277 +1059,8 @@
                 });
             });
         });
-        
-        // iOS-optimierte PDF-Download-Funktion
-        function openPdfIOS(pdfUrl) {
-            // Direkte Navigation für iOS/Safari
-            window.location.href = pdfUrl;
-        }
-        
-        // Globale Funktion: Teste PDF mit iframe, dann öffne oder zeige Coming Soon
-        function openPdfOrFallback(link, event) {
-            event.preventDefault();
-            
-            const pdfUrl = link.getAttribute('href');
-            
-            // iOS/Safari Detection und direkter Download
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            
-            if (isIOS || isSafari) {
-                openPdfIOS(pdfUrl);
-                return;
-            }
-            
-            // Erstelle unsichtbaren iframe zum Testen
-            const testFrame = document.createElement('iframe');
-            testFrame.style.display = 'none';
-            testFrame.src = pdfUrl;
-            
-            // Erfolg: PDF existiert
-            testFrame.onload = function() {
-                document.body.removeChild(testFrame);
-                window.open(pdfUrl, '_blank');
-            };
-            
-            // Fehler: PDF existiert nicht
-            testFrame.onerror = function() {
-                document.body.removeChild(testFrame);
-                window.location.href = '../coming_soon.html';
-            };
-            
-            // Timeout nach 3 Sekunden
-            setTimeout(() => {
-                if (testFrame.parentNode) {
-                    document.body.removeChild(testFrame);
-                    window.location.href = '../coming_soon.html';
-                }
-            }, 3000);
-            
-            document.body.appendChild(testFrame);
-        }
-        
-        // Neue Funktion: PDF mit Passwort-Schutz öffnen
-        function openPdfWithPassword(link, event) {
-            event.preventDefault();
-            
-            // Passwort-Dialog anzeigen
-            showPasswordDialog(() => {
-                // Bei korrektem Passwort: PDF öffnen
-                openPdfOrFallback(link, event);
-            });
-        }
-        
-        // Passwort-Dialog-Funktion
-        function showPasswordDialog(onSuccess) {
-            // Erstelle Modal für Passwort-Eingabe
-            const modal = document.createElement('div');
-            modal.id = 'password-modal';
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.7);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 2000;
-            `;
-            
-            const modalContent = document.createElement('div');
-            modalContent.style.cssText = `
-                background: white;
-                padding: 2rem;
-                border-radius: 12px;
-                max-width: 400px;
-                width: 90%;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                text-align: center;
-            `;
-            
-            modalContent.innerHTML = `
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div id="yeti-container" style="position: relative; display: inline-block;">
-                        <div id="yeti-body" style="
-                            font-family: 'Courier New', monospace;
-                            font-size: 1.3rem;
-                            line-height: 1.1;
-                            color: #f0f9ff;
-                            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-                            white-space: pre;
-                            transition: all 0.3s ease;
-                        ">    ∩─────∩
-   (  ░░░░░  )
-  /  ●     ●  \\
- |      ^      |
- |   \\─────/   |
-  \\___________/
-   \\\\\     ///
-    \\\\\   ///
-     🦶 🦶</div>
-                        <div id="yeti-eyes-normal" style="
-                            position: absolute;
-                            top: 2.2rem;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            font-size: 1.1rem;
-                            transition: all 0.3s ease;
-                            font-family: 'Courier New', monospace;
-                            color: #1e40af;
-                        ">●     ●</div>
-                        <div id="yeti-hands-covering" style="
-                            position: absolute;
-                            top: 1.8rem;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            font-size: 1.3rem;
-                            opacity: 0;
-                            transition: all 0.3s ease;
-                            font-family: 'Courier New', monospace;
-                        ">🙈 🙈</div>
-                    </div>
-                </div>
-                <h3 style="margin-bottom: 1rem; color: #059669;">🔐 Passwort erforderlich</h3>
-                <p style="margin-bottom: 1.5rem; color: #64748b;">Der Yeti bewacht die Lösung! Gib das Passwort ein:</p>
-                <input type="password" id="password-input" placeholder="Passwort eingeben" 
-                       style="width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem;">
-                <div id="password-error" style="color: #dc2626; margin-bottom: 1rem; display: none;">❌ Falsches Passwort! Der Yeti ist nicht überzeugt!</div>
-                <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                    <button id="cancel-password" style="background: #6b7280; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem;">Abbrechen</button>
-                    <button id="submit-password" style="background: #059669; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem;">OK</button>
-                </div>
-            `;
-            
-            const passwordInput = modalContent.querySelector('#password-input');
-            const errorDiv = modalContent.querySelector('#password-error');
-            const cancelBtn = modalContent.querySelector('#cancel-password');
-            const submitBtn = modalContent.querySelector('#submit-password');
-            const yetiEyesNormal = modalContent.querySelector('#yeti-eyes-normal');
-            const yetiHandsCovering = modalContent.querySelector('#yeti-hands-covering');
-            
-            // Yeti-Animationen
-            function showYetiCoveringEyes() {
-                yetiEyesNormal.style.opacity = '0';
-                yetiHandsCovering.style.opacity = '1';
-            }
-            
-            function showYetiNormalEyes() {
-                yetiEyesNormal.style.opacity = '1';
-                yetiHandsCovering.style.opacity = '0';
-            }
-            
-            function yetiShakeHead() {
-                const yetiContainer = modalContent.querySelector('#yeti-container');
-                yetiContainer.style.animation = 'shake 0.5s ease-in-out';
-                setTimeout(() => {
-                    yetiContainer.style.animation = '';
-                }, 500);
-            }
-            
-            function yetiHappyDance() {
-                const yetiContainer = modalContent.querySelector('#yeti-container');
-                yetiContainer.style.animation = 'bounce 0.6s ease-in-out';
-                setTimeout(() => {
-                    yetiContainer.style.animation = '';
-                }, 600);
-            }
-            
-            // Passwort prüfen
-            function checkPassword() {
-                const enteredPassword = passwordInput.value.trim();
-                
-                if (enteredPassword === window.correctPassword) {
-                    yetiHappyDance();
-                    setTimeout(() => {
-                        document.body.removeChild(modal);
-                        onSuccess();
-                    }, 300);
-                } else {
-                    yetiShakeHead();
-                    errorDiv.style.display = 'block';
-                    passwordInput.style.borderColor = '#dc2626';
-                    passwordInput.value = '';
-                    passwordInput.focus();
-                }
-            }
-            
-            // Event Listeners
-            cancelBtn.addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-            
-            submitBtn.addEventListener('click', checkPassword);
-            
-            passwordInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    checkPassword();
-                }
-            });
-            
-            // Yeti-Animationen bei Passwort-Eingabe
-            passwordInput.addEventListener('input', (e) => {
-                if (e.target.value.length > 0) {
-                    showYetiCoveringEyes();
-                } else {
-                    showYetiNormalEyes();
-                }
-            });
-            
-            passwordInput.addEventListener('focus', () => {
-                if (passwordInput.value.length > 0) {
-                    showYetiCoveringEyes();
-                }
-            });
-            
-            passwordInput.addEventListener('blur', () => {
-                if (passwordInput.value.length === 0) {
-                    showYetiNormalEyes();
-                }
-            });
-            
-            // Modal schließen bei Klick außerhalb
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    document.body.removeChild(modal);
-                }
-            });
-            
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-            
-            // Fokus auf Eingabefeld
-            setTimeout(() => {
-                passwordInput.focus();
-            }, 100);
-        }
-        
-        // Touch-Event-Handler für PDF-Buttons hinzufügen
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.pdf-arbeitsblatt').forEach(link => {
-                link.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPdfOrFallback(this, e);
-                });
-                link.addEventListener('click', function(e) {
-                    openPdfOrFallback(this, e);  
-                });
-            });
-            
-            document.querySelectorAll('.pdf-loesung').forEach(link => {
-                link.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPdfWithPassword(this, e);
-                });
-                link.addEventListener('click', function(e) {
-                    openPdfWithPassword(this, e);
-                });
-            });
-        });
+
+        // Tab navigation only - no visualization code needed
     </script>
     
     <!-- Footer -->

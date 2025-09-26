@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns - Analytische Geometrie Live</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .intro-section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .authors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .author-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .author-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .author-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-card h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-card .role {
+            color: #667eea;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .author-card .description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .author-card .specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .specialty-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .more-authors {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            border: 2px dashed #adb5bd;
+            color: #6c757d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+        }
+
+        .more-authors:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .more-authors .plus-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-info {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem;
+            }
+
+            .back-button {
+                left: 1rem;
+                top: 1rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+                margin-top: 2rem;
+            }
+
+            .content {
+                padding: 2rem 1rem;
+            }
+
+            .intro-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro-section p {
+                font-size: 1rem;
+            }
+
+            .authors-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">← Zurück zur Startseite</a>
+            <h1>👥 Über uns</h1>
+            <p>Lerne das Team hinter Analytische Geometrie Live kennen</p>
+        </div>
+
+        <div class="content">
+            <div class="intro-section">
+                <h2>Unser Team</h2>
+                <p>
+                    - was wir sind und was wir wollen - :P
+                </p>
+            </div>
+
+            <div class="authors-grid">
+                <!-- Peter - Hauptautor -->
+                <div class="author-card" onclick="showAuthorDetails('peter')">
+                    <div class="author-avatar">P</div>
+                    <h3>Peter</h3>
+                    <div class="role">Idee</div>
+                    <div class="description">
+                        -Beschreibung folgt- 
+                    </div>
+                    <div class="specialties">
+                        <span class="specialty-tag">3D-Visualisierung</span>
+                        <span class="specialty-tag">Vektorgeometrie</span>
+                        <span class="specialty-tag">Didaktik</span>
+                        <span class="specialty-tag">Web-Entwicklung</span>
+                    </div>
+                </div>
+
+                <!-- Platzhalter für weitere Autoren -->
+                <div class="author-card more-authors" onclick="showComingSoon()">
+                    <div class="plus-icon">+</div>
+                    <h3>Weitere Autorinnen</h3>
+                    <div class="description">
+                        - wächst durch aggressive Expansion:) -
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <h4>Kontakt & Mitarbeit</h4>
+            <p>
+                - was auch immer -
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showAuthorDetails(authorName) {
+            if (authorName === 'peter') {
+                alert(`📚 Peter 
+
+🎓 Qualifikationen:
+• Mathematiklehrer seit 2020
+• Diplommathematiker
+
+
+💡 Beiträge zur Plattform:
+• Entwicklung der 3D-Visualisierungen
+• Erstellung der interaktiven Übungen
+• Konzeption des Lernsystems
+
+
+
+🚀 Vision:
+Analytische Geometrie für jede Schülerin zugänglich und verständlich zu machen - durch innovative Technologie und durchdachte Didaktik.`);
+            }
+        }
+
+        function showComingSoon() {
+            alert(`🚀 Weitere Autorinnen kommen bald!
+
+Wir arbeiten daran, unser Team zu erweitern und weitere Expertinnen für verschiedene Bereiche der Mathematik zu gewinnen:
+
+
+
+Bleibt gespannt auf neue Updates!`);
+        }
+
+        // Smooth scroll animations
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.author-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.6s ease';
+
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D-Skalarprodukt Visualisierung</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .vector-input {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .vector-group {
+            flex: 1;
+            min-width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .vector-group h3 {
+            margin: 0 0 15px 0;
+            color: #495057;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-row label {
+            width: 20px;
+            font-weight: bold;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        canvas {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: white;
+            display: block;
+            margin: 20px auto;
+            cursor: grab;
+        }
+
+        canvas:active {
+            cursor: grabbing;
+        }
+
+        .results {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #007bff;
+        }
+
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .vector-a { color: #ff9500; }
+        .vector-b { color: #ff6600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📐 3D-Skalarprodukt Visualisierung</h1>
+
+        <div class="vector-input">
+            <div class="vector-group">
+                <h3 class="vector-a">Vektor a⃗ = (x, y, z)</h3>
+                <div class="input-row">
+                    <label>x:</label>
+                    <input type="number" id="aX" value="3" step="0.1">
+                </div>
+                <div class="input-row">
+                    <label>y:</label>
+                    <input type="number" id="aY" value="2" step="0.1">
+                </div>
+                <div class="input-row">
+                    <label>z:</label>
+                    <input type="number" id="aZ" value="1" step="0.1">
+                </div>
+                <div style="margin-top: 10px;">
+                    <strong>|a⃗| = <span id="lengthA">0</span></strong>
+                </div>
+            </div>
+
+            <div class="vector-group">
+                <h3 class="vector-b">Vektor b⃗ = (x, y, z)</h3>
+                <div class="input-row">
+                    <label>x:</label>
+                    <input type="number" id="bX" value="2" step="0.1">
+                </div>
+                <div class="input-row">
+                    <label>y:</label>
+                    <input type="number" id="bY" value="1" step="0.1">
+                </div>
+                <div class="input-row">
+                    <label>z:</label>
+                    <input type="number" id="bZ" value="2" step="0.1">
+                </div>
+                <div style="margin-top: 10px;">
+                    <strong>|b⃗| = <span id="lengthB">0</span></strong>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="btn" onclick="randomVectors()">🎲 Zufällige Vektoren</button>
+            <button class="btn" onclick="resetVectors()">↻ Zurücksetzen</button>
+        </div>
+
+        <canvas id="canvas" width="800" height="500"></canvas>
+
+        <div class="results" id="results">
+            <strong>Skalarprodukt:</strong> a⃗ · b⃗ = 0<br>
+            <small>Berechnung wird hier angezeigt...</small>
+        </div>
+
+        <div class="info-box">
+            <strong>🎯 Interaktion:</strong>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li><strong>Maus ziehen:</strong> Dreht das 3D-Koordinatensystem horizontal (Z-Achse bleibt vertikal)</li>
+                <li><strong>Hellorangener Vektor:</strong> a⃗ - Referenzvektor</li>
+                <li><strong>Dunkelorangener Vektor:</strong> b⃗ - Zu projizierender Vektor</li>
+                <li><strong>Grüner Vektor:</strong> Projektion von b⃗ auf a⃗ (ohne Beschriftung)</li>
+                <li><strong>Blaues Rechteck:</strong> Geometrische Darstellung des Skalarprodukts</li>
+                <li><strong>Dynamische Achsen:</strong> Skalieren automatisch mit der Vektorgröße</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Input-Elemente
+        const aXInput = document.getElementById('aX');
+        const aYInput = document.getElementById('aY');
+        const aZInput = document.getElementById('aZ');
+        const bXInput = document.getElementById('bX');
+        const bYInput = document.getElementById('bY');
+        const bZInput = document.getElementById('bZ');
+
+        const lengthAValue = document.getElementById('lengthA');
+        const lengthBValue = document.getElementById('lengthB');
+        const results = document.getElementById('results');
+
+        // 3D-Rotations-Variablen
+        let rotationY = 0.3; // Nur Y-Rotation (horizontal) erlaubt
+        let isDragging = false;
+        let lastMouseX = 0;
+
+        // Event Listeners
+        [aXInput, aYInput, aZInput, bXInput, bYInput, bZInput].forEach(input => {
+            input.addEventListener('input', updateVisualization);
+        });
+
+        // Maus-Events für Rotation
+        canvas.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            lastMouseX = e.clientX;
+            canvas.style.cursor = 'grabbing';
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            const deltaX = e.clientX - lastMouseX;
+            rotationY += deltaX * 0.01; // Nur horizontale Drehung um Z-Achse
+            lastMouseX = e.clientX;
+            updateVisualization();
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            isDragging = false;
+            canvas.style.cursor = 'grab';
+        });
+
+        canvas.addEventListener('mouseleave', function() {
+            isDragging = false;
+            canvas.style.cursor = 'default';
+        });
+
+        // Touch-Events für mobile Geräte
+        canvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (e.touches.length === 1) {
+                isDragging = true;
+                lastMouseX = e.touches[0].clientX;
+            }
+        });
+
+        canvas.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            if (!isDragging || e.touches.length !== 1) return;
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - lastMouseX;
+            rotationY += deltaX * 0.01;
+            lastMouseX = touch.clientX;
+            updateVisualization();
+        });
+
+        canvas.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            isDragging = false;
+        });
+
+        function updateVisualization() {
+            // Werte auslesen
+            const aX = parseFloat(aXInput.value) || 0;
+            const aY = parseFloat(aYInput.value) || 0;
+            const aZ = parseFloat(aZInput.value) || 0;
+            const bX = parseFloat(bXInput.value) || 0;
+            const bY = parseFloat(bYInput.value) || 0;
+            const bZ = parseFloat(bZInput.value) || 0;
+
+            // Berechnungen
+            const lengthA = Math.sqrt(aX * aX + aY * aY + aZ * aZ);
+            const lengthB = Math.sqrt(bX * bX + bY * bY + bZ * bZ);
+            const dotProduct = aX * bX + aY * bY + aZ * bZ;
+            const cosAngle = lengthA > 0 && lengthB > 0 ? dotProduct / (lengthA * lengthB) : 0;
+            const angle = Math.acos(Math.max(-1, Math.min(1, cosAngle))) * 180 / Math.PI;
+            const projectionLength = lengthA > 0 ? dotProduct / lengthA : 0;
+
+            // Werte anzeigen
+            lengthAValue.textContent = lengthA.toFixed(2);
+            lengthBValue.textContent = lengthB.toFixed(2);
+
+            // Canvas leeren
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dynamische Achsenlänge basierend auf Vektorgröße berechnen
+            const maxVectorComponent = Math.max(
+                Math.abs(aX), Math.abs(aY), Math.abs(aZ),
+                Math.abs(bX), Math.abs(bY), Math.abs(bZ)
+            );
+            const axisLength = Math.max(4, Math.ceil(maxVectorComponent * 1.2));
+
+            // Koordinatensystem zeichnen
+            drawCoordinateSystem(axisLength);
+
+            // 3D-Vektoren projizieren
+            const [originX, originY] = project3D(0, 0, 0);
+            const [vectorAEndX, vectorAEndY, vectorADepth] = project3D(aX, aY, aZ);
+            const [vectorBEndX, vectorBEndY, vectorBDepth] = project3D(bX, bY, bZ);
+
+            // Sammle alle Zeichnungsobjekte für Z-Sorting
+            let drawObjects = [];
+
+            // Vektor a⃗ hinzufügen
+            drawObjects.push({
+                type: 'vector',
+                startX: originX, startY: originY,
+                endX: vectorAEndX, endY: vectorAEndY,
+                depth: vectorADepth,
+                color: '#ff9500', label: 'a⃗', width: 4
+            });
+
+            // Vektor b⃗ hinzufügen
+            drawObjects.push({
+                type: 'vector',
+                startX: originX, startY: originY,
+                endX: vectorBEndX, endY: vectorBEndY,
+                depth: vectorBDepth,
+                color: '#ff6600', label: 'b⃗', width: 4
+            });
+
+            // Projektion von b⃗ auf a⃗ berechnen und zeichnen
+            if (lengthA > 0) {
+                const projFactor = dotProduct / (lengthA * lengthA);
+                const projX = aX * projFactor;
+                const projY = aY * projFactor;
+                const projZ = aZ * projFactor;
+
+                const [projEndX, projEndY, projDepth] = project3D(projX, projY, projZ);
+
+                // Projektionsvektor hinzufügen (ohne Label)
+                drawObjects.push({
+                    type: 'vector',
+                    startX: originX, startY: originY,
+                    endX: projEndX, endY: projEndY,
+                    depth: projDepth,
+                    color: '#27ae60', label: '', width: 3
+                });
+
+                // Hilfslinie zur Projektion hinzufügen
+                drawObjects.push({
+                    type: 'dashed_line',
+                    startX: vectorBEndX, startY: vectorBEndY,
+                    endX: projEndX, endY: projEndY,
+                    depth: Math.max(vectorBDepth, projDepth),
+                    color: '#95a5a6'
+                });
+
+                // Rechteck für Skalarprodukt hinzufügen (wenn nicht orthogonal)
+                if (Math.abs(projectionLength) > 0.01 && Math.abs(angle - 90) > 1) {
+                    drawObjects.push({
+                        type: 'rectangle',
+                        originX: originX, originY: originY,
+                        aEndX: vectorAEndX, aEndY: vectorAEndY,
+                        projEndX: projEndX, projEndY: projEndY,
+                        depth: (vectorADepth + projDepth) / 2,
+                        dotProduct: dotProduct,
+                        projectionLength: projectionLength
+                    });
+                }
+            }
+
+            // Z-Sorting: Objekte nach Tiefe sortieren (weiter weg zuerst)
+            drawObjects.sort((a, b) => a.depth - b.depth);
+
+            // Alle Objekte zeichnen
+            drawObjects.forEach(obj => {
+                switch (obj.type) {
+                    case 'vector':
+                        drawVector3D(obj.startX, obj.startY, obj.endX, obj.endY, obj.color, obj.label, obj.width);
+                        break;
+                    case 'dashed_line':
+                        drawDashedLine(obj.startX, obj.startY, obj.endX, obj.endY, obj.color);
+                        break;
+                    case 'rectangle':
+                        drawScalarProductRectangle3D(obj);
+                        break;
+                }
+            });
+
+            // Ergebnisse anzeigen
+            const angleColor = Math.abs(angle - 90) < 1 ? 'orange' : (angle < 90 ? 'green' : 'red');
+            results.innerHTML = `
+                <strong>Skalarprodukt:</strong> a⃗ · b⃗ = ${dotProduct.toFixed(2)}<br>
+                <small style="opacity: 0.8;">
+                    = (${aX}, ${aY}, ${aZ}) · (${bX}, ${bY}, ${bZ})<br>
+                    = ${aX}×${bX} + ${aY}×${bY} + ${aZ}×${bZ}<br>
+                    = ${(aX*bX).toFixed(1)} + ${(aY*bY).toFixed(1)} + ${(aZ*bZ).toFixed(1)}<br>
+                    <strong>Winkel:</strong> <span style="color: ${angleColor}">α = ${angle.toFixed(1)}°</span><br>
+                    <strong>Projektion:</strong> |proj_a⃗(b⃗)| = ${Math.abs(projectionLength).toFixed(2)}<br>
+                    <strong>Fläche:</strong> <span style="color: #3498db">Blaues Rechteck</span> = ${Math.abs(dotProduct).toFixed(2)}<br>
+                    <strong>Flächenformel:</strong> Fläche = |a⃗| × |proj_a⃗(b⃗)| = ${lengthA.toFixed(2)} × ${Math.abs(projectionLength).toFixed(2)} = ${Math.abs(dotProduct).toFixed(2)}
+                </small>
+            `;
+        }
+
+        // 3D-Rotation und Projektion
+        function rotate3D(x, y, z) {
+            const cosY = Math.cos(rotationY);
+            const sinY = Math.sin(rotationY);
+            const x1 = x * cosY - y * sinY;
+            const y1 = x * sinY + y * cosY;
+            const z1 = z; // Z bleibt unverändert (zeigt immer nach oben)
+            return [x1, y1, z1];
+        }
+
+        function project3D(x, y, z) {
+            const [rx, ry, rz] = rotate3D(x, y, z);
+            const originX = 300;
+            const originY = 300;
+            const scale = 35;
+            const projX = originX + rx * scale + ry * scale * 0.5;
+            const projY = originY - rz * scale - ry * scale * 0.3;
+            return [projX, projY, rz];
+        }
+
+        function drawCoordinateSystem(axisLength = 4) {
+            const [xEndX, xEndY] = project3D(axisLength, 0, 0);
+            const [xStartX, xStartY] = project3D(0, 0, 0);
+
+            // X-Achse (rot)
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(xStartX, xStartY);
+            ctx.lineTo(xEndX, xEndY);
+            ctx.stroke();
+            drawArrow3D(xEndX, xEndY, xStartX, xStartY, '#e74c3c');
+
+            // Y-Achse (grün)
+            const [yEndX, yEndY] = project3D(0, axisLength, 0);
+            ctx.strokeStyle = '#27ae60';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(xStartX, xStartY);
+            ctx.lineTo(yEndX, yEndY);
+            ctx.stroke();
+            drawArrow3D(yEndX, yEndY, xStartX, xStartY, '#27ae60');
+
+            // Z-Achse (blau)
+            const [zEndX, zEndY] = project3D(0, 0, axisLength);
+            ctx.strokeStyle = '#3498db';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(xStartX, xStartY);
+            ctx.lineTo(zEndX, zEndY);
+            ctx.stroke();
+            drawArrow3D(zEndX, zEndY, xStartX, xStartY, '#3498db');
+
+            // Ursprung
+            ctx.fillStyle = '#2c3e50';
+            ctx.beginPath();
+            ctx.arc(xStartX, xStartY, 4, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Achsenbeschriftungen
+            ctx.font = 'bold 16px Arial';
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillText(`X(${axisLength})`, xEndX + 10, xEndY + 5);
+            ctx.fillStyle = '#27ae60';
+            ctx.fillText(`Y(${axisLength})`, yEndX + 10, yEndY + 5);
+            ctx.fillStyle = '#3498db';
+            ctx.fillText(`Z(${axisLength})`, zEndX + 10, zEndY - 5);
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = '14px Arial';
+            ctx.fillText('O', xStartX - 15, xStartY + 20);
+
+            // Skalenmarkierungen
+            ctx.fillStyle = '#7f8c8d';
+            ctx.font = '10px Arial';
+            for (let i = 1; i < axisLength; i++) {
+                const [xMarkX, xMarkY] = project3D(i, 0, 0);
+                ctx.fillText(i.toString(), xMarkX, xMarkY + 15);
+                const [yMarkX, yMarkY] = project3D(0, i, 0);
+                ctx.fillText(i.toString(), yMarkX - 10, yMarkY);
+                const [zMarkX, zMarkY] = project3D(0, 0, i);
+                ctx.fillText(i.toString(), zMarkX - 15, zMarkY);
+            }
+        }
+
+        function drawArrow3D(endX, endY, startX, startY, color) {
+            const angle = Math.atan2(endY - startY, endX - startX);
+            const arrowLength = 15;
+            const arrowAngle = Math.PI / 6;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(endX - arrowLength * Math.cos(angle - arrowAngle), endY - arrowLength * Math.sin(angle - arrowAngle));
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(endX - arrowLength * Math.cos(angle + arrowAngle), endY - arrowLength * Math.sin(angle + arrowAngle));
+            ctx.stroke();
+        }
+
+        function drawVector3D(startX, startY, endX, endY, color, label, width) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            drawArrow3D(endX, endY, startX, startY, color);
+            if (label) {
+                ctx.fillStyle = color;
+                ctx.font = 'bold 16px Arial';
+                ctx.fillText(label, endX + 15, endY - 5);
+            }
+        }
+
+        function drawDashedLine(startX, startY, endX, endY, color) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([6, 4]);
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function drawScalarProductRectangle3D(obj) {
+            const height = 25;
+            const projLength = Math.sqrt((obj.projEndX - obj.originX) ** 2 + (obj.projEndY - obj.originY) ** 2);
+            if (projLength > 0) {
+                const perpX = -(obj.projEndY - obj.originY) / projLength * height;
+                const perpY = (obj.projEndX - obj.originX) / projLength * height;
+                const rect = [
+                    [obj.originX, obj.originY],
+                    [obj.projEndX, obj.projEndY],
+                    [obj.projEndX + perpX, obj.projEndY + perpY],
+                    [obj.originX + perpX, obj.originY + perpY]
+                ];
+                ctx.fillStyle = 'rgba(52, 152, 219, 0.25)';
+                ctx.beginPath();
+                ctx.moveTo(rect[0][0], rect[0][1]);
+                for (let i = 1; i < rect.length; i++) {
+                    ctx.lineTo(rect[i][0], rect[i][1]);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.strokeStyle = '#3498db';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([8, 4]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.fillStyle = '#2c3e50';
+                ctx.font = 'bold 12px Arial';
+                const centerX = (rect[0][0] + rect[2][0]) / 2;
+                const centerY = (rect[0][1] + rect[2][1]) / 2;
+                ctx.fillText(`Fläche = ${Math.abs(obj.dotProduct).toFixed(2)}`, centerX - 35, centerY + 4);
+                ctx.fillStyle = '#27ae60';
+                ctx.font = '11px Arial';
+                const midX = (obj.originX + obj.projEndX) / 2;
+                const midY = (obj.originY + obj.projEndY) / 2;
+                ctx.fillText(`|proj| = ${Math.abs(obj.projectionLength).toFixed(2)}`, midX - 25, midY - 12);
+            }
+        }
+
+        // Globale Funktionen für Buttons
+        function randomVectors() {
+            aXInput.value = (Math.random() * 8 - 4).toFixed(1);
+            aYInput.value = (Math.random() * 8 - 4).toFixed(1);
+            aZInput.value = (Math.random() * 8 - 4).toFixed(1);
+            bXInput.value = (Math.random() * 8 - 4).toFixed(1);
+            bYInput.value = (Math.random() * 8 - 4).toFixed(1);
+            bZInput.value = (Math.random() * 8 - 4).toFixed(1);
+            updateVisualization();
+        }
+
+        function resetVectors() {
+            aXInput.value = '3';
+            aYInput.value = '2';
+            aZInput.value = '1';
+            bXInput.value = '2';
+            bYInput.value = '1';
+            bZInput.value = '2';
+            updateVisualization();
+        }
+
+        // Erste Aktualisierung beim Laden
+        updateVisualization();
+    </script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreuzprodukt - 3D Visualisierung</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .visual-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background: #000;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        canvas {
+            border-radius: 8px;
+        }
+        
+        .vector-input {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .vector-group {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .vector-group h4 {
+            margin: 0 0 15px 0;
+            color: #495057;
+            text-align: center;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-row label {
+            width: 20px;
+            font-weight: bold;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .view-controls {
+            text-align: center;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .view-controls h4 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+        }
+
+        .slider-container {
+            display: inline-block;
+            margin: 10px 20px;
+        }
+
+        input[type="range"] {
+            width: 150px;
+            margin: 5px;
+        }
+
+        .slider-container label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .result-display {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .explanation {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .highlight {
+            background: #f1c40f;
+            color: #2c3e50;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .vector-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .vector-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Kreuzprodukt - 3D Visualisierung</h1>
+        
+        <div class="visual-section">
+            <h2>🎮 Interaktive 3D-Darstellung</h2>
+            <p><strong>Bedienung:</strong> Ziehe mit der Maus, um die Ansicht zu drehen! Scrolle zum Zoomen.</p>
+            
+            <div class="vector-input">
+                <div class="vector-group">
+                    <h4 style="color: #3498db;">🔵 Vektor a⃗ = (x, y, z)</h4>
+                    <div class="input-row">
+                        <label>x:</label>
+                        <input type="number" id="aX" value="3" step="0.1">
+                    </div>
+                    <div class="input-row">
+                        <label>y:</label>
+                        <input type="number" id="aY" value="1" step="0.1">
+                    </div>
+                    <div class="input-row">
+                        <label>z:</label>
+                        <input type="number" id="aZ" value="0" step="0.1">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <strong>|a⃗| = <span id="lengthA">0</span></strong>
+                    </div>
+                </div>
+
+                <div class="vector-group">
+                    <h4 style="color: #2ecc71;">🟢 Vektor b⃗ = (x, y, z)</h4>
+                    <div class="input-row">
+                        <label>x:</label>
+                        <input type="number" id="bX" value="1" step="0.1">
+                    </div>
+                    <div class="input-row">
+                        <label>y:</label>
+                        <input type="number" id="bY" value="2" step="0.1">
+                    </div>
+                    <div class="input-row">
+                        <label>z:</label>
+                        <input type="number" id="bZ" value="0" step="0.1">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <strong>|b⃗| = <span id="lengthB">0</span></strong>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="btn" onclick="randomVectors()">🎲 Zufällige Vektoren</button>
+                <button class="btn" onclick="resetVectors()">↻ Zurücksetzen</button>
+                <button class="btn" onclick="resetView()">🔄 Ansicht zurücksetzen</button>
+            </div>
+
+            <div class="view-controls">
+                <h4>🎛️ 3D-Ansicht</h4>
+                <div class="slider-container">
+                    <label>Rotation X:</label>
+                    <input type="range" id="rotX" min="-180" max="180" value="20" step="5">
+                    <span id="rotXValue">20°</span>
+                </div>
+                <div class="slider-container">
+                    <label>Rotation Y:</label>
+                    <input type="range" id="rotY" min="-180" max="180" value="30" step="5">
+                    <span id="rotYValue">30°</span>
+                </div>
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="crossCanvas" width="800" height="600"></canvas>
+            </div>
+            
+            <div class="vector-info">
+                <div class="vector-card" style="border-left: 4px solid #e74c3c;">
+                    <h4>Kreuzprodukt a⃗ × b⃗</h4>
+                    <div id="crossProduct">c⃗ = (0, 0, 5)</div>
+                    <div>|c⃗| = <span id="lengthC">5.00</span></div>
+                </div>
+            </div>
+            
+            <div class="result-display" id="results">
+                <div>a⃗ × b⃗ = (0, 0, 5)</div>
+                <div style="margin-top: 10px; font-size: 0.9em;">
+                    Flächeninhalt des Parallelogramms: 5.00
+                </div>
+            </div>
+        </div>
+        
+        <div class="explanation">
+            <h3>🧠 Was siehst du hier?</h3>
+            <p><strong>🔵 Blauer Vektor (a⃗):</strong> Der erste Vektor</p>
+            <p><strong>🟢 Grüner Vektor (b⃗):</strong> Der zweite Vektor</p>
+            <p><strong>🔴 Roter Vektor (a⃗ × b⃗):</strong> Das Kreuzprodukt - steht <span class="highlight">senkrecht</span> auf beiden!</p>
+            <p><strong>💙 Cyan-Fläche:</strong> Das Parallelogramm zwischen a⃗ und b⃗ - dessen Fläche = |a⃗ × b⃗|</p>
+        </div>
+        
+        <div class="key-insight">
+            ⚡ Das Kreuzprodukt zeigt dir die Richtung senkrecht zur Ebene, die von beiden Vektoren aufgespannt wird!<br>
+            Seine Länge entspricht der Fläche des aufgespannten Parallelogramms.
+        </div>
+        
+        <div class="info-box">
+            <h4>🔄 Experimentiere!</h4>
+            <ul>
+                <li><strong>Rechte-Hand-Regel:</strong> Zeige mit deinen Fingern in Richtung a⃗, beuge sie zu b⃗ - dein Daumen zeigt zu a⃗ × b⃗!</li>
+                <li><strong>Antikommutativ:</strong> Vertausche a⃗ und b⃗ - das Kreuzprodukt zeigt in die entgegengesetzte Richtung!</li>
+                <li><strong>Parallel → Null:</strong> Mache beide Vektoren parallel - das Kreuzprodukt wird zu (0,0,0)!</li>
+                <li><strong>Senkrecht → Maximum:</strong> Stelle die Vektoren senkrecht - maximale Parallelogramm-Fläche!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('crossCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Input-Referenzen
+        const aXInput = document.getElementById('aX');
+        const aYInput = document.getElementById('aY');
+        const aZInput = document.getElementById('aZ');
+        const bXInput = document.getElementById('bX');
+        const bYInput = document.getElementById('bY');
+        const bZInput = document.getElementById('bZ');
+        const rotXSlider = document.getElementById('rotX');
+        const rotYSlider = document.getElementById('rotY');
+
+        // Value-Display-Referenzen
+        const rotXValue = document.getElementById('rotXValue');
+        const rotYValue = document.getElementById('rotYValue');
+        
+        let centerX = canvas.width / 2;
+        let centerY = canvas.height / 2;
+        let scale = 40;
+        
+        // 3D zu 2D Projektion
+        function project3D(x, y, z, rotX, rotY) {
+            // Rotation um X-Achse
+            let cosRx = Math.cos(rotX);
+            let sinRx = Math.sin(rotX);
+            let y1 = y * cosRx - z * sinRx;
+            let z1 = y * sinRx + z * cosRx;
+            
+            // Rotation um Y-Achse
+            let cosRy = Math.cos(rotY);
+            let sinRy = Math.sin(rotY);
+            let x2 = x * cosRy + z1 * sinRy;
+            let z2 = -x * sinRy + z1 * cosRy;
+            
+            // Projektion auf 2D
+            return {
+                x: centerX + x2 * scale,
+                y: centerY - y1 * scale
+            };
+        }
+        
+        // Vektor zeichnen
+        function drawVector3D(x, y, z, color, rotX, rotY, label, lineWidth = 4) {
+            let start = project3D(0, 0, 0, rotX, rotY);
+            let end = project3D(x, y, z, rotX, rotY);
+            
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.lineTo(end.x, end.y);
+            ctx.stroke();
+            
+            // Pfeilspitze
+            let angle = Math.atan2(end.y - start.y, end.x - start.x);
+            let arrowLength = 15;
+            let arrowAngle = Math.PI / 6;
+            
+            ctx.beginPath();
+            ctx.moveTo(end.x, end.y);
+            ctx.lineTo(end.x - arrowLength * Math.cos(angle - arrowAngle), end.y - arrowLength * Math.sin(angle - arrowAngle));
+            ctx.moveTo(end.x, end.y);
+            ctx.lineTo(end.x - arrowLength * Math.cos(angle + arrowAngle), end.y - arrowLength * Math.sin(angle + arrowAngle));
+            ctx.stroke();
+            
+            // Label
+            ctx.fillStyle = color;
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText(label, end.x + 10, end.y - 10);
+        }
+        
+        // Koordinatensystem zeichnen
+        function drawAxes(rotX, rotY) {
+            let axisLength = 3;
+            drawVector3D(axisLength, 0, 0, '#95a5a6', rotX, rotY, 'X', 2);
+            drawVector3D(0, axisLength, 0, '#95a5a6', rotX, rotY, 'Y', 2);
+            drawVector3D(0, 0, axisLength, '#95a5a6', rotX, rotY, 'Z', 2);
+        }
+        
+        // Parallelogramm zeichnen
+        function drawParallelogram(ax, ay, az, bx, by, bz, rotX, rotY) {
+            let origin = project3D(0, 0, 0, rotX, rotY);
+            let pointA = project3D(ax, ay, az, rotX, rotY);
+            let pointB = project3D(bx, by, bz, rotX, rotY);
+            let pointC = project3D(ax + bx, ay + by, az + bz, rotX, rotY);
+            
+            ctx.fillStyle = 'rgba(52, 152, 219, 0.2)';
+            ctx.strokeStyle = '#3498db';
+            ctx.lineWidth = 2;
+            
+            ctx.beginPath();
+            ctx.moveTo(origin.x, origin.y);
+            ctx.lineTo(pointA.x, pointA.y);
+            ctx.lineTo(pointC.x, pointC.y);
+            ctx.lineTo(pointB.x, pointB.y);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+        
+        // Kreuzprodukt berechnen
+        function crossProduct(a, b) {
+            return {
+                x: a.y * b.z - a.z * b.y,
+                y: a.z * b.x - a.x * b.z,
+                z: a.x * b.y - a.y * b.x
+            };
+        }
+        
+        // Vektorlänge berechnen
+        function vectorLength(v) {
+            return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+        }
+        
+        function updateVisualization() {
+            // Werte auslesen
+            let ax = parseFloat(aXInput.value) || 0;
+            let ay = parseFloat(aYInput.value) || 0;
+            let az = parseFloat(aZInput.value) || 0;
+            let bx = parseFloat(bXInput.value) || 0;
+            let by = parseFloat(bYInput.value) || 0;
+            let bz = parseFloat(bZInput.value) || 0;
+            let rotX = parseFloat(rotXSlider.value) * Math.PI / 180;
+            let rotY = parseFloat(rotYSlider.value) * Math.PI / 180;
+
+            // Rotations-Werte anzeigen
+            rotXValue.textContent = rotXSlider.value + '°';
+            rotYValue.textContent = rotYSlider.value + '°';
+            
+            // Canvas leeren
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Hintergrundgradient
+            let gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 300);
+            gradient.addColorStop(0, '#2c3e50');
+            gradient.addColorStop(1, '#34495e');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Parallelogramm zeichnen (zuerst, damit es im Hintergrund ist)
+            drawParallelogram(ax, ay, az, bx, by, bz, rotX, rotY);
+            
+            // Koordinatensystem
+            drawAxes(rotX, rotY);
+            
+            // Vektoren
+            drawVector3D(ax, ay, az, '#3498db', rotX, rotY, 'a⃗');
+            drawVector3D(bx, by, bz, '#2ecc71', rotX, rotY, 'b⃗');
+            
+            // Kreuzprodukt berechnen und zeichnen
+            let a = {x: ax, y: ay, z: az};
+            let b = {x: bx, y: by, z: bz};
+            let cross = crossProduct(a, b);
+            
+            if (vectorLength(cross) > 0.01) {
+                drawVector3D(cross.x, cross.y, cross.z, '#e74c3c', rotX, rotY, 'a⃗×b⃗');
+            }
+
+            // Ergebnisse aktualisieren
+            let lengthA = vectorLength(a);
+            let lengthB = vectorLength(b);
+            let lengthCross = vectorLength(cross);
+
+            document.getElementById('crossProduct').textContent = `c⃗ = (${cross.x.toFixed(1)}, ${cross.y.toFixed(1)}, ${cross.z.toFixed(1)})`;
+            document.getElementById('lengthA').textContent = lengthA.toFixed(2);
+            document.getElementById('lengthB').textContent = lengthB.toFixed(2);
+            document.getElementById('lengthC').textContent = lengthCross.toFixed(2);
+
+            document.getElementById('results').innerHTML = `
+                <div>a⃗ × b⃗ = (${cross.x.toFixed(1)}, ${cross.y.toFixed(1)}, ${cross.z.toFixed(1)})</div>
+                <div style="margin-top: 10px; font-size: 0.9em;">
+                    Flächeninhalt des Parallelogramms: ${lengthCross.toFixed(2)}
+                </div>
+                <div style="margin-top: 5px; font-size: 0.8em;">
+                    Berechnung: |a⃗| × |b⃗| × sin(θ) = ${lengthA.toFixed(2)} × ${lengthB.toFixed(2)} × sin(${Math.acos(Math.abs(Math.min(1, (ax*bx + ay*by + az*bz)/(lengthA*lengthB || 1)))) * 180/Math.PI}°)
+                </div>
+            `;
+        }
+
+        function resetView() {
+            rotXSlider.value = 20;
+            rotYSlider.value = 30;
+            updateVisualization();
+        }
+
+        // Event Listeners für alle Inputs und Slider
+        [aXInput, aYInput, aZInput, bXInput, bYInput, bZInput, rotXSlider, rotYSlider].forEach(input => {
+            input.addEventListener('input', updateVisualization);
+        });
+
+        // Zusätzliche Funktionen wie beim Skalarprodukt
+        function randomVectors() {
+            aXInput.value = (Math.random() * 8 - 4).toFixed(1);
+            aYInput.value = (Math.random() * 8 - 4).toFixed(1);
+            aZInput.value = (Math.random() * 8 - 4).toFixed(1);
+            bXInput.value = (Math.random() * 8 - 4).toFixed(1);
+            bYInput.value = (Math.random() * 8 - 4).toFixed(1);
+            bZInput.value = (Math.random() * 8 - 4).toFixed(1);
+            updateVisualization();
+        }
+
+        function resetVectors() {
+            aXInput.value = '3';
+            aYInput.value = '1';
+            aZInput.value = '0';
+            bXInput.value = '1';
+            bYInput.value = '2';
+            bZInput.value = '0';
+            updateVisualization();
+        }
+
+        // Maus-Steuerung für Rotation
+        let isDragging = false;
+        let lastMouseX = 0;
+        let lastMouseY = 0;
+
+        canvas.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+            canvas.style.cursor = 'grabbing';
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+
+            let deltaX = e.clientX - lastMouseX;
+            let deltaY = e.clientY - lastMouseY;
+
+            let currentRotY = parseInt(rotYSlider.value);
+            let currentRotX = parseInt(rotXSlider.value);
+
+            rotYSlider.value = Math.max(-180, Math.min(180, currentRotY + deltaX * 0.5));
+            rotXSlider.value = Math.max(-180, Math.min(180, currentRotX - deltaY * 0.5));
+
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+
+            updateVisualization();
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            isDragging = false;
+            canvas.style.cursor = 'grab';
+        });
+
+        canvas.addEventListener('mouseleave', function() {
+            isDragging = false;
+            canvas.style.cursor = 'default';
+        });
+
+        // Touch-Events für mobile Geräte
+        canvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (e.touches.length === 1) {
+                isDragging = true;
+                lastMouseX = e.touches[0].clientX;
+                lastMouseY = e.touches[0].clientY;
+            }
+        });
+
+        canvas.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            if (!isDragging || e.touches.length !== 1) return;
+
+            let touch = e.touches[0];
+            let deltaX = touch.clientX - lastMouseX;
+            let deltaY = touch.clientY - lastMouseY;
+
+            let currentRotY = parseInt(rotYSlider.value);
+            let currentRotX = parseInt(rotXSlider.value);
+
+            rotYSlider.value = Math.max(-180, Math.min(180, currentRotY + deltaX * 0.5));
+            rotXSlider.value = Math.max(-180, Math.min(180, currentRotX - deltaY * 0.5));
+
+            lastMouseX = touch.clientX;
+            lastMouseY = touch.clientY;
+
+            updateVisualization();
+        });
+
+        canvas.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            isDragging = false;
+        });
+
+        // Zoom mit Mausrad
+        canvas.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            scale += e.deltaY > 0 ? -3 : 3;
+            scale = Math.max(20, Math.min(80, scale));
+            updateVisualization();
+        });
+
+        // Canvas-Cursor
+        canvas.style.cursor = 'grab';
+
+        // Erste Aktualisierung
+        updateVisualization();
+    </script>
+</body>
+</html>

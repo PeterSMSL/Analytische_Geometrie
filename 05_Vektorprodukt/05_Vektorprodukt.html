@@ -492,12 +492,19 @@
                 <a href="05_Vektorprodukt_Loesung.pdf" target="_blank" class="pdf-link" class="pdf-link pdf-loesung" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
                     Lösung
                 </a>
+                <a href="Marius.pdf" target="_blank" class="pdf-link" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
+                    Marius
+                </a>
+                <a href="Marius_Loesung.pdf" target="_blank" class="pdf-link" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0);">
+                    Marius Lösungen
+                </a>
             </div>
         </div>
         
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="theory">Theorie</button>
             <button class="nav-tab" data-tab="exercises">Übungen</button>
+            <button class="nav-tab" data-tab="visualization">Visualisierung</button>
             <button class="nav-tab" data-tab="quiz">Quiz</button>
         </div>
         
@@ -795,7 +802,41 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Visualisierung Tab -->
+            <div id="visualization" class="tab-content">
+                <h2>📐 3D-Kreuzprodukt Visualisierung</h2>
+                <p style="text-align: center; margin-bottom: 1rem;">
+                    Interaktive 3D-Visualisierung des Kreuzprodukts
+                </p>
+
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <iframe src="kreuzprodukt_embed.html"
+                            width="100%"
+                            height="900"
+                            style="border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <p>Ihr Browser unterstützt keine iframes.
+                           <a href="kreuzprodukt_embed.html" target="_blank">
+                               Klicken Sie hier, um die Visualisierung zu öffnen
+                           </a>
+                        </p>
+                    </iframe>
+                </div>
+
+                <div class="info-box">
+                    <strong>🎯 Interaktion:</strong>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>Maus ziehen:</strong> Dreht das 3D-Koordinatensystem</li>
+                        <li><strong>Mausrad:</strong> Zoomt rein/raus</li>
+                        <li><strong>Blauer Vektor (a⃗):</strong> Erster Eingabevektor</li>
+                        <li><strong>Grüner Vektor (b⃗):</strong> Zweiter Eingabevektor</li>
+                        <li><strong>Roter Vektor (a⃗×b⃗):</strong> Kreuzprodukt - steht senkrecht auf beiden!</li>
+                        <li><strong>Cyan-Fläche:</strong> Parallelogramm zwischen a⃗ und b⃗</li>
+                        <li><strong>Rechte-Hand-Regel:</strong> Finger von a⃗ zu b⃗, Daumen zeigt zu a⃗×b⃗</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Quiz Tab -->
             <div id="quiz" class="tab-content">
                 <h2>🎯 Quiz</h2>

@@ -248,7 +248,7 @@
                 <div class="author-card" onclick="showAuthorDetails('peter')">
                     <div class="author-avatar">P</div>
                     <h3>Peter</h3>
-                    <div class="role">Idee</div>
+                    <div class="role">Idee + Grundimplementierung</div>
                     <div class="description">
                         -Beschreibung folgt- 
                     </div>
@@ -257,6 +257,22 @@
                         <span class="specialty-tag">Vektorgeometrie</span>
                         <span class="specialty-tag">Didaktik</span>
                         <span class="specialty-tag">Web-Entwicklung</span>
+                    </div>
+                </div>
+
+                <!-- Marius - Zusätzlicher Autor -->
+                <div class="author-card" onclick="showAuthorDetails('marius')">
+                    <div class="author-avatar">M</div>
+                    <h3>Marius</h3>
+                    <div class="role">Experte für Verknüpfungen</div>
+                    <div class="description">
+                        -Beschreibung folgt-
+                    </div>
+                    <div class="specialties">
+                        <span class="specialty-tag">Skalarprodukt</span>
+                        <span class="specialty-tag">Vektorprodukt</span>
+                        <span class="specialty-tag">Geometrische Interpretationen</span>
+                        
                     </div>
                 </div>
 
@@ -282,7 +298,7 @@
     <script>
         function showAuthorDetails(authorName) {
             if (authorName === 'peter') {
-                alert(`📚 Peter 
+                alert(`📚 Peter
 
 🎓 Qualifikationen:
 • Mathematiklehrer seit 2020
@@ -298,6 +314,21 @@
 
 🚀 Vision:
 Analytische Geometrie für jede Schülerin zugänglich und verständlich zu machen - durch innovative Technologie und durchdachte Didaktik.`);
+            } else if (authorName === 'marius') {
+                alert(`📚 Marius
+
+🎓 Qualifikationen:
+• Teil des Mathe LK Abi 2027
+
+
+
+💡 Beiträge zur Plattform:
+• Material Skalarprodukt und Vektorprodukt
+
+
+
+🚀 Vision:
+-
             }
         }
 

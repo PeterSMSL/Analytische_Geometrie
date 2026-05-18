@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stochastik Exkurs - Spielmodus wählen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 3rem 2.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0e7490;
+            margin-bottom: 0.5rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .tiles {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tile {
+            display: block;
+            text-decoration: none;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            color: #1e293b;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tile::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--accent);
+            transition: width 0.2s ease;
+        }
+
+        .tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        .tile:hover::before {
+            width: 10px;
+        }
+
+        .tile.jump {
+            --accent: #f59e0b;
+        }
+
+        .tile.kwizz {
+            --accent: #ec4899;
+        }
+
+        .tile-emoji {
+            font-size: 1.6rem;
+            margin-right: 0.6rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .tile-title {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .tile-desc {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-top: 0.35rem;
+            margin-left: 2.2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #0891b2;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #0e7490;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+            .tile {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Stochastik Exkurs</h1>
+        <p class="subtitle">Wähle deinen Spielmodus</p>
+
+        <div class="tiles">
+            <a href="kwizz_Stochastik_LZK_final_LKM12.html" class="tile kwizz">
+                <span class="tile-emoji">🧠</span><span class="tile-title">Kwizz</span>
+                <span class="tile-desc">Multiple-Choice-Quiz im klassischen Frage-Antwort-Stil</span>
+            </a>
+
+            <a href="jump_Stochastik_LZK_final_LKM12.html" class="tile jump">
+                <span class="tile-emoji">🏃</span><span class="tile-title">Jump</span>
+                <span class="tile-desc">Spielerisches Jump'n'Run mit Lernfragen</span>
+            </a>
+        </div>
+
+        <a href="../index.html" class="back-link">← zurück zur Übersicht</a>
+    </div>
+</body>
+</html>

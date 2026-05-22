@@ -1,2 +1,0 @@
-Test-Datei zum Ausprobieren des gespeicherten GitHub-Tokens.
-Kann nach erfolgreichem Push wieder geloescht werden.
